@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Hexo</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2018-07-06T08:40:30.640Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>John Doe</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【逆向】VM保护入门</title>
+    <link href="http://yoursite.com/2018/07/05/%E3%80%90%E9%80%86%E5%90%91%E3%80%91VM%E4%BF%9D%E6%8A%A4%E5%85%A5%E9%97%A8/"/>
+    <id>http://yoursite.com/2018/07/05/【逆向】VM保护入门/</id>
+    <published>2018-07-05T09:34:37.000Z</published>
+    <updated>2018-07-06T08:40:30.640Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="【逆向】VM保护入门"><a href="#【逆向】VM保护入门" class="headerlink" title="【逆向】VM保护入门"></a>【逆向】VM保护入门</h1><blockquote></blockquote><h2 id="原理介绍"><a href="#原理介绍" class="headerlink" title="原理介绍"></a>原理介绍</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>​    虚拟机保护技术是指，将程序代码转换为自定义的中间操作码（OpCode，当操作码只占一个字节可称作ByteCode），OpCode通过一种解释执行系统或者模拟器（Emulator）解释执行，实现代码基本功能。</p><p>​    逆向这种程序，一般需要对emulator结构进行逆向，结合opcode进行分析，得到各个操作码对应的基本操作，从而理解程序功能。（图片来自：<a href="https://mp.weixin.qq.com/s/4Nfso1OuHeQgCTGYv2IF5Q）" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/4Nfso1OuHeQgCTGYv2IF5Q）</a></p><p><img src="C:\Users\Max_Wang\AppData\Local\Temp\1530847718783.png" alt="1530847718783"></p><h3 id="JVM虚拟机"><a href="#JVM虚拟机" class="headerlink" title="JVM虚拟机"></a>JVM虚拟机</h3><p>​    JVM虚拟可以提供一种与平台无关的编程环境，这是虚拟化思想的一种成功应用。下图为JVM虚拟机的基本架构（图片来自：geeksforgeeks ）</p><p><img src="C:\Users\Max_Wang\AppData\Local\Temp\1530848472213.png" alt="1530848472213"></p><h3 id="VMP虚拟机"><a href="#VMP虚拟机" class="headerlink" title="VMP虚拟机"></a>VMP虚拟机</h3><p>​    VMP虚拟机保护技术指的是将基于x86汇编系统的可执行代码转换为字节码指令系统的代码，达到保护原有指令不被轻易逆向和修改的目的。从本质上来说，就是创建一套虚拟指令系统对原本的x86汇编指令系统进行一次封装，将原本的汇编指令转换为另一种表现形式。</p><p>​    虚拟指令有自己的机器码，但和原本的x86汇编机器码完全不一样，而且常常是一堆无意义的代码，他们只能由VM虚拟解释器（Dispatcher）来解释并执行。我们在逆向时看到的汇编代码其实不是x86汇编代码，而是字节码（伪指令），它是由指令执行系统定义的一套指令和数据组成的一串数据流，所以虚拟机的脱壳很难写出一个通用的脱壳机，原则上只要虚拟指令集一变动，原本的伪指令的解释就会发生变化。</p><blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 要逆向被VM SDK保护起来的原始代码，只有手工分析这段虚拟指令，找到虚拟指令和原始汇编的对应关系，然后重写出原始程序的代码，完成算法的逆向和分析。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></blockquote><h2 id="题目示例"><a href="#题目示例" class="headerlink" title="题目示例"></a>题目示例</h2><h3 id="DDCTF2018-黑盒破解"><a href="#DDCTF2018-黑盒破解" class="headerlink" title="DDCTF2018 黑盒破解"></a>DDCTF2018 黑盒破解</h3><p>​    解题的基本思路是通过分析二进制文件，得到opcode及其对应的基本操作，通过构造passcode，令程序输出binggo字样。</p><ul><li><p>前期准备分析</p><p>​    拿到文件完成基本分析后加载到IDA。</p><p>​    首先通过字符串搜索，并交叉引用定位到主函数，分析程序的基本逻辑：输入password（即给的txt文件名中的数字），然后输入passcode，令程序输出Binggo。</p><p>​    main函数关键判断如下</p><p><img src="C:\Users\Max_Wang\AppData\Local\Temp\1530849338318.png" alt="1530849338318"></p><p>​    对flag查找引用发现一个函数，但继续查找引用遇到障碍，所以开动态调试，看一下程序运行的情况。发现sub_401A48可能是一个重要函数，进入查看。</p><p><img src="C:\Users\Max_Wang\AppData\Local\Temp\1530858822184.png" alt="1530858822184"></p><p>​    这段代码F5之后不是很友好，但还是看得到大概意思是：根据输入参数调用函数，也就是虚拟机的Dispatcher位置，被调用的各个函数就是虚拟机的各个Handler。下图的汇编更加直接的展示了这个意思，call eax表示调用Handler。</p><p><img src="C:\Users\Max_Wang\AppData\Local\Temp\1530860300945.png" alt="1530860300945"></p></li></ul><ul><li><p>得到passcode与其对应的操作</p><p>​    在这段调用Handel的CFG块上方是判断是否会执行调用的关键代码。根据汇编代码推断算法，并写出idc脚本。在推断算法时要注意根据动态调试来确定各个值得变化，不然很容易出错。</p><p><img src="C:\Users\Max_Wang\AppData\Local\Temp\1530858999174.png" alt="1530858999174"></p><p>​    idc脚本如下，要注意这个脚本中的值0x123E010在每一次执行过程中会发生变化，因为它是输入参数存放的地址，具体方法是动态调试执行到参数存放时得到地址值，再根据它修改脚本。爆破出各种可能的函数跳转。</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;idc.idc&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">auto</span> i,j,p,q,v14;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>;i&lt;<span class="number">8</span>;i++)&#123;</span><br><span class="line">p = Byte(<span class="number">0x123E010</span>+<span class="number">4</span>*(i+<span class="number">72</span>)+<span class="number">8</span>);</span><br><span class="line">v14 = Dword(<span class="number">0x123E010</span>+<span class="number">8</span>*(p+<span class="number">0x54</span>)+<span class="number">8</span>);</span><br><span class="line">Message(<span class="string">"%x"</span>,p);</span><br><span class="line"><span class="keyword">for</span>(j = <span class="number">0</span> ;j&lt;<span class="number">255</span>;j++)&#123;</span><br><span class="line"><span class="keyword">if</span>(Byte(<span class="number">0x603900</span>+j)==Byte(<span class="number">0x123E010</span>+p+<span class="number">0x198</span>))&#123;</span><br><span class="line">q = j;</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">Message(<span class="string">"%x %c %x\n"</span>,q , q, v14);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>​    运行结果如下</p><hr><p>1324 $ 400dc1<br>9738 8 400e7a<br>1943 C 400f3a<br>774 t 401064<br>c730 0 4011c9<br>d545 E 40133d<br>c875 u 4012f3<br>1423 # 4014b9</p><hr><p>​    现在要开始分析各个handler的作用，最为特殊的一个handler是sub_40133d，进入这个函数后发现代码如下：</p><p><img src="C:\Users\Max_Wang\AppData\Local\Temp\1530862044942.png" alt="1530862044942"></p><p>​    这段代码有个地方比较坑，其实这个将flag置1并不是问题的关键，这个题目要求的是输出“Binggo”字样，所以这里的三个函数并不要去逆向分析，关键在于前面几句，将a1+0x120里的20个字节输出，我们要做的就是构造输出的字符串。在构造之前我们先要分析出其他handler的作用才能根据这些handler构造字符串。</p><p>​    各个handler的分析过程比较痛苦，但在分析时要有一个意识，虚拟机的堆栈或寄存器是创建在真实堆栈之上的，比如说在这个题目中有很多类似如下的代码。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov     edx, [rax+120h]</span><br></pre></td></tr></table></figure><p>​    其实这当中的[rax+120h]只是模拟一个变量或者一个寄存器，在整个handler中一共用到了四个变量，下面是四个变量的枚举，以及经过分析得出的四变量的作用。</p><hr><p>[rax+120h] –&gt; 当前指针位置a[index]</p><p>[rax+298h] –&gt; 当前字符参数的下一个字符passcode[next]</p><p>[rax+299h] –&gt; 临时变量temp</p><hr><p>​    最终得到下表</p><p>| opcode |                    功能                    |<br>| :—-: | :—————————————-: |<br>|   $    |              temp = a[index]               |<br>|   8    |              a[index] = temp               |<br>|   C    |         temp += passcode[next] -33         |<br>|   t    |         temp -= passcode[next] +33         |<br>|   0    |                  index++                   |<br>|   E    |      if(passcode[next]==’s’) print(a)      |<br>|   u    |                  index–                   |<br>|   #    | temp = passcode[temp+passcode[next]-48]-49 |</p></li><li><p>构造passcode</p><p>​    根据上表构造passcode，这里要注意，由于每次取到的a[index]无法静态分析获得，只能每构造一个字符，再动态调试获得下一个a[index]。最后要注意由于输出handler是输出20个字符，而Binggo只有六个字符，所以要注意构造第七个字符加上’\x00’使其截断。构造方式有很多种，下面是一种从前向后的构造方法。</p><hr><p>$ –&gt; 取得a[index]的值为50h</p><p>t/ –&gt; 将50h变为’B’</p><p>8 –&gt; 将’B’放回到a[index]</p><p>0 –&gt; index++</p><hr><p>​    重复上述操作得到”Binggo”字符串，对应的passcode为’$t/80$C)80$CI80$CX80$Cg80$Cj80 ‘，然后再通过’#J1’构造’\x00’最后将index移回字符串开头并输出对应passcode为’uuuuuuuEs ‘。 </p></li></ul><p>passcode:</p><p>$t/80$C)80$CI80$CX80$Cg80$Cj80#J1uuuuuuuEs</p><h3 id="RCTF2018-Simple-vm"><a href="#RCTF2018-Simple-vm" class="headerlink" title="RCTF2018 Simple vm"></a>RCTF2018 Simple vm</h3><h3 id="RCTF2018-Magic"><a href="#RCTF2018-Magic" class="headerlink" title="RCTF2018 Magic"></a>RCTF2018 Magic</h3><blockquote><p>参考内容</p><p><a href="https://mp.weixin.qq.com/s/4Nfso1OuHeQgCTGYv2IF5Q" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/4Nfso1OuHeQgCTGYv2IF5Q</a></p><p><a href="https://www.anquanke.com/post/id/145553" target="_blank" rel="noopener">https://www.anquanke.com/post/id/145553</a></p><p><a href="https://blog.csdn.net/liutianshx2012/article/details/48466327?locationNum=7&amp;fps=1" target="_blank" rel="noopener">https://blog.csdn.net/liutianshx2012/article/details/48466327?locationNum=7&amp;fps=1</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;【逆向】VM保护入门&quot;&gt;&lt;a href=&quot;#【逆向】VM保护入门&quot; class=&quot;headerlink&quot; title=&quot;【逆向】VM保护入门&quot;&gt;&lt;/a&gt;【逆向】VM保护入门&lt;/h1&gt;&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;原理介绍&quot;&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="二进制安全" scheme="http://yoursite.com/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>helloworld</title>
+    <link href="http://yoursite.com/2018/07/04/helloworld/"/>
+    <id>http://yoursite.com/2018/07/04/helloworld/</id>
+    <published>2018-07-04T09:34:37.000Z</published>
+    <updated>2018-07-04T09:35:29.091Z</updated>
+    
+    <content type="html"><![CDATA[<p>###第一批</p><p>#哈哈</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;###第一批&lt;/p&gt;
+&lt;p&gt;#哈哈&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2018/07/04/hello-world/"/>
+    <id>http://yoursite.com/2018/07/04/hello-world/</id>
+    <published>2018-07-04T09:15:26.051Z</published>
+    <updated>2018-07-04T09:15:26.052Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
