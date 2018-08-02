@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="二进制安全," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="wyx'" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="MIPS合集  DDCTF2018 baby_mips  SUCTF2018 babyre  QCTF2018 Xman_mips">
+<meta name="keywords" content="二进制安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Reverse】MIPS合集">
+<meta property="og:url" content="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/index.html">
+<meta property="og:site_name" content="wyx&#39;">
+<meta property="og:description" content="MIPS合集  DDCTF2018 baby_mips  SUCTF2018 babyre  QCTF2018 Xman_mips">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/1531364168593.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/1531382477663.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/1530979847276.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/1530949463944.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/1531379919600.png">
+<meta property="og:updated_time" content="2018-08-02T04:59:11.637Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Reverse】MIPS合集">
+<meta name="twitter:description" content="MIPS合集  DDCTF2018 baby_mips  SUCTF2018 babyre  QCTF2018 Xman_mips">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/1531364168593.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/"/>
+
+
+
+
+
+  <title>【Reverse】MIPS合集 | wyx'</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">wyx'</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wyx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wyx'">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【Reverse】MIPS合集</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-06T17:22:36+08:00">
+                2018-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="MIPS合集"><a href="#MIPS合集" class="headerlink" title="MIPS合集"></a>MIPS合集</h1><ul>
+<li style="list-style: none"><input type="checkbox" checked> DDCTF2018 baby_mips</li>
+<li style="list-style: none"><input type="checkbox" checked> SUCTF2018 babyre</li>
+<li style="list-style: none"><input type="checkbox" checked> QCTF2018 Xman_mips</li>
+</ul>
+<a id="more"></a>
+<h2 id="MIPS简介"><a href="#MIPS简介" class="headerlink" title="MIPS简介"></a>MIPS简介</h2><blockquote>
+<p>待施工</p>
+</blockquote>
+<h2 id="工具的使用"><a href="#工具的使用" class="headerlink" title="工具的使用"></a>工具的使用</h2><blockquote>
+<p>待施工</p>
+</blockquote>
+<img src="/2018/07/06/【Reverse】MIPS合集/1531364168593.png" title="test">
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h3 id="DDCTF2018-baby-mips"><a href="#DDCTF2018-baby-mips" class="headerlink" title="DDCTF2018 baby_mips"></a>DDCTF2018 baby_mips</h3><p>​    这道题目的解题思路比较常规，通过调试发现花指令并修改，然后分析它的算法得出最终解。重在了解MIPS指令集，并且熟悉MIPS的反编译工具jeb或者retdec。</p>
+<ul>
+<li><p>前期准备</p>
+<p>​    在Ubuntu上看到该程序是一个mips32位的程序，无法直接执行，所以在Linux上搭建一个qemu运行这个程序。</p>
+</li>
+<li><p>修改花指令</p>
+<p>​    用qemu+jeb动态调试代码，要注意这个baby_mips是小端序，执行时不能直接qemu-mips。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qemu-mipsel baby_mips //执行baby_mips</span><br><span class="line">qemu-mipsel -g 2359 baby_mips//监听2359端口</span><br></pre></td></tr></table></figure>
+<p>​    用IDA开动态调试，观察发生段错误的指令，‘\xEB02’开头，往后面翻可以看到很多无法解析的二进制也有’\xEB02‘，‘\xEB’在x86指令集中指的是”jmp 后面的两个字节是偏移“，‘\xEB02’就是指向后跳转两字节。</p>
+<p>​    mips指令集是一个定长指令集，大小为四字节，我们可以大胆的猜测，‘\xEB02’就是一个简单的花指令，于是编写代码去花。下面是去花用的python代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">f = open(<span class="string">"baby_mips"</span>,<span class="string">"rb"</span>)</span><br><span class="line">content = f.read()</span><br><span class="line">f.close()</span><br><span class="line">content = list(content)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>,len(content)):</span><br><span class="line">	<span class="keyword">if</span> content[x] == <span class="string">"\xeb"</span> <span class="keyword">and</span> content[x+<span class="number">1</span>] == <span class="string">"\x02"</span> <span class="keyword">and</span> (x%<span class="number">4</span>==<span class="number">0</span>):</span><br><span class="line">		content[x] = <span class="string">"\x00"</span></span><br><span class="line">		content[x+<span class="number">1</span>] = <span class="string">"\x00"</span></span><br><span class="line">		content[x+<span class="number">2</span>] = <span class="string">"\x00"</span></span><br><span class="line">		content[x+<span class="number">3</span>] = <span class="string">"\x00"</span></span><br><span class="line">content = <span class="string">""</span>.join(content)</span><br><span class="line">p = open(<span class="string">"patch"</span>,<span class="string">"wb"</span>)</span><br><span class="line">p.write(content)</span><br><span class="line">p.close()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分析算法得解</p>
+<p>​    用IDA插件retdec反编译去花后的程序，是一个16元一次方程。</p>
+<img src="/2018/07/06/【Reverse】MIPS合集/1531382477663.png" title="babymips_1">
+<p>​    然后编写一个python脚本解方程组，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.linalg <span class="keyword">import</span> solve</span><br><span class="line">A=[</span><br><span class="line">  [<span class="number">-15858</span>,<span class="number">-48466</span>,<span class="number">32599</span>,<span class="number">38605</span>,<span class="number">-44159</span>,<span class="number">23939</span>,<span class="number">45662</span>,<span class="number">9287</span>,<span class="number">47754</span>,<span class="number">47937</span>,<span class="number">41896</span>,<span class="number">51986</span>,<span class="number">-26968</span>,<span class="number">22561</span>,<span class="number">30701</span>,<span class="number">63487</span>],</span><br><span class="line">  [<span class="number">60228</span>,<span class="number">-3993</span>,<span class="number">-16615</span>,<span class="number">57134</span>,<span class="number">-19246</span>,<span class="number">-38581</span>,<span class="number">40294</span>,<span class="number">-44968</span>,<span class="number">-28198</span>,<span class="number">-58965</span>,<span class="number">-39534</span>,<span class="number">22458</span>,<span class="number">-8828</span>,<span class="number">48593</span>,<span class="number">46135</span>,<span class="number">23871</span>],</span><br><span class="line">  [<span class="number">59121</span>,<span class="number">42162</span>,<span class="number">-65140</span>,<span class="number">-3847</span>,<span class="number">-23842</span>,<span class="number">-47173</span>,<span class="number">-39252</span>,<span class="number">37804</span>,<span class="number">-20964</span>,<span class="number">-19217</span>,<span class="number">56467</span>,<span class="number">5112</span>,<span class="number">9324</span>,<span class="number">61729</span>,<span class="number">61599</span>,<span class="number">3578</span>],</span><br><span class="line">  [<span class="number">-36731</span>,<span class="number">-26147</span>,<span class="number">1670</span>,<span class="number">19245</span>,<span class="number">26847</span>,<span class="number">39911</span>,<span class="number">8628</span>,<span class="number">57946</span>,<span class="number">-51207</span>,<span class="number">63125</span>,<span class="number">-21537</span>,<span class="number">-9321</span>,<span class="number">40745</span>,<span class="number">-58129</span>,<span class="number">30962</span>,<span class="number">-27610</span>],</span><br><span class="line">  [<span class="number">-63560</span>,<span class="number">-53320</span>,<span class="number">-34289</span>,<span class="number">61060</span>,<span class="number">-14289</span>,<span class="number">46922</span>,<span class="number">53218</span>,<span class="number">36638</span>,<span class="number">-61969</span>,<span class="number">-33727</span>,<span class="number">-4681</span>,<span class="number">32423</span>,<span class="number">-17044</span>,<span class="number">-46689</span>,<span class="number">-35443</span>,<span class="number">-24156</span>],</span><br><span class="line">  [<span class="number">-10571</span>,<span class="number">-11103</span>,<span class="number">51585</span>,<span class="number">-24771</span>,<span class="number">63730</span>,<span class="number">57047</span>,<span class="number">-63227</span>,<span class="number">4227</span>,<span class="number">-56470</span>,<span class="number">-22654</span>,<span class="number">-46325</span>,<span class="number">62842</span>,<span class="number">22480</span>,<span class="number">59412</span>,<span class="number">24937</span>,<span class="number">62085</span>],</span><br><span class="line">  [<span class="number">52617</span>,<span class="number">-54333</span>,<span class="number">61495</span>,<span class="number">33704</span>,<span class="number">-41733</span>,<span class="number">-44527</span>,<span class="number">51882</span>,<span class="number">-61765</span>,<span class="number">-24691</span>,<span class="number">-10103</span>,<span class="number">31055</span>,<span class="number">61454</span>,<span class="number">-59349</span>,<span class="number">9812</span>,<span class="number">-48848</span>,<span class="number">-47279</span>],</span><br><span class="line">  [<span class="number">-40696</span>,<span class="number">-26470</span>,<span class="number">54670</span>,<span class="number">-23715</span>,<span class="number">10008</span>,<span class="number">7723</span>,<span class="number">-62622</span>,<span class="number">53112</span>,<span class="number">31753</span>,<span class="number">-5047</span>,<span class="number">-48878</span>,<span class="number">-58448</span>,<span class="number">19875</span>,<span class="number">-34944</span>,<span class="number">-22161</span>,<span class="number">35800</span>],</span><br><span class="line">  [<span class="number">-23196</span>,<span class="number">-43354</span>,<span class="number">-58947</span>,<span class="number">3384</span>,<span class="number">-2426</span>,<span class="number">-60194</span>,<span class="number">51907</span>,<span class="number">-20177</span>,<span class="number">-31882</span>,<span class="number">61703</span>,<span class="number">42398</span>,<span class="number">-4627</span>,<span class="number">45749</span>,<span class="number">-29203</span>,<span class="number">-11139</span>,<span class="number">-41301</span>],</span><br><span class="line">  [<span class="number">-37819</span>,<span class="number">-10066</span>,<span class="number">-48579</span>,<span class="number">-62613</span>,<span class="number">-28961</span>,<span class="number">40001</span>,<span class="number">-37989</span>,<span class="number">-27875</span>,<span class="number">-20264</span>,<span class="number">-33616</span>,<span class="number">-5998</span>,<span class="number">30740</span>,<span class="number">-29594</span>,<span class="number">21652</span>,<span class="number">5165</span>,<span class="number">51797</span>],</span><br><span class="line">  [<span class="number">52993</span>,<span class="number">62328</span>,<span class="number">4196</span>,<span class="number">-55719</span>,<span class="number">-1917</span>,<span class="number">28075</span>,<span class="number">-44831</span>,<span class="number">-15799</span>,<span class="number">13652</span>,<span class="number">-52110</span>,<span class="number">-38933</span>,<span class="number">62219</span>,<span class="number">40030</span>,<span class="number">-23815</span>,<span class="number">-19505</span>,<span class="number">60128</span>],</span><br><span class="line">  [<span class="number">35796</span>,<span class="number">-28033</span>,<span class="number">-59250</span>,<span class="number">46833</span>,<span class="number">39767</span>,<span class="number">-22909</span>,<span class="number">5585</span>,<span class="number">-42334</span>,<span class="number">64787</span>,<span class="number">6068</span>,<span class="number">60536</span>,<span class="number">-54554</span>,<span class="number">22189</span>,<span class="number">-49945</span>,<span class="number">40846</span>,<span class="number">64023</span>],</span><br><span class="line">  [<span class="number">-18536</span>,<span class="number">-35823</span>,<span class="number">4253</span>,<span class="number">-63956</span>,<span class="number">20175</span>,<span class="number">43158</span>,<span class="number">30523</span>,<span class="number">28298</span>,<span class="number">-29564</span>,<span class="number">18809</span>,<span class="number">50821</span>,<span class="number">-38574</span>,<span class="number">3005</span>,<span class="number">33408</span>,<span class="number">58281</span>,<span class="number">-29452</span>]</span><br><span class="line">  [<span class="number">2848</span>,<span class="number">39836</span>,<span class="number">46250</span>,<span class="number">24950</span>,<span class="number">38512</span>,<span class="number">31901</span>,<span class="number">-21506</span>,<span class="number">-36050</span>,<span class="number">44162</span>,<span class="number">41717</span>,<span class="number">-36605</span>,<span class="number">-26097</span>,<span class="number">-38073</span>,<span class="number">36024</span>,<span class="number">7349</span>,<span class="number">19105</span>],</span><br><span class="line">  [<span class="number">22525</span>,<span class="number">15747</span>,<span class="number">63301</span>,<span class="number">42436</span>,<span class="number">-26106</span>,<span class="number">-22761</span>,<span class="number">48830</span>,<span class="number">6176</span>,<span class="number">-55225</span>,<span class="number">-45599</span>,<span class="number">-30368</span>,<span class="number">50701</span>,<span class="number">5775</span>,<span class="number">10902</span>,<span class="number">12758</span>,<span class="number">-19336</span>],</span><br><span class="line">  [<span class="number">-58450</span>,<span class="number">-51156</span>,<span class="number">-5460</span>,<span class="number">32490</span>,<span class="number">-26701</span>,<span class="number">27355</span>,<span class="number">34100</span>,<span class="number">-14902</span>,<span class="number">10736</span>,<span class="number">54258</span>,<span class="number">-9189</span>,<span class="number">-25920</span>,<span class="number">48339</span>,<span class="number">-61339</span>,<span class="number">61403</span>,<span class="number">-30542</span>]</span><br><span class="line">]</span><br><span class="line">B=[<span class="number">23261386</span>,<span class="number">-1298872</span>,<span class="number">13877344</span>,<span class="number">9172342</span>,<span class="number">-11622989</span>,<span class="number">10343966</span>,<span class="number">-9721165</span>,<span class="number">-8286458</span>,<span class="number">-7515929</span>,<span class="number">-12609498</span>,<span class="number">2179053</span>,<span class="number">11137244</span>,<span class="number">12446496</span>,<span class="number">10255605</span>,<span class="number">854242</span>,<span class="number">1542147</span></span><br><span class="line">a = np.array(A)</span><br><span class="line">b = np.array(B)</span><br><span class="line">x =solve(a,b)</span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
+<p>​    求解python得到解答如下，四舍五入输入程序得到flag</p>
+<img src="/2018/07/06/【Reverse】MIPS合集/1530979847276.png" title="babymips_2">
+<img src="/2018/07/06/【Reverse】MIPS合集/1530949463944.png" title="babymips_3">
+<h3 id="SUCTF2018-babyre"><a href="#SUCTF2018-babyre" class="headerlink" title="SUCTF2018 babyre"></a>SUCTF2018 babyre</h3><ul>
+<li><p>分析代码算法</p>
+<p>​    我们看到main函数中的主要流程是对输入字符串进行检测，首先经过sub_400780函数进行处理，然后对处理过的字符串进行匹配。sub_400780函数是一个base64编码的函数，它对转换表进行了替换。</p>
+<img src="/2018/07/06/【Reverse】MIPS合集/1531379919600.png" title="babyre_1">
+</li>
+</ul>
+<ul>
+<li><p>编写程序求解</p>
+<p>​    先把对比字符串数据扣下来，用C代码转换成可见字符串</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> arr[] = &#123; <span class="number">101</span>, <span class="number">81</span>, <span class="number">52</span>, <span class="number">121</span>, <span class="number">52</span>, <span class="number">54</span>, <span class="number">43</span>, <span class="number">86</span>, <span class="number">117</span>, <span class="number">102</span>, <span class="number">90</span>, <span class="number">122</span>, <span class="number">100</span>, <span class="number">70</span>, <span class="number">78</span>, <span class="number">70</span>, <span class="number">100</span>, <span class="number">120</span>, <span class="number">48</span>, <span class="number">122</span>, <span class="number">117</span>, <span class="number">100</span>, <span class="number">115</span>, <span class="number">97</span>, <span class="number">43</span>, <span class="number">121</span>, <span class="number">89</span>, <span class="number">48</span>, <span class="number">43</span>, <span class="number">74</span>, <span class="number">50</span>, <span class="number">109</span> &#125;;</span><br><span class="line">    <span class="comment">//char arr[] = &#123; 82,57,76,121,54,78,111,74,118,115,73,80,110,87,104,69,84,89,116,72,101,52,83,100,108,43,77,98,71,117,106,97,90,112,107,49,48,50,119,75,67,114,55,47,79,68,103,53,122,88,65,70,113,81,102,120,66,105,99,86,51,109,56,85,0 &#125;;</span></span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (arr[i]) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%c"</span>, arr[i]);</span><br><span class="line">		i++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    运行结果如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eQ4y46+VufZzdFNFdx0zudsa+yY0+J2m</span><br></pre></td></tr></table></figure>
+<p>​    把替换字符串数据也扣下来，用如上C代码转换，结果如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R9Ly6NoJvsIPnWhETYtHe4Sdl+MbGujaZpk102wKCr7/ODg5zXAFqQfxBicV3m8U</span><br></pre></td></tr></table></figure>
+<p>​    然后用python编写base64的解码代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">my_base64table = <span class="string">"R9Ly6NoJvsIPnWhETYtHe4Sdl+MbGujaZpk102wKCr7/0Dg5zXAFqQfxBicV3m8U"</span></span><br><span class="line">std_base64table =<span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</span></span><br><span class="line">s = <span class="string">"eQ4y46+VufZzdFNFdx0zudsa+yY0+J2m"</span></span><br><span class="line">s = s.translate(string.maketrans(my_base64table,std_base64table))</span><br><span class="line"><span class="keyword">print</span> base64.b64decode(s)</span><br></pre></td></tr></table></figure>
+<p>​    运行得到结果如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SUCTF&#123;wh0_1s_&#123;0ur_d4ldy&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="QCTF2018-Xman-babymips"><a href="#QCTF2018-Xman-babymips" class="headerlink" title="QCTF2018 Xman_babymips"></a>QCTF2018 Xman_babymips</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span>* arr = <span class="string">"Q|j&#123;g"</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> arr2[] = &#123; <span class="number">0x52</span>,<span class="number">0xFD</span>,<span class="number">0x16</span>,<span class="number">0xA4</span>,<span class="number">0x89</span>,<span class="number">0xBD</span>,<span class="number">0x92</span>,<span class="number">0x80</span>,<span class="number">0x13</span>,<span class="number">0x41</span>,<span class="number">0x54</span>,<span class="number">0xA0</span>,<span class="number">0x8D</span>,<span class="number">0x45</span>,<span class="number">0x18</span>,<span class="number">0x81</span>,<span class="number">0xDE</span>,<span class="number">0xFC</span>,<span class="number">0x95</span>,<span class="number">0xF0</span>,<span class="number">0x16</span>,<span class="number">0x79</span>,<span class="number">0x1A</span>,<span class="number">0x15</span>,<span class="number">0x5B</span>,<span class="number">0x75</span>,<span class="number">0x1F</span> &#125;;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (i; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%c"</span>, arr[i]^(<span class="number">32</span>-i));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">27</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">int</span> temp = i + <span class="number">5</span>;</span><br><span class="line">		<span class="keyword">if</span> (temp % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">int</span> t = arr2[i] % <span class="number">4</span>;</span><br><span class="line">			arr2[i] = arr2[i] / <span class="number">4</span>;</span><br><span class="line">			arr2[i] = arr2[i] +t*<span class="number">64</span>;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%c"</span>, arr2[i] ^(<span class="number">32</span>-temp));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">int</span> t = arr2[i] /<span class="number">64</span>;</span><br><span class="line">			arr2[i] = arr2[i] %<span class="number">64</span>;</span><br><span class="line">			arr2[i] = arr2[i]*<span class="number">4</span> + t;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%c"</span>, arr2[i] ^ (<span class="number">32</span> - temp));</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    运行结果如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qctf&#123;ReA11y_4_B@89_mlp5_4_XmAn_&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/二进制安全/" rel="tag"># 二进制安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/05/【Reverse】VM保护合集/" rel="next" title="【Reverse】VM保护合集">
+                <i class="fa fa-chevron-left"></i> 【Reverse】VM保护合集
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/09/【pwn】入门笔记/" rel="prev" title="【pwn】入门笔记">
+                【pwn】入门笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/header.jpg"
+               alt="wyx" />
+          <p class="site-author-name" itemprop="name">wyx</p>
+           
+              <p class="site-description motion-element" itemprop="description">Something cruel, someone ideal.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MIPS合集"><span class="nav-text">MIPS合集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MIPS简介"><span class="nav-text">MIPS简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具的使用"><span class="nav-text">工具的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DDCTF2018-baby-mips"><span class="nav-text">DDCTF2018 baby_mips</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SUCTF2018-babyre"><span class="nav-text">SUCTF2018 babyre</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QCTF2018-Xman-babymips"><span class="nav-text">QCTF2018 Xman_babymips</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wyx</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
