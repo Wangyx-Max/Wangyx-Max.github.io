@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -100,20 +100,20 @@
 <meta name="keywords" content="二进制安全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Reverse】MIPS合集">
-<meta property="og:url" content="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/index.html">
+<meta property="og:url" content="http://yoursite.com/【Reverse】MIPS合集/index.html">
 <meta property="og:site_name" content="wyx&#39;">
 <meta property="og:description" content="MIPS合集  DDCTF2018 baby_mips  SUCTF2018 babyre  QCTF2018 Xman_mips">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/1531364168593.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/1531382477663.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/1530979847276.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/1530949463944.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/1531379919600.png">
+<meta property="og:image" content="http://yoursite.com/【Reverse】MIPS合集/1531364168593.png">
+<meta property="og:image" content="http://yoursite.com/【Reverse】MIPS合集/1531382477663.png">
+<meta property="og:image" content="http://yoursite.com/【Reverse】MIPS合集/1530979847276.png">
+<meta property="og:image" content="http://yoursite.com/【Reverse】MIPS合集/1530949463944.png">
+<meta property="og:image" content="http://yoursite.com/【Reverse】MIPS合集/1531379919600.png">
 <meta property="og:updated_time" content="2018-08-02T04:59:11.637Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Reverse】MIPS合集">
 <meta name="twitter:description" content="MIPS合集  DDCTF2018 baby_mips  SUCTF2018 babyre  QCTF2018 Xman_mips">
-<meta name="twitter:image" content="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/1531364168593.png">
+<meta name="twitter:image" content="http://yoursite.com/【Reverse】MIPS合集/1531364168593.png">
 
 
 
@@ -121,7 +121,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Gemini',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -142,7 +142,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/"/>
+  <link rel="canonical" href="http://yoursite.com/【Reverse】MIPS合集/"/>
 
 
 
@@ -291,7 +291,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/06/【Reverse】MIPS合集/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/【Reverse】MIPS合集/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wyx">
@@ -370,7 +370,7 @@
 <h2 id="工具的使用"><a href="#工具的使用" class="headerlink" title="工具的使用"></a>工具的使用</h2><blockquote>
 <p>待施工</p>
 </blockquote>
-<img src="/2018/07/06/【Reverse】MIPS合集/1531364168593.png" title="test">
+<img src="/【Reverse】MIPS合集/1531364168593.png" title="test">
 <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h3 id="DDCTF2018-baby-mips"><a href="#DDCTF2018-baby-mips" class="headerlink" title="DDCTF2018 baby_mips"></a>DDCTF2018 baby_mips</h3><p>​    这道题目的解题思路比较常规，通过调试发现花指令并修改，然后分析它的算法得出最终解。重在了解MIPS指令集，并且熟悉MIPS的反编译工具jeb或者retdec。</p>
 <ul>
 <li><p>前期准备</p>
@@ -385,16 +385,16 @@
 </li>
 <li><p>分析算法得解</p>
 <p>​    用IDA插件retdec反编译去花后的程序，是一个16元一次方程。</p>
-<img src="/2018/07/06/【Reverse】MIPS合集/1531382477663.png" title="babymips_1">
+<img src="/【Reverse】MIPS合集/1531382477663.png" title="babymips_1">
 <p>​    然后编写一个python脚本解方程组，</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.linalg <span class="keyword">import</span> solve</span><br><span class="line">A=[</span><br><span class="line">  [<span class="number">-15858</span>,<span class="number">-48466</span>,<span class="number">32599</span>,<span class="number">38605</span>,<span class="number">-44159</span>,<span class="number">23939</span>,<span class="number">45662</span>,<span class="number">9287</span>,<span class="number">47754</span>,<span class="number">47937</span>,<span class="number">41896</span>,<span class="number">51986</span>,<span class="number">-26968</span>,<span class="number">22561</span>,<span class="number">30701</span>,<span class="number">63487</span>],</span><br><span class="line">  [<span class="number">60228</span>,<span class="number">-3993</span>,<span class="number">-16615</span>,<span class="number">57134</span>,<span class="number">-19246</span>,<span class="number">-38581</span>,<span class="number">40294</span>,<span class="number">-44968</span>,<span class="number">-28198</span>,<span class="number">-58965</span>,<span class="number">-39534</span>,<span class="number">22458</span>,<span class="number">-8828</span>,<span class="number">48593</span>,<span class="number">46135</span>,<span class="number">23871</span>],</span><br><span class="line">  [<span class="number">59121</span>,<span class="number">42162</span>,<span class="number">-65140</span>,<span class="number">-3847</span>,<span class="number">-23842</span>,<span class="number">-47173</span>,<span class="number">-39252</span>,<span class="number">37804</span>,<span class="number">-20964</span>,<span class="number">-19217</span>,<span class="number">56467</span>,<span class="number">5112</span>,<span class="number">9324</span>,<span class="number">61729</span>,<span class="number">61599</span>,<span class="number">3578</span>],</span><br><span class="line">  [<span class="number">-36731</span>,<span class="number">-26147</span>,<span class="number">1670</span>,<span class="number">19245</span>,<span class="number">26847</span>,<span class="number">39911</span>,<span class="number">8628</span>,<span class="number">57946</span>,<span class="number">-51207</span>,<span class="number">63125</span>,<span class="number">-21537</span>,<span class="number">-9321</span>,<span class="number">40745</span>,<span class="number">-58129</span>,<span class="number">30962</span>,<span class="number">-27610</span>],</span><br><span class="line">  [<span class="number">-63560</span>,<span class="number">-53320</span>,<span class="number">-34289</span>,<span class="number">61060</span>,<span class="number">-14289</span>,<span class="number">46922</span>,<span class="number">53218</span>,<span class="number">36638</span>,<span class="number">-61969</span>,<span class="number">-33727</span>,<span class="number">-4681</span>,<span class="number">32423</span>,<span class="number">-17044</span>,<span class="number">-46689</span>,<span class="number">-35443</span>,<span class="number">-24156</span>],</span><br><span class="line">  [<span class="number">-10571</span>,<span class="number">-11103</span>,<span class="number">51585</span>,<span class="number">-24771</span>,<span class="number">63730</span>,<span class="number">57047</span>,<span class="number">-63227</span>,<span class="number">4227</span>,<span class="number">-56470</span>,<span class="number">-22654</span>,<span class="number">-46325</span>,<span class="number">62842</span>,<span class="number">22480</span>,<span class="number">59412</span>,<span class="number">24937</span>,<span class="number">62085</span>],</span><br><span class="line">  [<span class="number">52617</span>,<span class="number">-54333</span>,<span class="number">61495</span>,<span class="number">33704</span>,<span class="number">-41733</span>,<span class="number">-44527</span>,<span class="number">51882</span>,<span class="number">-61765</span>,<span class="number">-24691</span>,<span class="number">-10103</span>,<span class="number">31055</span>,<span class="number">61454</span>,<span class="number">-59349</span>,<span class="number">9812</span>,<span class="number">-48848</span>,<span class="number">-47279</span>],</span><br><span class="line">  [<span class="number">-40696</span>,<span class="number">-26470</span>,<span class="number">54670</span>,<span class="number">-23715</span>,<span class="number">10008</span>,<span class="number">7723</span>,<span class="number">-62622</span>,<span class="number">53112</span>,<span class="number">31753</span>,<span class="number">-5047</span>,<span class="number">-48878</span>,<span class="number">-58448</span>,<span class="number">19875</span>,<span class="number">-34944</span>,<span class="number">-22161</span>,<span class="number">35800</span>],</span><br><span class="line">  [<span class="number">-23196</span>,<span class="number">-43354</span>,<span class="number">-58947</span>,<span class="number">3384</span>,<span class="number">-2426</span>,<span class="number">-60194</span>,<span class="number">51907</span>,<span class="number">-20177</span>,<span class="number">-31882</span>,<span class="number">61703</span>,<span class="number">42398</span>,<span class="number">-4627</span>,<span class="number">45749</span>,<span class="number">-29203</span>,<span class="number">-11139</span>,<span class="number">-41301</span>],</span><br><span class="line">  [<span class="number">-37819</span>,<span class="number">-10066</span>,<span class="number">-48579</span>,<span class="number">-62613</span>,<span class="number">-28961</span>,<span class="number">40001</span>,<span class="number">-37989</span>,<span class="number">-27875</span>,<span class="number">-20264</span>,<span class="number">-33616</span>,<span class="number">-5998</span>,<span class="number">30740</span>,<span class="number">-29594</span>,<span class="number">21652</span>,<span class="number">5165</span>,<span class="number">51797</span>],</span><br><span class="line">  [<span class="number">52993</span>,<span class="number">62328</span>,<span class="number">4196</span>,<span class="number">-55719</span>,<span class="number">-1917</span>,<span class="number">28075</span>,<span class="number">-44831</span>,<span class="number">-15799</span>,<span class="number">13652</span>,<span class="number">-52110</span>,<span class="number">-38933</span>,<span class="number">62219</span>,<span class="number">40030</span>,<span class="number">-23815</span>,<span class="number">-19505</span>,<span class="number">60128</span>],</span><br><span class="line">  [<span class="number">35796</span>,<span class="number">-28033</span>,<span class="number">-59250</span>,<span class="number">46833</span>,<span class="number">39767</span>,<span class="number">-22909</span>,<span class="number">5585</span>,<span class="number">-42334</span>,<span class="number">64787</span>,<span class="number">6068</span>,<span class="number">60536</span>,<span class="number">-54554</span>,<span class="number">22189</span>,<span class="number">-49945</span>,<span class="number">40846</span>,<span class="number">64023</span>],</span><br><span class="line">  [<span class="number">-18536</span>,<span class="number">-35823</span>,<span class="number">4253</span>,<span class="number">-63956</span>,<span class="number">20175</span>,<span class="number">43158</span>,<span class="number">30523</span>,<span class="number">28298</span>,<span class="number">-29564</span>,<span class="number">18809</span>,<span class="number">50821</span>,<span class="number">-38574</span>,<span class="number">3005</span>,<span class="number">33408</span>,<span class="number">58281</span>,<span class="number">-29452</span>]</span><br><span class="line">  [<span class="number">2848</span>,<span class="number">39836</span>,<span class="number">46250</span>,<span class="number">24950</span>,<span class="number">38512</span>,<span class="number">31901</span>,<span class="number">-21506</span>,<span class="number">-36050</span>,<span class="number">44162</span>,<span class="number">41717</span>,<span class="number">-36605</span>,<span class="number">-26097</span>,<span class="number">-38073</span>,<span class="number">36024</span>,<span class="number">7349</span>,<span class="number">19105</span>],</span><br><span class="line">  [<span class="number">22525</span>,<span class="number">15747</span>,<span class="number">63301</span>,<span class="number">42436</span>,<span class="number">-26106</span>,<span class="number">-22761</span>,<span class="number">48830</span>,<span class="number">6176</span>,<span class="number">-55225</span>,<span class="number">-45599</span>,<span class="number">-30368</span>,<span class="number">50701</span>,<span class="number">5775</span>,<span class="number">10902</span>,<span class="number">12758</span>,<span class="number">-19336</span>],</span><br><span class="line">  [<span class="number">-58450</span>,<span class="number">-51156</span>,<span class="number">-5460</span>,<span class="number">32490</span>,<span class="number">-26701</span>,<span class="number">27355</span>,<span class="number">34100</span>,<span class="number">-14902</span>,<span class="number">10736</span>,<span class="number">54258</span>,<span class="number">-9189</span>,<span class="number">-25920</span>,<span class="number">48339</span>,<span class="number">-61339</span>,<span class="number">61403</span>,<span class="number">-30542</span>]</span><br><span class="line">]</span><br><span class="line">B=[<span class="number">23261386</span>,<span class="number">-1298872</span>,<span class="number">13877344</span>,<span class="number">9172342</span>,<span class="number">-11622989</span>,<span class="number">10343966</span>,<span class="number">-9721165</span>,<span class="number">-8286458</span>,<span class="number">-7515929</span>,<span class="number">-12609498</span>,<span class="number">2179053</span>,<span class="number">11137244</span>,<span class="number">12446496</span>,<span class="number">10255605</span>,<span class="number">854242</span>,<span class="number">1542147</span></span><br><span class="line">a = np.array(A)</span><br><span class="line">b = np.array(B)</span><br><span class="line">x =solve(a,b)</span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
 <p>​    求解python得到解答如下，四舍五入输入程序得到flag</p>
-<img src="/2018/07/06/【Reverse】MIPS合集/1530979847276.png" title="babymips_2">
-<img src="/2018/07/06/【Reverse】MIPS合集/1530949463944.png" title="babymips_3">
+<img src="/【Reverse】MIPS合集/1530979847276.png" title="babymips_2">
+<img src="/【Reverse】MIPS合集/1530949463944.png" title="babymips_3">
 <h3 id="SUCTF2018-babyre"><a href="#SUCTF2018-babyre" class="headerlink" title="SUCTF2018 babyre"></a>SUCTF2018 babyre</h3><ul>
 <li><p>分析代码算法</p>
 <p>​    我们看到main函数中的主要流程是对输入字符串进行检测，首先经过sub_400780函数进行处理，然后对处理过的字符串进行匹配。sub_400780函数是一个base64编码的函数，它对转换表进行了替换。</p>
-<img src="/2018/07/06/【Reverse】MIPS合集/1531379919600.png" title="babyre_1">
+<img src="/【Reverse】MIPS合集/1531379919600.png" title="babyre_1">
 </li>
 </ul>
 <ul>
@@ -446,7 +446,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/05/【Reverse】VM保护合集/" rel="next" title="【Reverse】VM保护合集">
+              <a href="/【Reverse】VM保护合集/" rel="next" title="【Reverse】VM保护合集">
                 <i class="fa fa-chevron-left"></i> 【Reverse】VM保护合集
               </a>
             
@@ -456,7 +456,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/09/【pwn】入门笔记/" rel="prev" title="【pwn】入门笔记">
+              <a href="/【pwn】入门笔记/" rel="prev" title="【pwn】入门笔记">
                 【pwn】入门笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -628,7 +628,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Gemini
   </a>
 </div>
 
@@ -709,6 +709,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
