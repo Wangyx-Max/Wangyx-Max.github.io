@@ -1808,7 +1808,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #3232a4;
+  background: #c4dadf;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3027,10 +3027,4 @@ pre {
   font-size: 24px;
   font-weight: 400;
   font-family: 'Damion', "PingFang SC", "Microsoft YaHei", sans-serif;
-}
-#sidebar {
-  background: url("/images/sidebar.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
