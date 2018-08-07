@@ -96,18 +96,22 @@
 
 
 
-<meta name="description" content="0804tip：gmpy2几个取模数函数的细微区别    函数名 区别     f_mod(x,y) 取得的模数与y的符号相同   c_mod(x,y) 取得的模数与y的符号相反   t_mod(x,y) 取得的模数与x的符号相同     下周计划  《一步一步学ROP之x64篇》并完成对应知识点的pwn题  学习angr原理及使用，并用其解三道reverse题  《0day》第四、五章 可选任务">
+<meta name="description" content="8月日总结">
 <meta name="keywords" content="diary">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【diary】2018&#x2F;8">
 <meta property="og:url" content="http://yoursite.com/【diary】2018-8/index.html">
 <meta property="og:site_name" content="wyx&#39;s blog">
-<meta property="og:description" content="0804tip：gmpy2几个取模数函数的细微区别    函数名 区别     f_mod(x,y) 取得的模数与y的符号相同   c_mod(x,y) 取得的模数与y的符号相反   t_mod(x,y) 取得的模数与x的符号相同     下周计划  《一步一步学ROP之x64篇》并完成对应知识点的pwn题  学习angr原理及使用，并用其解三道reverse题  《0day》第四、五章 可选任务">
+<meta property="og:description" content="8月日总结">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-04T09:04:33.125Z">
+<meta property="og:image" content="http://yoursite.com/【diary】2018-8/1533619420293.png">
+<meta property="og:image" content="http://yoursite.com/【diary】2018-8/1533619490619.png">
+<meta property="og:image" content="http://yoursite.com/【diary】2018-8/1533619548055.png">
+<meta property="og:updated_time" content="2018-08-07T05:27:07.248Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【diary】2018&#x2F;8">
-<meta name="twitter:description" content="0804tip：gmpy2几个取模数函数的细微区别    函数名 区别     f_mod(x,y) 取得的模数与y的符号相同   c_mod(x,y) 取得的模数与y的符号相反   t_mod(x,y) 取得的模数与x的符号相同     下周计划  《一步一步学ROP之x64篇》并完成对应知识点的pwn题  学习angr原理及使用，并用其解三道reverse题  《0day》第四、五章 可选任务">
+<meta name="twitter:description" content="8月日总结">
+<meta name="twitter:image" content="http://yoursite.com/【diary】2018-8/1533619420293.png">
 
 
 
@@ -330,8 +334,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-04T17:04:33+08:00">
-                2018-08-04
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-07T13:27:07+08:00">
+                2018-08-07
               </time>
             
           </span>
@@ -364,7 +368,9 @@
       
 
       
-        <h3 id="0804"><a href="#0804" class="headerlink" title="0804"></a>0804</h3><p>tip：gmpy2几个取模数函数的细微区别</p>
+        <p>8月日总结</p>
+<a id="more"></a>
+<h3 id="0804"><a href="#0804" class="headerlink" title="0804"></a>0804</h3><p>tip：gmpy2几个取模数函数的细微区别</p>
 <table>
 <thead>
 <tr>
@@ -389,7 +395,7 @@
 </table>
 <ul>
 <li>下周计划<ul>
-<li style="list-style: none"><input type="checkbox"> 《一步一步学ROP之x64篇》并完成对应知识点的pwn题</li>
+<li style="list-style: none"><input type="checkbox" checked> 《一步一步学ROP之x64篇》并完成对应知识点的pwn题</li>
 <li style="list-style: none"><input type="checkbox"> 学习angr原理及使用，并用其解三道reverse题</li>
 <li style="list-style: none"><input type="checkbox"> 《0day》第四、五章</li>
 <li>可选任务</li>
@@ -398,6 +404,22 @@
 </ul>
 </li>
 </ul>
+<h3 id="0806"><a href="#0806" class="headerlink" title="0806"></a>0806</h3><p>收获总结：</p>
+<ol>
+<li>rop链的本质是构造假栈帧</li>
+<li>aslr和pie的区别，aslr不会将.bss和.data段代码地址随机化，pie是讲整个进程的地址随机化。</li>
+<li>内存泄漏基本手段及怎样通过内存泄漏来搜索内存找到system()的地址</li>
+</ol>
+<h3 id="0807"><a href="#0807" class="headerlink" title="0807"></a>0807</h3><p>收获总结：</p>
+<ol>
+<li><p>x64和x86参数传送方式不一样</p>
+</li>
+<li><p>使用工具查找简单的gadgets</p>
+<img src="/【diary】2018-8/1533619420293.png">
+<img src="/【diary】2018-8/1533619490619.png">
+<img src="/【diary】2018-8/1533619548055.png">
+</li>
+</ol>
 
       
     </div>
@@ -594,7 +616,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0804"><span class="nav-text">0804</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0804"><span class="nav-text">0804</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0806"><span class="nav-text">0806</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0807"><span class="nav-text">0807</span></a></li></ol></div>
             
 
           </div>
