@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="CTF-Misc," />
+  <meta name="keywords" content="CTF," />
 
 
 
@@ -97,9 +97,9 @@
 
 
 <meta name="description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2">
-<meta name="keywords" content="CTF-Misc">
+<meta name="keywords" content="CTF">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Misc】题目集合">
+<meta property="og:title" content="水题集合">
 <meta property="og:url" content="http://yoursite.com/水题集合/index.html">
 <meta property="og:site_name" content="wyx&#39;s blog">
 <meta property="og:description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2">
@@ -107,9 +107,9 @@
 <meta property="og:image" content="http://yoursite.com/水题集合/1532439460327.png">
 <meta property="og:image" content="http://yoursite.com/水题集合/1532440354909.png">
 <meta property="og:image" content="http://yoursite.com/水题集合/1532440672940.png">
-<meta property="og:updated_time" content="2018-08-06T01:31:35.124Z">
+<meta property="og:updated_time" content="2018-09-06T11:37:22.662Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【Misc】题目集合">
+<meta name="twitter:title" content="水题集合">
 <meta name="twitter:description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2">
 <meta name="twitter:image" content="http://yoursite.com/水题集合/1532439460327.png">
 
@@ -146,7 +146,7 @@
 
 
 
-  <title>【Misc】题目集合 | wyx's blog</title>
+  <title>水题集合 | wyx's blog</title>
   
 
 
@@ -306,7 +306,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">【Misc】题目集合</h1>
+          <h1 class="post-title" itemprop="name headline">水题集合</h1>
         
 
         <div class="post-meta">
@@ -334,12 +334,34 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-06T09:31:35+08:00">
-                2018-08-06
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-06T19:37:22+08:00">
+                2018-09-06
               </time>
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/misc/" itemprop="url" rel="index">
+                    <span itemprop="name">misc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -373,16 +395,16 @@
 <li style="list-style: none"><input type="checkbox"> afctf 数据恢复2</li>
 </ul>
 <a id="more"></a>
-<h2 id="JarvisOJ-basic-help"><a href="#JarvisOJ-basic-help" class="headerlink" title="JarvisOJ  basic_help!!"></a>JarvisOJ  basic_help!!</h2><p>​    打开压缩包发现有加密，但是拖到爆破软件中未能得到密码，查找资料发现可能是伪加密。用010editor查看文件，并修改二进制文件。修改结果如下，也就是将ushort deFlags的值将09改为00</p>
-<img src="/水题集合/1532439460327.png" title="help!!_1">
-<p>​    进行了这个修改之后，就可以直接将压缩文件解压，是一个word文件，打开如下</p>
-<img src="/水题集合/1532440354909.png" title="help!!_2">
-<p>​    考虑这是一种word隐写（关于word隐写的各种类型和破解方法详看这个博客<a href="https://blog.csdn.net/drondong/article/details/79322799" target="_blank" rel="noopener">https://blog.csdn.net/drondong/article/details/79322799</a>  ），而这个word的隐写方式为博客中的第三种，解压后得到几个文件夹，最后在word&gt;media中找到了flag如下</p>
-<img src="/水题集合/1532440672940.png" title="help!!_3">
-<h2 id="afctf-数据恢复2"><a href="#afctf-数据恢复2" class="headerlink" title="afctf 数据恢复2"></a>afctf 数据恢复2</h2><p>​    打开压缩包发现有大量的文件夹，文件夹最底层才是可能存在flag的txt文件，编写脚本提取字符串并输出flag</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">path = <span class="string">r'C:\Users\Max_Wang\Documents\CTF\Challenge\Misc\temp'</span></span><br><span class="line">text = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> root,dirs,files <span class="keyword">in</span> os.walk(path,topdown=<span class="keyword">False</span>):</span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> files:</span><br><span class="line">        temp = os.path.join(root,name)</span><br><span class="line">        <span class="keyword">if</span> temp.endswith(<span class="string">'.txt'</span>):</span><br><span class="line">            f = open(temp)</span><br><span class="line">            text = f.read()</span><br><span class="line">            <span class="keyword">if</span> <span class="string">'afctf'</span> <span class="keyword">in</span> text:</span><br><span class="line">                <span class="keyword">print</span> text</span><br></pre></td></tr></table></figure>
-<p>​    得到flag</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">afctf&#123;Traver31ng_the_d1rect0ry&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="JarvisOJ-basic-help"><a href="#JarvisOJ-basic-help" class="headerlink" title="JarvisOJ  basic_help!!"></a>JarvisOJ  basic_help!!</h2><pre><code>打开压缩包发现有加密，但是拖到爆破软件中未能得到密码，查找资料发现可能是伪加密。用010editor查看文件，并修改二进制文件。修改结果如下，也就是将ushort deFlags的值将09改为00
+</code></pre><img src="/水题集合/1532439460327.png" title="help!!_1">
+<pre><code>进行了这个修改之后，就可以直接将压缩文件解压，是一个word文件，打开如下
+</code></pre><img src="/水题集合/1532440354909.png" title="help!!_2">
+<pre><code>考虑这是一种word隐写（关于word隐写的各种类型和破解方法详看这个博客https://blog.csdn.net/drondong/article/details/79322799  ），而这个word的隐写方式为博客中的第三种，解压后得到几个文件夹，最后在word&gt;media中找到了flag如下
+</code></pre><img src="/水题集合/1532440672940.png" title="help!!_3">
+<h2 id="afctf-数据恢复2"><a href="#afctf-数据恢复2" class="headerlink" title="afctf 数据恢复2"></a>afctf 数据恢复2</h2><pre><code>打开压缩包发现有大量的文件夹，文件夹最底层才是可能存在flag的txt文件，编写脚本提取字符串并输出flag
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">path = <span class="string">r'C:\Users\Max_Wang\Documents\CTF\Challenge\Misc\temp'</span></span><br><span class="line">text = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> root,dirs,files <span class="keyword">in</span> os.walk(path,topdown=<span class="keyword">False</span>):</span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> files:</span><br><span class="line">        temp = os.path.join(root,name)</span><br><span class="line">        <span class="keyword">if</span> temp.endswith(<span class="string">'.txt'</span>):</span><br><span class="line">            f = open(temp)</span><br><span class="line">            text = f.read()</span><br><span class="line">            <span class="keyword">if</span> <span class="string">'afctf'</span> <span class="keyword">in</span> text:</span><br><span class="line">                <span class="keyword">print</span> text</span><br></pre></td></tr></table></figure>
+<pre><code>得到flag
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">afctf&#123;Traver31ng_the_d1rect0ry&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -400,7 +422,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/CTF-Misc/" rel="tag"># CTF-Misc</a>
+            <a href="/tags/CTF/" rel="tag"># CTF</a>
           
         </div>
       
@@ -413,8 +435,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/入门笔记/" rel="next" title="【pwn】入门笔记">
-                <i class="fa fa-chevron-left"></i> 【pwn】入门笔记
+              <a href="/入门笔记/" rel="next" title="入门笔记">
+                <i class="fa fa-chevron-left"></i> 入门笔记
               </a>
             
           </div>
@@ -509,13 +531,22 @@
           
 
           
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
           
             
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

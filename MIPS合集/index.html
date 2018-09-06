@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="二进制安全,Re,ctf," />
+  <meta name="keywords" content="Re,ctf," />
 
 
 
@@ -97,7 +97,7 @@
 
 
 <meta name="description" content="MIPS合集  DDCTF2018 baby_mips  SUCTF2018 babyre  QCTF2018 Xman_mips">
-<meta name="keywords" content="二进制安全,Re,ctf">
+<meta name="keywords" content="Re,ctf">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MIPS合集">
 <meta property="og:url" content="http://yoursite.com/MIPS合集/index.html">
@@ -109,7 +109,7 @@
 <meta property="og:image" content="http://yoursite.com/MIPS合集/1530979847276.png">
 <meta property="og:image" content="http://yoursite.com/MIPS合集/1530949463944.png">
 <meta property="og:image" content="http://yoursite.com/MIPS合集/1531379919600.png">
-<meta property="og:updated_time" content="2018-09-05T13:08:12.979Z">
+<meta property="og:updated_time" content="2018-09-06T11:32:30.600Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIPS合集">
 <meta name="twitter:description" content="MIPS合集  DDCTF2018 baby_mips  SUCTF2018 babyre  QCTF2018 Xman_mips">
@@ -336,12 +336,34 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-05T21:08:12+08:00">
-                2018-09-05
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-06T19:32:30+08:00">
+                2018-09-06
               </time>
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Binary-safe/" itemprop="url" rel="index">
+                    <span itemprop="name">Binary-safe</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -413,23 +435,22 @@ mips指令集是一个定长指令集，大小为四字节，我们可以大胆�
 <ul>
 <li><p>编写程序求解</p>
 <pre><code>先把对比字符串数据扣下来，用C代码转换成可见字符串
-</code></pre><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> arr[] = &#123; <span class="number">101</span>, <span class="number">81</span>, <span class="number">52</span>, <span class="number">121</span>, <span class="number">52</span>, <span class="number">54</span>, <span class="number">43</span>, <span class="number">86</span>, <span class="number">117</span>, <span class="number">102</span>, <span class="number">90</span>, <span class="number">122</span>, <span class="number">100</span>, <span class="number">70</span>, <span class="number">78</span>, <span class="number">70</span>, <span class="number">100</span>, <span class="number">120</span>, <span class="number">48</span>, <span class="number">122</span>, <span class="number">117</span>, <span class="number">100</span>, <span class="number">115</span>, <span class="number">97</span>, <span class="number">43</span>, <span class="number">121</span>, <span class="number">89</span>, <span class="number">48</span>, <span class="number">43</span>, <span class="number">74</span>, <span class="number">50</span>, <span class="number">109</span> &#125;;</span><br><span class="line">    <span class="comment">//char arr[] = &#123; 82,57,76,121,54,78,111,74,118,115,73,80,110,87,104,69,84,89,116,72,101,52,83,100,108,43,77,98,71,117,106,97,90,112,107,49,48,50,119,75,67,114,55,47,79,68,103,53,122,88,65,70,113,81,102,120,66,105,99,86,51,109,56,85,0 &#125;;</span></span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (arr[i]) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%c"</span>, arr[i]);</span><br><span class="line">		i++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<pre><code>运行结果如下
-</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eQ4y46+VufZzdFNFdx0zudsa+yY0+J2m</span><br></pre></td></tr></table></figure>
-<pre><code>把替换字符串数据也扣下来，用如上C代码转换，结果如下
-</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R9Ly6NoJvsIPnWhETYtHe4Sdl+MbGujaZpk102wKCr7/ODg5zXAFqQfxBicV3m8U</span><br></pre></td></tr></table></figure>
-<pre><code>然后用python编写base64的解码代码
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">my_base64table = <span class="string">"R9Ly6NoJvsIPnWhETYtHe4Sdl+MbGujaZpk102wKCr7/0Dg5zXAFqQfxBicV3m8U"</span></span><br><span class="line">std_base64table =<span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</span></span><br><span class="line">s = <span class="string">"eQ4y46+VufZzdFNFdx0zudsa+yY0+J2m"</span></span><br><span class="line">s = s.translate(string.maketrans(my_base64table,std_base64table))</span><br><span class="line"><span class="keyword">print</span> base64.b64decode(s)</span><br></pre></td></tr></table></figure>
-<pre><code>运行得到结果如下
-</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SUCTF&#123;wh0_1s_&#123;0ur_d4ldy&#125;</span><br></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> arr[] = &#123; <span class="number">101</span>, <span class="number">81</span>, <span class="number">52</span>, <span class="number">121</span>, <span class="number">52</span>, <span class="number">54</span>, <span class="number">43</span>, <span class="number">86</span>, <span class="number">117</span>, <span class="number">102</span>, <span class="number">90</span>, <span class="number">122</span>, <span class="number">100</span>, <span class="number">70</span>, <span class="number">78</span>, <span class="number">70</span>, <span class="number">100</span>, <span class="number">120</span>, <span class="number">48</span>, <span class="number">122</span>, <span class="number">117</span>, <span class="number">100</span>, <span class="number">115</span>, <span class="number">97</span>, <span class="number">43</span>, <span class="number">121</span>, <span class="number">89</span>, <span class="number">48</span>, <span class="number">43</span>, <span class="number">74</span>, <span class="number">50</span>, <span class="number">109</span> &#125;;</span><br><span class="line">    <span class="comment">//char arr[] = &#123; 82,57,76,121,54,78,111,74,118,115,73,80,110,87,104,69,84,89,116,72,101,52,83,100,108,43,77,98,71,117,106,97,90,112,107,49,48,50,119,75,67,114,55,47,79,68,103,53,122,88,65,70,113,81,102,120,66,105,99,86,51,109,56,85,0 &#125;;</span></span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (arr[i]) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%c"</span>, arr[i]);</span><br><span class="line">		i++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eQ4y46+VufZzdFNFdx0zudsa+yY0+J2m</span><br></pre></td></tr></table></figure>
+<p>把替换字符串数据也扣下来，用如上C代码转换，结果如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R9Ly6NoJvsIPnWhETYtHe4Sdl+MbGujaZpk102wKCr7/ODg5zXAFqQfxBicV3m8U</span><br></pre></td></tr></table></figure>
+<p>然后用python编写base64的解码代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">my_base64table = <span class="string">"R9Ly6NoJvsIPnWhETYtHe4Sdl+MbGujaZpk102wKCr7/0Dg5zXAFqQfxBicV3m8U"</span></span><br><span class="line">std_base64table =<span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</span></span><br><span class="line">s = <span class="string">"eQ4y46+VufZzdFNFdx0zudsa+yY0+J2m"</span></span><br><span class="line">s = s.translate(string.maketrans(my_base64table,std_base64table))</span><br><span class="line"><span class="keyword">print</span> base64.b64decode(s)</span><br></pre></td></tr></table></figure>
+<p>运行得到结果如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SUCTF&#123;wh0_1s_&#123;0ur_d4ldy&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="QCTF2018-Xman-babymips"><a href="#QCTF2018-Xman-babymips" class="headerlink" title="QCTF2018 Xman_babymips"></a>QCTF2018 Xman_babymips</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span>* arr = <span class="string">"Q|j&#123;g"</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> arr2[] = &#123; <span class="number">0x52</span>,<span class="number">0xFD</span>,<span class="number">0x16</span>,<span class="number">0xA4</span>,<span class="number">0x89</span>,<span class="number">0xBD</span>,<span class="number">0x92</span>,<span class="number">0x80</span>,<span class="number">0x13</span>,<span class="number">0x41</span>,<span class="number">0x54</span>,<span class="number">0xA0</span>,<span class="number">0x8D</span>,<span class="number">0x45</span>,<span class="number">0x18</span>,<span class="number">0x81</span>,<span class="number">0xDE</span>,<span class="number">0xFC</span>,<span class="number">0x95</span>,<span class="number">0xF0</span>,<span class="number">0x16</span>,<span class="number">0x79</span>,<span class="number">0x1A</span>,<span class="number">0x15</span>,<span class="number">0x5B</span>,<span class="number">0x75</span>,<span class="number">0x1F</span> &#125;;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (i; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%c"</span>, arr[i]^(<span class="number">32</span>-i));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">27</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">int</span> temp = i + <span class="number">5</span>;</span><br><span class="line">		<span class="keyword">if</span> (temp % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">int</span> t = arr2[i] % <span class="number">4</span>;</span><br><span class="line">			arr2[i] = arr2[i] / <span class="number">4</span>;</span><br><span class="line">			arr2[i] = arr2[i] +t*<span class="number">64</span>;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%c"</span>, arr2[i] ^(<span class="number">32</span>-temp));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">int</span> t = arr2[i] /<span class="number">64</span>;</span><br><span class="line">			arr2[i] = arr2[i] %<span class="number">64</span>;</span><br><span class="line">			arr2[i] = arr2[i]*<span class="number">4</span> + t;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%c"</span>, arr2[i] ^ (<span class="number">32</span> - temp));</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<pre><code>运行结果如下
-</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qctf&#123;ReA11y_4_B@89_mlp5_4_XmAn_&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-
+<p>运行结果如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qctf&#123;ReA11y_4_B@89_mlp5_4_XmAn_&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -446,7 +467,9 @@ mips指令集是一个定长指令集，大小为四字节，我们可以大胆�
       
         <div class="post-tags">
           
-            <a href="/tags/二进制安全-Re-ctf/" rel="tag"># 二进制安全,Re,ctf</a>
+            <a href="/tags/Re/" rel="tag"># Re</a>
+          
+            <a href="/tags/ctf/" rel="tag"># ctf</a>
           
         </div>
       
@@ -459,8 +482,8 @@ mips指令集是一个定长指令集，大小为四字节，我们可以大胆�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/VM保护合集/" rel="next" title="【Reverse】VM保护合集">
-                <i class="fa fa-chevron-left"></i> 【Reverse】VM保护合集
+              <a href="/VM保护合集/" rel="next" title="VM保护合集">
+                <i class="fa fa-chevron-left"></i> VM保护合集
               </a>
             
           </div>
@@ -469,8 +492,8 @@ mips指令集是一个定长指令集，大小为四字节，我们可以大胆�
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/入门笔记/" rel="prev" title="【pwn】入门笔记">
-                【pwn】入门笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/入门笔记/" rel="prev" title="入门笔记">
+                入门笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -555,13 +578,22 @@ mips指令集是一个定长指令集，大小为四字节，我们可以大胆�
           
 
           
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
           
             
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
