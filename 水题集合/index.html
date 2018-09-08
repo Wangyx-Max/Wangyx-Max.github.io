@@ -96,21 +96,21 @@
 
 
 
-<meta name="description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2">
+<meta name="description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2  网鼎杯 advenced">
 <meta name="keywords" content="CTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="水题集合">
 <meta property="og:url" content="http://yoursite.com/水题集合/index.html">
 <meta property="og:site_name" content="wyx&#39;s blog">
-<meta property="og:description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2">
+<meta property="og:description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2  网鼎杯 advenced">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/水题集合/1532439460327.png">
 <meta property="og:image" content="http://yoursite.com/水题集合/1532440354909.png">
 <meta property="og:image" content="http://yoursite.com/水题集合/1532440672940.png">
-<meta property="og:updated_time" content="2018-09-06T11:37:22.662Z">
+<meta property="og:updated_time" content="2018-09-08T07:03:19.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="水题集合">
-<meta name="twitter:description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2">
+<meta name="twitter:description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2  网鼎杯 advenced">
 <meta name="twitter:image" content="http://yoursite.com/水题集合/1532439460327.png">
 
 
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-06T19:37:22+08:00">
-                2018-09-06
+              <time title="更新于" itemprop="dateModified" datetime="2018-09-08T15:03:19+08:00">
+                2018-09-08
               </time>
             
           </span>
@@ -392,7 +392,8 @@
       
         <h1 id="水一水"><a href="#水一水" class="headerlink" title="水一水"></a>水一水</h1><ul>
 <li style="list-style: none"><input type="checkbox" checked> JarvisOJ  basic_help!!</li>
-<li style="list-style: none"><input type="checkbox"> afctf 数据恢复2</li>
+<li style="list-style: none"><input type="checkbox" checked> afctf 数据恢复2</li>
+<li style="list-style: none"><input type="checkbox" checked> 网鼎杯 advenced</li>
 </ul>
 <a id="more"></a>
 <h2 id="JarvisOJ-basic-help"><a href="#JarvisOJ-basic-help" class="headerlink" title="JarvisOJ  basic_help!!"></a>JarvisOJ  basic_help!!</h2><pre><code>打开压缩包发现有加密，但是拖到爆破软件中未能得到密码，查找资料发现可能是伪加密。用010editor查看文件，并修改二进制文件。修改结果如下，也就是将ushort deFlags的值将09改为00
@@ -401,10 +402,18 @@
 </code></pre><img src="/水题集合/1532440354909.png" title="help!!_2">
 <pre><code>考虑这是一种word隐写（关于word隐写的各种类型和破解方法详看这个博客https://blog.csdn.net/drondong/article/details/79322799  ），而这个word的隐写方式为博客中的第三种，解压后得到几个文件夹，最后在word&gt;media中找到了flag如下
 </code></pre><img src="/水题集合/1532440672940.png" title="help!!_3">
-<h2 id="afctf-数据恢复2"><a href="#afctf-数据恢复2" class="headerlink" title="afctf 数据恢复2"></a>afctf 数据恢复2</h2><pre><code>打开压缩包发现有大量的文件夹，文件夹最底层才是可能存在flag的txt文件，编写脚本提取字符串并输出flag
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">path = <span class="string">r'C:\Users\Max_Wang\Documents\CTF\Challenge\Misc\temp'</span></span><br><span class="line">text = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> root,dirs,files <span class="keyword">in</span> os.walk(path,topdown=<span class="keyword">False</span>):</span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> files:</span><br><span class="line">        temp = os.path.join(root,name)</span><br><span class="line">        <span class="keyword">if</span> temp.endswith(<span class="string">'.txt'</span>):</span><br><span class="line">            f = open(temp)</span><br><span class="line">            text = f.read()</span><br><span class="line">            <span class="keyword">if</span> <span class="string">'afctf'</span> <span class="keyword">in</span> text:</span><br><span class="line">                <span class="keyword">print</span> text</span><br></pre></td></tr></table></figure>
-<pre><code>得到flag
-</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">afctf&#123;Traver31ng_the_d1rect0ry&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="afctf-数据恢复2"><a href="#afctf-数据恢复2" class="headerlink" title="afctf 数据恢复2"></a>afctf 数据恢复2</h2><p>打开压缩包发现有大量的文件夹，文件夹最底层才是可能存在flag的txt文件，编写脚本提取字符串并输出flag</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">path = <span class="string">r'C:\Users\Max_Wang\Documents\CTF\Challenge\Misc\temp'</span></span><br><span class="line">text = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> root,dirs,files <span class="keyword">in</span> os.walk(path,topdown=<span class="keyword">False</span>):</span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> files:</span><br><span class="line">        temp = os.path.join(root,name)</span><br><span class="line">        <span class="keyword">if</span> temp.endswith(<span class="string">'.txt'</span>):</span><br><span class="line">            f = open(temp)</span><br><span class="line">            text = f.read()</span><br><span class="line">            <span class="keyword">if</span> <span class="string">'afctf'</span> <span class="keyword">in</span> text:</span><br><span class="line">                <span class="keyword">print</span> text</span><br></pre></td></tr></table></figure>
+<p>得到flag</p>
+<blockquote>
+<p>afctf{Traver31ng_the_d1rect0ry}</p>
+</blockquote>
+<h2 id="网鼎杯-advenced"><a href="#网鼎杯-advenced" class="headerlink" title="网鼎杯 advenced"></a>网鼎杯 advenced</h2><p>看到writeup之后，真的觉得这道题就是用来耍我们的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: ascii -*-</span></span><br><span class="line">enc = <span class="string">'K@LKVHr[DXEsLsYI@\\AMYIr\\EIZQ'</span></span><br><span class="line">s = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(enc)):</span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        s+= chr(ord(enc[i]) ^ <span class="number">45</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">         s+= chr(ord(enc[i]) ^ <span class="number">44</span>)</span><br><span class="line"><span class="keyword">print</span> s</span><br></pre></td></tr></table></figure>
+<p>解得flag如下</p>
+<blockquote>
+<p>flag{d_with_a_template_phew}</p>
+</blockquote>
 
       
     </div>
@@ -610,7 +619,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#水一水"><span class="nav-text">水一水</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JarvisOJ-basic-help"><span class="nav-text">JarvisOJ  basic_help!!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#afctf-数据恢复2"><span class="nav-text">afctf 数据恢复2</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#水一水"><span class="nav-text">水一水</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JarvisOJ-basic-help"><span class="nav-text">JarvisOJ  basic_help!!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#afctf-数据恢复2"><span class="nav-text">afctf 数据恢复2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网鼎杯-advenced"><span class="nav-text">网鼎杯 advenced</span></a></li></ol></li></ol></div>
             
 
           </div>
