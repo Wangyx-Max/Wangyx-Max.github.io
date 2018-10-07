@@ -105,7 +105,7 @@
 <meta property="og:description" content="RSA有毒  Jarvis OJ Medium RSA   Jarvis OJ hard RSA  Jarvis OJ very hard RSA  Jarvis OJ Extremely hard RSA  God Like RSA">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/RSA集合/1533366636149.png">
-<meta property="og:updated_time" content="2018-09-06T11:35:22.208Z">
+<meta property="og:updated_time" content="2018-10-07T11:07:37.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RSA集合">
 <meta name="twitter:description" content="RSA有毒  Jarvis OJ Medium RSA   Jarvis OJ hard RSA  Jarvis OJ very hard RSA  Jarvis OJ Extremely hard RSA  God Like RSA">
@@ -332,8 +332,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-06T19:35:22+08:00">
-                2018-09-06
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-07T19:07:37+08:00">
+                2018-10-07
               </time>
             
           </span>
@@ -391,7 +391,7 @@
         <h1 id="RSA有毒"><a href="#RSA有毒" class="headerlink" title="RSA有毒"></a>RSA有毒</h1><ul>
 <li style="list-style: none"><input type="checkbox" checked> Jarvis OJ Medium RSA </li>
 <li style="list-style: none"><input type="checkbox" checked> Jarvis OJ hard RSA</li>
-<li style="list-style: none"><input type="checkbox"> Jarvis OJ very hard RSA</li>
+<li style="list-style: none"><input type="checkbox" checked> Jarvis OJ very hard RSA</li>
 <li style="list-style: none"><input type="checkbox"> Jarvis OJ Extremely hard RSA</li>
 <li style="list-style: none"><input type="checkbox"> God Like RSA </li>
 </ul>
@@ -410,7 +410,15 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line">enc = <span class="number">0x39DE036DE3132757E819F769EAD64BB487EE3F47E67843AFB73748FD9E979BE0</span></span><br><span class="line">p =  <span class="number">275127860351348928173285174381581152299</span></span><br><span class="line">q =  <span class="number">319576316814478949870590164193048041239</span></span><br><span class="line">n = <span class="number">0x00c2636ae5c3d8e43ffb97ab09028f1aac6c0bf6cd3d70ebca281bffe97fbe30dd</span></span><br><span class="line">xp = gmpy2.powmod(enc,(p+<span class="number">1</span>)/<span class="number">4</span>,p)</span><br><span class="line">xq = gmpy2.powmod(enc,(q+<span class="number">1</span>)/<span class="number">4</span>,q)</span><br><span class="line">inv_q = gmpy2.invert(q,p)</span><br><span class="line">inv_p = gmpy2.invert(p,q)</span><br><span class="line">c1 = xp*q*inv_q</span><br><span class="line">c2 = xq*p*inv_p</span><br><span class="line">m = <span class="string">''</span></span><br><span class="line">m = hex(gmpy2.f_mod(c1+c2,n))[<span class="number">2</span>:] + hex(gmpy2.f_mod(c1-c2,n))[<span class="number">2</span>:] + hex(gmpy2.f_mod(c2-c1,n))[<span class="number">2</span>:] + hex(gmpy2.f_mod(<span class="number">0</span>-c1-c2,n))[<span class="number">2</span>:]</span><br><span class="line">c = binascii.a2b_hex(m[<span class="number">1</span>:])</span><br><span class="line"><span class="keyword">print</span> c</span><br></pre></td></tr></table></figure>
 <p>得到flag为</p>
 <img src="/RSA集合/1533366636149.png" title="hardRSA">
-<h2 id="Jarvis-OJ-very-hard-RSA"><a href="#Jarvis-OJ-very-hard-RSA" class="headerlink" title="Jarvis OJ very hard RSA"></a>Jarvis OJ very hard RSA</h2>
+<h2 id="Jarvis-OJ-very-hard-RSA"><a href="#Jarvis-OJ-very-hard-RSA" class="headerlink" title="Jarvis OJ very hard RSA"></a>Jarvis OJ very hard RSA</h2><p>通过加密代码可知，这两个加密文件共用了模数，自然想到模数攻击，其原理如下<br>$$<br>c_1 = m^{e_1} \mod n<br>$$</p>
+<p>$$<br>c_2 = m^{e_2}\mod n<br>$$</p>
+<p>$$<br>若e_1和e_2互素，有re_1+se_2 = 1，则可以根据<br>$$</p>
+<p>$$<br>(c_1)^r*(c2)^s = m^{re_1+se_2} = m \mod n<br>$$</p>
+<p>所以编写solve.py如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">e1 = <span class="number">17</span></span><br><span class="line">e2 = <span class="number">65537</span></span><br><span class="line">a = gmpy2.gcdext(e1,e2)</span><br><span class="line">r = int(a[<span class="number">1</span>])</span><br><span class="line">s = int(a[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">fo1 = open(<span class="string">'flag.enc1'</span>,<span class="string">'rb'</span>)</span><br><span class="line">fo2 = open(<span class="string">'flag.enc2'</span>,<span class="string">'rb'</span>)</span><br><span class="line">c1 = fo1.read()</span><br><span class="line">c1 = int(c1.encode(<span class="string">'hex'</span>),<span class="number">16</span>)</span><br><span class="line">c2 = fo2.read()</span><br><span class="line">c2 = int(c2.encode(<span class="string">'hex'</span>),<span class="number">16</span>)</span><br><span class="line">fo1.close()</span><br><span class="line">fo2.close()</span><br><span class="line"></span><br><span class="line">N = <span class="number">0x00b0bee5e3e9e5a7e8d00b493355c618fc8c7d7d03b82e409951c182f398dee3104580e7ba70d383ae5311475656e8a964d380cb157f48c951adfa65db0b122ca40e42fa709189b719a4f0d746e2f6069baf11cebd650f14b93c977352fd13b1eea6d6e1da775502abff89d3a8b3615fd0db49b88a976bc20568489284e181f6f11e270891c8ef80017bad238e363039a458470f1749101bc29949d3a4f4038d463938851579c7525a69984f15b5667f34209b70eb261136947fa123e549dfff00601883afd936fe411e006e4e93d1a00b0fea541bbfc8c5186cb6220503a94b2413110d640c77ea54ba3220fc8f4cc6ce77151e29b3e06578c478bd1bebe04589ef9a197f6f806db8b3ecd826cad24f5324ccdec6e8fead2c2150068602c8dcdc59402ccac9424b790048ccdd9327068095efa010b7f196c74ba8c37b128f9e1411751633f78b7b9e56f71f77a1b4daad3fc54b5e7ef935d9a72fb176759765522b4bbc02e314d5c06b64d5054b7b096c601236e6ccf45b5e611c805d335dbab0c35d226cc208d8ce4736ba39a0354426fae006c7fe52d5267dcfb9c3884f51fddfdf4a9794bcfe0e1557113749e6c8ef421dba263aff68739ce00ed80fd0022ef92d3488f76deb62bdef7bea6026f22a1d25aa2a92d124414a8021fe0c174b9803e6bb5fad75e186a946a17280770f1243f4387446ccceb2222a965cc30b3929L</span></span><br><span class="line"></span><br><span class="line">m = (gmpy2.powmod(c1,r,N)*gmpy2.powmod(c2,s,N))%N</span><br><span class="line">flag = hex(m)</span><br><span class="line">flag = binascii.a2b_hex(flag[<span class="number">2</span>:])</span><br><span class="line"><span class="keyword">print</span> flag</span><br></pre></td></tr></table></figure>
+<p>得到flag如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PCTF&#123;M4st3r_oF_Number_Th3ory&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
