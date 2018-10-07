@@ -125,7 +125,7 @@
 <meta property="og:image" content="http://yoursite.com/VM保护合集/1531298507806.png">
 <meta property="og:image" content="http://yoursite.com/VM保护合集/1531298953005.png">
 <meta property="og:image" content="http://yoursite.com/VM保护合集/1531308757507.png">
-<meta property="og:updated_time" content="2018-09-06T11:34:27.959Z">
+<meta property="og:updated_time" content="2018-10-05T11:08:33.751Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VM保护合集">
 <meta name="twitter:description" content="VM保护合集题目清单   DDCTF2018 黑盒破解  RCTF2018 Simple vm  RCTF2018 Magic">
@@ -352,8 +352,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-06T19:34:27+08:00">
-                2018-09-06
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-05T19:08:33+08:00">
+                2018-10-05
               </time>
             
           </span>
@@ -371,8 +371,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Binary-safe/" itemprop="url" rel="index">
-                    <span itemprop="name">Binary-safe</span>
+                  <a href="/categories/Binary-security/" itemprop="url" rel="index">
+                    <span itemprop="name">Binary security</span>
                   </a>
                 </span>
 
@@ -452,36 +452,79 @@ main函数关键判断如下
 <pre><code>idc脚本如下，要注意这个脚本中的值0x123E010在每一次执行过程中会发生变化，因为它是输入参数存放的地址，具体方法是动态调试执行到参数存放时得到地址值，再根据它修改脚本。爆破出各种可能的函数跳转。
 </code></pre><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;idc.idc&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">auto</span> i,j,p,q,v14;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>;i&lt;<span class="number">8</span>;i++)&#123;</span><br><span class="line">		p = Byte(<span class="number">0x123E010</span>+<span class="number">4</span>*(i+<span class="number">72</span>)+<span class="number">8</span>);</span><br><span class="line">		v14 = Dword(<span class="number">0x123E010</span>+<span class="number">8</span>*(p+<span class="number">0x54</span>)+<span class="number">8</span>);</span><br><span class="line">		Message(<span class="string">"%x"</span>,p);</span><br><span class="line">		<span class="keyword">for</span>(j = <span class="number">0</span> ;j&lt;<span class="number">255</span>;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(Byte(<span class="number">0x603900</span>+j)==Byte(<span class="number">0x123E010</span>+p+<span class="number">0x198</span>))&#123;</span><br><span class="line">				q = j;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		Message(<span class="string">"%x %c %x\n"</span>,q , q, v14);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <pre><code>运行结果如下
-</code></pre><hr>
-<p>1324 $ 400dc1<br>9738 8 400e7a<br>1943 C 400f3a<br>774 t 401064<br>c730 0 4011c9<br>d545 E 40133d<br>c875 u 4012f3<br>1423 # 4014b9</p>
+</code></pre></li>
+</ul>
+<hr>
+<p>  1324 $ 400dc1<br>  9738 8 400e7a<br>  1943 C 400f3a<br>  774 t 401064<br>  c730 0 4011c9<br>  d545 E 40133d<br>  c875 u 4012f3<br>  1423 # 4014b9</p>
 <hr>
 <pre><code>现在要开始分析各个handler的作用，最为特殊的一个handler是sub_40133d，进入这个函数后发现代码如下：
-</code></pre><img src="/VM保护合集/1530862044942.png" title="ReverseMe_5">
+</code></pre>  <img src="/VM保护合集/1530862044942.png" title="ReverseMe_5">
 <pre><code>这段代码有个地方比较坑，其实这个将flag置1并不是问题的关键，这个题目要求的是输出“Binggo”字样，所以这里的三个函数并不要去逆向分析，关键在于前面几句，将a1+0x120里的20个字节输出，我们要做的就是构造输出的字符串。在构造之前我们先要分析出其他handler的作用才能根据这些handler构造字符串。
 
 各个handler的分析过程比较痛苦，但在分析时要有一个意识，虚拟机的堆栈或寄存器是创建在真实堆栈之上的，比如说在这个题目中有很多类似如下的代码。
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov     edx, [rax+120h]</span><br></pre></td></tr></table></figure>
+</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov     edx, [rax+120h]</span><br></pre></td></tr></table></figure>
 <pre><code>其实这当中的[rax+120h]只是模拟一个变量或者一个寄存器，在整个handler中一共用到了四个变量，下面是四个变量的枚举，以及经过分析得出的四变量的作用。
 </code></pre><hr>
-<p>[rax+120h] –&gt; 当前指针位置a[index]</p>
-<p>[rax+298h] –&gt; 当前字符参数的下一个字符passcode[next]</p>
-<p>[rax+299h] –&gt; 临时变量temp</p>
+<p>  [rax+120h] –&gt; 当前指针位置a[index]</p>
+<p>  [rax+298h] –&gt; 当前字符参数的下一个字符passcode[next]</p>
+<p>  [rax+299h] –&gt; 临时变量temp</p>
 <hr>
 <pre><code>最终得到下表
-</code></pre><p>| opcode |                    功能                    |<br>| :—-: | :—————————————-: |<br>|   $    |              temp = a[index]               |<br>|   8    |              a[index] = temp               |<br>|   C    |         temp += passcode[next] -33         |<br>|   t    |         temp -= passcode[next] +33         |<br>|   0    |                  index++                   |<br>|   E    |      if(passcode[next]==’s’) print(a)      |<br>|   u    |                  index–                   |<br>|   #    | temp = passcode[temp+passcode[next]-48]-49 |</p>
-</li>
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:center">opcode</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$</td>
+<td style="text-align:center">temp = a[index]</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">a[index] = temp</td>
+</tr>
+<tr>
+<td style="text-align:center">C</td>
+<td style="text-align:center">temp += passcode[next] -33</td>
+</tr>
+<tr>
+<td style="text-align:center">t</td>
+<td style="text-align:center">temp -= passcode[next] +33</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">index++</td>
+</tr>
+<tr>
+<td style="text-align:center">E</td>
+<td style="text-align:center">if(passcode[next]==’s’) print(a)</td>
+</tr>
+<tr>
+<td style="text-align:center">u</td>
+<td style="text-align:center">index–</td>
+</tr>
+<tr>
+<td style="text-align:center">#</td>
+<td style="text-align:center">temp = passcode[temp+passcode[next]-48]-49</td>
+</tr>
+</tbody>
+</table>
+<ul>
 <li><p>构造passcode</p>
 <pre><code>根据上表构造passcode，这里要注意，由于每次取到的a[index]无法静态分析获得，只能每构造一个字符，再动态调试获得下一个a[index]。最后要注意由于输出handler是输出20个字符，而Binggo只有六个字符，所以要注意构造第七个字符加上&apos;\x00&apos;使其截断。构造方式有很多种，下面是一种从前向后的构造方法。
-</code></pre><hr>
-<p>$ –&gt; 取得a[index]的值为50h</p>
-<p>t/ –&gt; 将50h变为’B’</p>
-<p>8 –&gt; 将’B’放回到a[index]</p>
-<p>0 –&gt; index++</p>
-<hr>
-<pre><code>重复上述操作得到&quot;Binggo&quot;字符串，对应的passcode为&apos;$t/80$C)80$CI80$CX80$Cg80$Cj80 &apos;，然后再通过&apos;#J1&apos;构造&apos;\x00&apos;最后将index移回字符串开头并输出对应passcode为&apos;uuuuuuuEs &apos;。 
 </code></pre></li>
 </ul>
-<p>passcode:</p>
+<hr>
+<p>  $ –&gt; 取得a[index]的值为50h</p>
+<p>  t/ –&gt; 将50h变为’B’</p>
+<p>  8 –&gt; 将’B’放回到a[index]</p>
+<p>  0 –&gt; index++</p>
+<hr>
+<pre><code>重复上述操作得到&quot;Binggo&quot;字符串，对应的passcode为&apos;$t/80$C)80$CI80$CX80$Cg80$Cj80 &apos;，然后再通过&apos;#J1&apos;构造&apos;\x00&apos;最后将index移回字符串开头并输出对应passcode为&apos;uuuuuuuEs &apos;。 
+</code></pre><p>passcode:</p>
 <p>$t/80$C)80$CI80$CX80$Cg80$Cj80#J1uuuuuuuEs</p>
 <h3 id="RCTF2018-Simple-vm"><a href="#RCTF2018-Simple-vm" class="headerlink" title="RCTF2018 Simple vm"></a>RCTF2018 Simple vm</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><pre><code>这道题目给出了Emulator和虚拟机的opcode，通过逆向分析Emulator中各个handler的作用以及opcode的意义推断正确输入从而得到flag
 </code></pre><ul>
@@ -542,7 +585,9 @@ main函数关键判断如下
 <pre><code>可以看到这里面有除法操作，而除数为0的时候会引起异常，这个时候就会转到signal注册的函数signfunc中去执行操作，执行完之后再返回到循环中去，取下一步操作。
 
 其他handler作用的分析比较简单这里不赘述，0x405340处存储的是要执行的opcode，以下是对op凑得的分析
-</code></pre><hr>
+</code></pre></li>
+</ul>
+<hr>
 <pre><code>AB 03 00   reg[3] = 0 
 
 AB 04 1A   reg[4] = 0x1A
@@ -592,19 +637,17 @@ A6 D1  if (reg[5] == 0) vip +=0xD1
 CC
 </code></pre><hr>
 <pre><code>根据上述分析得到的opcode写出爆破求解程序如下：
-</code></pre><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> cmpstr[] = &#123; <span class="number">0x89</span>, <span class="number">0xC1</span>, <span class="number">0xEC</span>, <span class="number">0x50</span>, <span class="number">0x97</span>, <span class="number">0x3A</span>, <span class="number">0x57</span>, <span class="number">0x59</span>, <span class="number">0xE4</span>, <span class="number">0xE6</span>, <span class="number">0xE4</span>, <span class="number">0x42</span>, <span class="number">0xCB</span>, <span class="number">0xD9</span>, <span class="number">0x08</span>, <span class="number">0x22</span>, <span class="number">0xAE</span>, <span class="number">0x9D</span>, <span class="number">0x7C</span>, <span class="number">0x07</span>, <span class="number">0x80</span>, <span class="number">0x8F</span>, <span class="number">0x1B</span>, <span class="number">0x45</span>, <span class="number">0x04</span>, <span class="number">0xE8</span> &#125;;</span><br><span class="line">	<span class="keyword">char</span> temp = <span class="number">0x66</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">255</span>; j++) &#123;</span><br><span class="line">			<span class="keyword">char</span> t = ((j + <span class="number">0xcc</span>) &amp; <span class="number">0xFF</span>) ^ temp;</span><br><span class="line">			<span class="keyword">if</span> (cmpstr[i] == t) &#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"0x%x "</span>, j);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		temp = (~temp)&amp;<span class="number">0xff</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> cmpstr[] = &#123; <span class="number">0x89</span>, <span class="number">0xC1</span>, <span class="number">0xEC</span>, <span class="number">0x50</span>, <span class="number">0x97</span>, <span class="number">0x3A</span>, <span class="number">0x57</span>, <span class="number">0x59</span>, <span class="number">0xE4</span>, <span class="number">0xE6</span>, <span class="number">0xE4</span>, <span class="number">0x42</span>, <span class="number">0xCB</span>, <span class="number">0xD9</span>, <span class="number">0x08</span>, <span class="number">0x22</span>, <span class="number">0xAE</span>, <span class="number">0x9D</span>, <span class="number">0x7C</span>, <span class="number">0x07</span>, <span class="number">0x80</span>, <span class="number">0x8F</span>, <span class="number">0x1B</span>, <span class="number">0x45</span>, <span class="number">0x04</span>, <span class="number">0xE8</span> &#125;;</span><br><span class="line">	<span class="keyword">char</span> temp = <span class="number">0x66</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">255</span>; j++) &#123;</span><br><span class="line">			<span class="keyword">char</span> t = ((j + <span class="number">0xcc</span>) &amp; <span class="number">0xFF</span>) ^ temp;</span><br><span class="line">			<span class="keyword">if</span> (cmpstr[i] == t) &#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"0x%x "</span>, j);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		temp = (~temp)&amp;<span class="number">0xff</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <pre><code>得到的结果如下
-</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x23 0x8c 0xbe 0xfd 0x25 0xd7 0x65 0xf4 0xb6 0xb3 0xb6 0xf 0xe1 0x74 0xa2 0xef 0xfc 0x38 0x4e 0xd2 0x1a 0x4a 0xb1 0x10 0x96 0xa5</span><br></pre></td></tr></table></figure>
+</code></pre>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x23 0x8c 0xbe 0xfd 0x25 0xd7 0x65 0xf4 0xb6 0xb3 0xb6 0xf 0xe1 0x74 0xa2 0xef 0xfc 0x38 0x4e 0xd2 0x1a 0x4a 0xb1 0x10 0x96 0xa5</span><br></pre></td></tr></table></figure>
 <pre><code>由于rc4加解密过程一样，所以把上述字符串作为输入，利用源程序的rc4的密钥求解，把上述字符串作为输入可以通过脚本修改，脚本来自http://ahageek.com/blog/rctf2018-magic-writeup/
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> idaapi <span class="keyword">import</span> *</span><br><span class="line">rc4ed = [<span class="number">0x23</span>,<span class="number">0x8c</span>,<span class="number">0xbe</span>,<span class="number">0xfd</span>,<span class="number">0x25</span>,<span class="number">0xd7</span>,<span class="number">0x65</span>,<span class="number">0xf4</span>,<span class="number">0xb6</span>,<span class="number">0xb3</span>,<span class="number">0xb6</span>,<span class="number">0xf</span>,<span class="number">0xe1</span>,<span class="number">0x74</span>,<span class="number">0xa2</span>,<span class="number">0xef</span>,<span class="number">0xfc</span>,<span class="number">0x38</span>,<span class="number">0x4e</span>,<span class="number">0xd2</span>,<span class="number">0x1a</span>,<span class="number">0x4a</span>,<span class="number">0xb1</span>,<span class="number">0x10</span>,<span class="number">0x96</span>,<span class="number">0xa5</span>]</span><br><span class="line">rcx = idc.GetRegValue(<span class="string">'rcx'</span>)</span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> addr <span class="keyword">in</span> range(rcx, rcx + <span class="number">0x1A</span>):</span><br><span class="line">    idc.PatchByte(addr, rc4ed[i])</span><br><span class="line">    i = i + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+</code></pre>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> idaapi <span class="keyword">import</span> *</span><br><span class="line">rc4ed = [<span class="number">0x23</span>,<span class="number">0x8c</span>,<span class="number">0xbe</span>,<span class="number">0xfd</span>,<span class="number">0x25</span>,<span class="number">0xd7</span>,<span class="number">0x65</span>,<span class="number">0xf4</span>,<span class="number">0xb6</span>,<span class="number">0xb3</span>,<span class="number">0xb6</span>,<span class="number">0xf</span>,<span class="number">0xe1</span>,<span class="number">0x74</span>,<span class="number">0xa2</span>,<span class="number">0xef</span>,<span class="number">0xfc</span>,<span class="number">0x38</span>,<span class="number">0x4e</span>,<span class="number">0xd2</span>,<span class="number">0x1a</span>,<span class="number">0x4a</span>,<span class="number">0xb1</span>,<span class="number">0x10</span>,<span class="number">0x96</span>,<span class="number">0xa5</span>]</span><br><span class="line">rcx = idc.GetRegValue(<span class="string">'rcx'</span>)</span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> addr <span class="keyword">in</span> range(rcx, rcx + <span class="number">0x1A</span>):</span><br><span class="line">    idc.PatchByte(addr, rc4ed[i])</span><br><span class="line">    i = i + <span class="number">1</span></span><br></pre></td></tr></table></figure>
 <pre><code>最后得到字符串如下
 
 @ck_For_fun_02508iO2_2iOR}
 在打过补丁的程序中输入上述flag，得到另一半flag：rctf{h
-</code></pre><img src="/VM保护合集/1531308757507.png" title="maigc_9">
-<p>综上整个flag为：rctf{h@ck_For_fun_02508iO2_2iOR}</p>
-</li>
-</ul>
+</code></pre>  <img src="/VM保护合集/1531308757507.png" title="maigc_9">
+<p>  综上整个flag为：rctf{h@ck_For_fun_02508iO2_2iOR}</p>
 <blockquote>
 <p>参考内容</p>
 <p><a href="https://mp.weixin.qq.com/s/4Nfso1OuHeQgCTGYv2IF5Q" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/4Nfso1OuHeQgCTGYv2IF5Q</a></p>
@@ -732,7 +775,7 @@ CC
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
