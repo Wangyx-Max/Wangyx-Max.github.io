@@ -125,7 +125,8 @@
 <meta property="og:image" content="http://yoursite.com/VM保护合集/1531298507806.png">
 <meta property="og:image" content="http://yoursite.com/VM保护合集/1531298953005.png">
 <meta property="og:image" content="http://yoursite.com/VM保护合集/1531308757507.png">
-<meta property="og:updated_time" content="2018-10-15T07:14:08.082Z">
+<meta property="og:image" content="c:/Users/Max_Wang/Documents/blog/blog/source/_posts/assets/1539592784926.png">
+<meta property="og:updated_time" content="2018-10-15T13:36:29.051Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VM保护合集">
 <meta name="twitter:description" content="VM保护合集题目清单   DDCTF2018 黑盒破解  RCTF2018 Simple vm  RCTF2018 Magic  护网杯2018 rerere">
@@ -352,7 +353,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-15T15:14:08+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-15T21:36:29+08:00">
                 2018-10-15
               </time>
             
@@ -413,7 +414,7 @@
 <li style="list-style: none"><input type="checkbox" checked> DDCTF2018 黑盒破解</li>
 <li style="list-style: none"><input type="checkbox" checked> RCTF2018 Simple vm</li>
 <li style="list-style: none"><input type="checkbox" checked> RCTF2018 Magic</li>
-<li style="list-style: none"><input type="checkbox"> 护网杯2018 rerere</li>
+<li style="list-style: none"><input type="checkbox" checked> 护网杯2018 rerere</li>
 </ul>
 <a id="more"></a>
 <h2 id="原理介绍"><a href="#原理介绍" class="headerlink" title="原理介绍"></a>原理介绍</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>虚拟机保护技术是指，将程序代码转换为自定义的中间操作码（OpCode，当操作码只占一个字节可称作ByteCode），OpCode通过一种解释执行系统或者模拟器（Emulator）解释执行，实现代码基本功能。</p>
@@ -429,7 +430,7 @@
 <blockquote>
 <p>详情待施工……</p>
 </blockquote>
-<h2 id="题目示例"><a href="#题目示例" class="headerlink" title="题目示例"></a>题目示例</h2><h3 id="DDCTF2018-黑盒破解"><a href="#DDCTF2018-黑盒破解" class="headerlink" title="DDCTF2018 黑盒破解"></a>DDCTF2018 黑盒破解</h3><p>解题的基本思路是通过分析二进制文件，得到opcode及其对应的基本操作，通过构造passcode，令程序输出binggo字样。</p>
+<h2 id="DDCTF2018-黑盒破解"><a href="#DDCTF2018-黑盒破解" class="headerlink" title="DDCTF2018 黑盒破解"></a>DDCTF2018 黑盒破解</h2><p>解题的基本思路是通过分析二进制文件，得到opcode及其对应的基本操作，通过构造passcode，令程序输出binggo字样。</p>
 <h5 id="前期准备分析"><a href="#前期准备分析" class="headerlink" title="前期准备分析"></a>前期准备分析</h5><p>拿到文件完成基本分析后加载到IDA。</p>
 <p>首先通过字符串搜索，并交叉引用定位到主函数，分析程序的基本逻辑：输入password（即给的txt文件名中的数字），然后输入passcode，令程序输出Binggo。</p>
 <p>main函数关键判断如下</p>
@@ -510,7 +511,7 @@
 <p>重复上述操作得到”Binggo”字符串，对应的passcode为’$t/80$C)80$CI80$CX80$Cg80$Cj80 ‘，然后再通过’#J1’构造’\x00’最后将index移回字符串开头并输出对应passcode为’uuuuuuuEs ‘。 </p>
 <p>passcode:</p>
 <p>$t/80$C)80$CI80$CX80$Cg80$Cj80#J1uuuuuuuEs</p>
-<h3 id="RCTF2018-Simple-vm"><a href="#RCTF2018-Simple-vm" class="headerlink" title="RCTF2018 Simple vm"></a>RCTF2018 Simple vm</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>这道题目给出了Emulator和虚拟机的opcode，通过逆向分析Emulator中各个handler的作用以及opcode的意义推断正确输入从而得到flag</p>
+<h2 id="RCTF2018-Simple-vm"><a href="#RCTF2018-Simple-vm" class="headerlink" title="RCTF2018 Simple vm"></a>RCTF2018 Simple vm</h2><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>这道题目给出了Emulator和虚拟机的opcode，通过逆向分析Emulator中各个handler的作用以及opcode的意义推断正确输入从而得到flag</p>
 <h5 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h5><p>运行vm_rel看一下程序要求，发现是要猜输入</p>
   <img src="/VM保护合集/1531100314558.png" title="Simplevm_1">
 <p>把vm_rel拖入IDA里面进行字符串搜索，并未发现“Input Flag”等字符串。进入主函数看代码流程，猜测vm_rel其实是虚拟机emulator，p.bin才是真正的函数。</p>
@@ -557,55 +558,9 @@
   <img src="/VM保护合集/1531298953005.png" title="magic_8">
 <p>可以看到这里面有除法操作，而除数为0的时候会引起异常，这个时候就会转到signal注册的函数signfunc中去执行操作，执行完之后再返回到循环中去，取下一步操作。</p>
 <p>其他handler作用的分析比较简单这里不赘述，0x405340处存储的是要执行的opcode，以下是对op凑得的分析</p>
-<hr>
-<pre><code>AB 03 00   reg[3] = 0 
-
-AB 04 1A   reg[4] = 0x1A
-
-AB 00  66  reg[0] = 0x66
-
-AA 05 02   reg[5] = reg[2]    ;input_rc4ed
-
-A9 53   reg[5] += reg[3]
-
-A0 05   reg[5] = *(byte)reg[5]   ;input_rc4ed[i]
-
-AB 06 CC   reg[6] = 0xCC
-
-A9 56   reg[5] += reg[6] 
-
-AB 06 FF    reg[6] = 0xFF
-
-AC 56   reg[5] &amp;= reg[6] 
-
-AE 50    reg[5] ^= reg[0]
-
-AD 00    reg[0] = ~reg[0]
-
-AA 06 05   reg[6] = reg[5]
-
-AA 05 01   reg[5] = reg[1]  ;cmpstr
-
-A9 53   reg[5] += reg[3]
-
-A0 05   reg[5] = *(byte)reg[5]  ;cmpstr[i]
-
-AF 56 00   reg[5] = (reg[5] == reg[6])
-
-A7 01   if (reg[5] == 1) vip += 1
-
-CC
-
-A9 35   reg[3] += reg[5]
-
-AA 05 03   reg[5] = reg[3]
-
-AF 54 00    reg[5] = (reg[5] == reg[4])
-
-A6 D1  if (reg[5] == 0) vip +=0xD1
-
-CC
-</code></pre><hr>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&gt; AB 03 00   reg[3] = 0 </span><br><span class="line">&gt; AB 04 1A   reg[4] = 0x1A</span><br><span class="line">&gt; AB 00  66  reg[0] = 0x66</span><br><span class="line">&gt; AA 05 02   reg[5] = reg[2]    ;input_rc4ed</span><br><span class="line">&gt; A9 53   reg[5] += reg[3]</span><br><span class="line">&gt; A0 05   reg[5] = *(byte)reg[5]   ;input_rc4ed[i]</span><br><span class="line">&gt; AB 06 CC   reg[6] = 0xCC</span><br><span class="line">&gt; A9 56   reg[5] += reg[6] </span><br><span class="line">&gt; AB 06 FF    reg[6] = 0xFF</span><br><span class="line">&gt; AC 56   reg[5] &amp;= reg[6] </span><br><span class="line">&gt; AE 50    reg[5] ^= reg[0]</span><br><span class="line">&gt; AD 00    reg[0] = ~reg[0]</span><br><span class="line">&gt; AA 06 05   reg[6] = reg[5]</span><br><span class="line">&gt; AA 05 01   reg[5] = reg[1]  ;cmpstr</span><br><span class="line">&gt; A9 53   reg[5] += reg[3]</span><br><span class="line">&gt; A0 05   reg[5] = *(byte)reg[5]  ;cmpstr[i]</span><br><span class="line">&gt; AF 56 00   reg[5] = (reg[5] == reg[6])</span><br><span class="line">&gt; A7 01   if (reg[5] == 1) vip += 1</span><br><span class="line">&gt; CC</span><br><span class="line">&gt; A9 35   reg[3] += reg[5]</span><br><span class="line">&gt; AA 05 03   reg[5] = reg[3]</span><br><span class="line">&gt; AF 54 00    reg[5] = (reg[5] == reg[4])</span><br><span class="line">&gt; A6 D1  if (reg[5] == 0) vip +=0xD1</span><br><span class="line">&gt; CC</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
 <p>根据上述分析得到的opcode写出爆破求解程序如下：</p>
   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> cmpstr[] = &#123; <span class="number">0x89</span>, <span class="number">0xC1</span>, <span class="number">0xEC</span>, <span class="number">0x50</span>, <span class="number">0x97</span>, <span class="number">0x3A</span>, <span class="number">0x57</span>, <span class="number">0x59</span>, <span class="number">0xE4</span>, <span class="number">0xE6</span>, <span class="number">0xE4</span>, <span class="number">0x42</span>, <span class="number">0xCB</span>, <span class="number">0xD9</span>, <span class="number">0x08</span>, <span class="number">0x22</span>, <span class="number">0xAE</span>, <span class="number">0x9D</span>, <span class="number">0x7C</span>, <span class="number">0x07</span>, <span class="number">0x80</span>, <span class="number">0x8F</span>, <span class="number">0x1B</span>, <span class="number">0x45</span>, <span class="number">0x04</span>, <span class="number">0xE8</span> &#125;;</span><br><span class="line">	<span class="keyword">char</span> temp = <span class="number">0x66</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">255</span>; j++) &#123;</span><br><span class="line">			<span class="keyword">char</span> t = ((j + <span class="number">0xcc</span>) &amp; <span class="number">0xFF</span>) ^ temp;</span><br><span class="line">			<span class="keyword">if</span> (cmpstr[i] == t) &#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"0x%x "</span>, j);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		temp = (~temp)&amp;<span class="number">0xff</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>得到的结果如下</p>
@@ -617,7 +572,152 @@ CC
 </code></pre><p>在打过补丁的程序中输入上述flag，得到另一半flag：rctf{h</p>
   <img src="/VM保护合集/1531308757507.png" title="maigc_9">
 <p>综上整个flag为：rctf{h@ck_For_fun_02508iO2_2iOR}</p>
-<h3 id="护网杯2018-rerere"><a href="#护网杯2018-rerere" class="headerlink" title="护网杯2018 rerere"></a>护网杯2018 rerere</h3><blockquote>
+<h2 id="护网杯2018-rerere"><a href="#护网杯2018-rerere" class="headerlink" title="护网杯2018 rerere"></a>护网杯2018 rerere</h2><h5 id="VM结构分析"><a href="#VM结构分析" class="headerlink" title="VM结构分析"></a>VM结构分析</h5><p>下图为VM初始化，this[1]~this[5]为寄存器，初始值为0；this[6]为输出参数字符串；this[9]为opcode。</p>
+<p><img src="C:\Users\Max_Wang\Documents\blog\blog\source\_posts\assets\1539592784926.png" alt="1539592784926"></p>
+<p>然后是各个handler的分析，结果如下</p>
+<table>
+<thead>
+<tr>
+<th>操作码（操作数）</th>
+<th>功能</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x43</td>
+<td>exit()</td>
+<td>退出循环</td>
+</tr>
+<tr>
+<td>0x53(a)</td>
+<td>this[a2] += this[a1]</td>
+<td></td>
+</tr>
+<tr>
+<td>0x59(a)</td>
+<td>this[a2]  -= this[a1]</td>
+<td></td>
+</tr>
+<tr>
+<td>0x58(a)</td>
+<td>this[a2]  *= this[a1]</td>
+<td></td>
+</tr>
+<tr>
+<td>0x45(a)</td>
+<td>this[a2]  /= this[a1]</td>
+<td></td>
+</tr>
+<tr>
+<td>0x50(a)</td>
+<td>this[a2] = this[a1] + 1</td>
+<td></td>
+</tr>
+<tr>
+<td>0x4E(a)</td>
+<td>this[a2] = this[a1] - 1</td>
+<td></td>
+</tr>
+<tr>
+<td>0x47(a)</td>
+<td>this[a2]  ^= this[a1]</td>
+<td></td>
+</tr>
+<tr>
+<td>0x4A(a)</td>
+<td>this[a2]  &amp;= this[a1]</td>
+<td></td>
+</tr>
+<tr>
+<td>0x52(a)</td>
+<td>this[8] = this[a1]</td>
+<td></td>
+</tr>
+<tr>
+<td>0x4F(a,b,c,d)</td>
+<td>this[8] = abcd</td>
+<td></td>
+</tr>
+<tr>
+<td>0x54(a)</td>
+<td>this[a2] = this[8]</td>
+<td></td>
+</tr>
+<tr>
+<td>0x51(a)</td>
+<td>result = this[a2]</td>
+<td></td>
+</tr>
+<tr>
+<td>0x46(a)</td>
+<td>this[a2] = this[6]</td>
+<td></td>
+</tr>
+<tr>
+<td>0x57(a)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0x55(a)</td>
+<td>if(this[4]!=0) {this[4]–;this[9] - a;}</td>
+<td>跳转指令</td>
+</tr>
+<tr>
+<td>0x48(a)</td>
+<td>if(v1==v2){this[5]=0;}if(v1&lt;v2){this[5]=-1;}if(v1&gt;v2){this[5]=1;}</td>
+<td>v1=this[a1];v2=this[a2]</td>
+</tr>
+<tr>
+<td>0x44(a)</td>
+<td>if(this[5]==-1){this[9] + a;}</td>
+<td>跳转指令</td>
+</tr>
+<tr>
+<td>0x4D(a)</td>
+<td>if(this[5]==1){this[9] + a;}</td>
+<td>跳转指令</td>
+</tr>
+<tr>
+<td>0x4B(a)</td>
+<td>if(this[5]==0){this[9] + a;}</td>
+<td>跳转指令</td>
+</tr>
+<tr>
+<td>0x49()</td>
+<td>this[6]++</td>
+<td></td>
+</tr>
+<tr>
+<td>0x56()</td>
+<td>this[6]–</td>
+<td></td>
+</tr>
+<tr>
+<td>0x4C()</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>tips:  </p>
+<p>a1 = (a&amp;0xF)+1 ; a2 = (a&gt;&gt;4)+1</p>
+<p>this[9]指向下一条要执行的语句</p>
+</blockquote>
+<p>最后对opcode进行分析，得到vm保护部分的代码含义。</p>
+<p>第一段代码的含义是限制输入为[0~1][A~F]。</p>
+<p>后几段是将48位输入分为6段，每段8byte，但是要注意是从后往前进行比较的。下面是以第二段为例的具体分析。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&gt; code2:</span><br><span class="line">&gt; 55 40 ;if(this[4]!=0)&#123;this[4]--;this[9]-0x40;&#125;</span><br><span class="line">&gt; 4F 00 00 00 07 54 30 ;this[4]=0x7</span><br><span class="line">&gt; 47 11 ;this[2]^=this[2]</span><br><span class="line">&gt; t_code1:</span><br><span class="line">&gt; 56 ;index--</span><br><span class="line">&gt; 46 00 ;this[1]=input[index]</span><br><span class="line">&gt; 4F 00 00 00 30 54 20 ;this[3]=0x30</span><br><span class="line">&gt; 59 02 ;this[1]-=this[3]</span><br><span class="line">&gt; 4F 00 00 00 0A 54 20 ;this[3]=0xa </span><br><span class="line">&gt; 48 02 44 09 ;if(this[3]&lt;this[1])jmp t_code2</span><br><span class="line">&gt; 4F 00 00 00 07 54 20 ;this[3]=0x7</span><br><span class="line">&gt; 59 02 ;this[1]-=this[3]</span><br><span class="line">&gt; t_code2:</span><br><span class="line">&gt; 4F 00 00 00 10 54 20 ;this[3]=0x10</span><br><span class="line">&gt; 58 12 ;this[2]*=this[3]</span><br><span class="line">&gt; 53 10 ;this[2]+=this[1]</span><br><span class="line">&gt; 55 2B ;if(this[4]!=0)&#123;this[4]--;jmp t_code1;&#125;</span><br><span class="line">&gt; 4F 33 B4 88 AC 54 20 ;this[3]=0x33B488AC</span><br><span class="line">&gt; 48 12 47 00 4B 03 ;if(this[3]==this[2])jmp code3;this[1]^=this[1]</span><br><span class="line">&gt; 50 00 ;this[1]++</span><br><span class="line">&gt; 43 ;exit()</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>最后用python编写解密代码得到输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\CTF\Challenge\Binary_sec\Reverse&gt;task_huwang-refinal-4.exe E25BD838D2B62FE1B1579293CECDC5C7F349B0A4CA884B33</span><br><span class="line">Great! Add flag&#123;&#125; to <span class="built_in">hash</span> and submit</span><br></pre></td></tr></table></figure>
+<p>flag如下</p>
+<blockquote>
+<p>flag{E25BD838D2B62FE1B1579293CECDC5C7F349B0A4CA884B33}</p>
+</blockquote>
+<blockquote>
 <p>参考内容</p>
 <p><a href="https://mp.weixin.qq.com/s/4Nfso1OuHeQgCTGYv2IF5Q" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/4Nfso1OuHeQgCTGYv2IF5Q</a></p>
 <p><a href="https://www.anquanke.com/post/id/145553" target="_blank" rel="noopener">https://www.anquanke.com/post/id/145553</a></p>
@@ -830,7 +930,7 @@ CC
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VM保护合集"><span class="nav-text">VM保护合集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理介绍"><span class="nav-text">原理介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理"><span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM虚拟机"><span class="nav-text">JVM虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VMP虚拟机"><span class="nav-text">VMP虚拟机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目示例"><span class="nav-text">题目示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DDCTF2018-黑盒破解"><span class="nav-text">DDCTF2018 黑盒破解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#前期准备分析"><span class="nav-text">前期准备分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#得到passcode与其对应的操作"><span class="nav-text">得到passcode与其对应的操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构造passcode"><span class="nav-text">构造passcode</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RCTF2018-Simple-vm"><span class="nav-text">RCTF2018 Simple vm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法一"><span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#分析"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#动态调试对p-bin的行为进行分析"><span class="nav-text">动态调试对p.bin的行为进行分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#求解"><span class="nav-text">求解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二"><span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RCTF2018-Magic"><span class="nav-text">RCTF2018 Magic</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#寻找入口函数"><span class="nav-text">寻找入口函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#时间验证"><span class="nav-text">时间验证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#输入验证"><span class="nav-text">输入验证</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#护网杯2018-rerere"><span class="nav-text">护网杯2018 rerere</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VM保护合集"><span class="nav-text">VM保护合集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理介绍"><span class="nav-text">原理介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理"><span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM虚拟机"><span class="nav-text">JVM虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VMP虚拟机"><span class="nav-text">VMP虚拟机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DDCTF2018-黑盒破解"><span class="nav-text">DDCTF2018 黑盒破解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#前期准备分析"><span class="nav-text">前期准备分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#得到passcode与其对应的操作"><span class="nav-text">得到passcode与其对应的操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构造passcode"><span class="nav-text">构造passcode</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RCTF2018-Simple-vm"><span class="nav-text">RCTF2018 Simple vm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法一"><span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#分析"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#动态调试对p-bin的行为进行分析"><span class="nav-text">动态调试对p.bin的行为进行分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#求解"><span class="nav-text">求解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二"><span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RCTF2018-Magic"><span class="nav-text">RCTF2018 Magic</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#寻找入口函数"><span class="nav-text">寻找入口函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#时间验证"><span class="nav-text">时间验证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#输入验证"><span class="nav-text">输入验证</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#护网杯2018-rerere"><span class="nav-text">护网杯2018 rerere</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#VM结构分析"><span class="nav-text">VM结构分析</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
