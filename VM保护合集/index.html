@@ -96,13 +96,13 @@
 
 
 
-<meta name="description" content="VM保护合集题目清单   DDCTF2018 黑盒破解  RCTF2018 Simple vm  RCTF2018 Magic">
+<meta name="description" content="VM保护合集题目清单   DDCTF2018 黑盒破解  RCTF2018 Simple vm  RCTF2018 Magic  护网杯2018 rerere">
 <meta name="keywords" content="Re,ctf">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VM保护合集">
 <meta property="og:url" content="http://yoursite.com/VM保护合集/index.html">
 <meta property="og:site_name" content="wyx&#39;s blog">
-<meta property="og:description" content="VM保护合集题目清单   DDCTF2018 黑盒破解  RCTF2018 Simple vm  RCTF2018 Magic">
+<meta property="og:description" content="VM保护合集题目清单   DDCTF2018 黑盒破解  RCTF2018 Simple vm  RCTF2018 Magic  护网杯2018 rerere">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/VM保护合集/1530847718783.png">
 <meta property="og:image" content="http://yoursite.com/VM保护合集/1530848472213.png">
@@ -125,10 +125,10 @@
 <meta property="og:image" content="http://yoursite.com/VM保护合集/1531298507806.png">
 <meta property="og:image" content="http://yoursite.com/VM保护合集/1531298953005.png">
 <meta property="og:image" content="http://yoursite.com/VM保护合集/1531308757507.png">
-<meta property="og:updated_time" content="2018-10-15T03:31:44.016Z">
+<meta property="og:updated_time" content="2018-10-15T07:14:08.082Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VM保护合集">
-<meta name="twitter:description" content="VM保护合集题目清单   DDCTF2018 黑盒破解  RCTF2018 Simple vm  RCTF2018 Magic">
+<meta name="twitter:description" content="VM保护合集题目清单   DDCTF2018 黑盒破解  RCTF2018 Simple vm  RCTF2018 Magic  护网杯2018 rerere">
 <meta name="twitter:image" content="http://yoursite.com/VM保护合集/1530847718783.png">
 
 
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-15T11:31:44+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-15T15:14:08+08:00">
                 2018-10-15
               </time>
             
@@ -413,6 +413,7 @@
 <li style="list-style: none"><input type="checkbox" checked> DDCTF2018 黑盒破解</li>
 <li style="list-style: none"><input type="checkbox" checked> RCTF2018 Simple vm</li>
 <li style="list-style: none"><input type="checkbox" checked> RCTF2018 Magic</li>
+<li style="list-style: none"><input type="checkbox"> 护网杯2018 rerere</li>
 </ul>
 <a id="more"></a>
 <h2 id="原理介绍"><a href="#原理介绍" class="headerlink" title="原理介绍"></a>原理介绍</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>虚拟机保护技术是指，将程序代码转换为自定义的中间操作码（OpCode，当操作码只占一个字节可称作ByteCode），OpCode通过一种解释执行系统或者模拟器（Emulator）解释执行，实现代码基本功能。</p>
@@ -429,7 +430,9 @@
 <p>详情待施工……</p>
 </blockquote>
 <h2 id="题目示例"><a href="#题目示例" class="headerlink" title="题目示例"></a>题目示例</h2><h3 id="DDCTF2018-黑盒破解"><a href="#DDCTF2018-黑盒破解" class="headerlink" title="DDCTF2018 黑盒破解"></a>DDCTF2018 黑盒破解</h3><p>解题的基本思路是通过分析二进制文件，得到opcode及其对应的基本操作，通过构造passcode，令程序输出binggo字样。</p>
-<h5 id="前期准备分析"><a href="#前期准备分析" class="headerlink" title="前期准备分析"></a>前期准备分析</h5><p>拿到文件完成基本分析后加载到IDA。首先通过字符串搜索，并交叉引用定位到主函数，分析程序的基本逻辑：输入password（即给的txt文件名中的数字），然后输入passcode，令程序输出Binggo。main函数关键判断如下</p>
+<h5 id="前期准备分析"><a href="#前期准备分析" class="headerlink" title="前期准备分析"></a>前期准备分析</h5><p>拿到文件完成基本分析后加载到IDA。</p>
+<p>首先通过字符串搜索，并交叉引用定位到主函数，分析程序的基本逻辑：输入password（即给的txt文件名中的数字），然后输入passcode，令程序输出Binggo。</p>
+<p>main函数关键判断如下</p>
   <img src="/VM保护合集/1530849338318.png" title="ReverseMe_1">
 <p>对flag查找引用发现一个函数，但继续查找引用遇到障碍，所以开动态调试，看一下程序运行的情况。发现sub_401A48可能是一个重要函数，进入查看。</p>
   <img src="/VM保护合集/1530858822184.png" title="ReverseMe_2">
@@ -614,7 +617,7 @@ CC
 </code></pre><p>在打过补丁的程序中输入上述flag，得到另一半flag：rctf{h</p>
   <img src="/VM保护合集/1531308757507.png" title="maigc_9">
 <p>综上整个flag为：rctf{h@ck_For_fun_02508iO2_2iOR}</p>
-<blockquote>
+<h3 id="护网杯2018-rerere"><a href="#护网杯2018-rerere" class="headerlink" title="护网杯2018 rerere"></a>护网杯2018 rerere</h3><blockquote>
 <p>参考内容</p>
 <p><a href="https://mp.weixin.qq.com/s/4Nfso1OuHeQgCTGYv2IF5Q" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/4Nfso1OuHeQgCTGYv2IF5Q</a></p>
 <p><a href="https://www.anquanke.com/post/id/145553" target="_blank" rel="noopener">https://www.anquanke.com/post/id/145553</a></p>
@@ -827,7 +830,7 @@ CC
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VM保护合集"><span class="nav-text">VM保护合集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理介绍"><span class="nav-text">原理介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理"><span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM虚拟机"><span class="nav-text">JVM虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VMP虚拟机"><span class="nav-text">VMP虚拟机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目示例"><span class="nav-text">题目示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DDCTF2018-黑盒破解"><span class="nav-text">DDCTF2018 黑盒破解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#前期准备分析"><span class="nav-text">前期准备分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#得到passcode与其对应的操作"><span class="nav-text">得到passcode与其对应的操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构造passcode"><span class="nav-text">构造passcode</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RCTF2018-Simple-vm"><span class="nav-text">RCTF2018 Simple vm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法一"><span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#分析"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#动态调试对p-bin的行为进行分析"><span class="nav-text">动态调试对p.bin的行为进行分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#求解"><span class="nav-text">求解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二"><span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RCTF2018-Magic"><span class="nav-text">RCTF2018 Magic</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#寻找入口函数"><span class="nav-text">寻找入口函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#时间验证"><span class="nav-text">时间验证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#输入验证"><span class="nav-text">输入验证</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VM保护合集"><span class="nav-text">VM保护合集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理介绍"><span class="nav-text">原理介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理"><span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM虚拟机"><span class="nav-text">JVM虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VMP虚拟机"><span class="nav-text">VMP虚拟机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目示例"><span class="nav-text">题目示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DDCTF2018-黑盒破解"><span class="nav-text">DDCTF2018 黑盒破解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#前期准备分析"><span class="nav-text">前期准备分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#得到passcode与其对应的操作"><span class="nav-text">得到passcode与其对应的操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构造passcode"><span class="nav-text">构造passcode</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RCTF2018-Simple-vm"><span class="nav-text">RCTF2018 Simple vm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法一"><span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#分析"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#动态调试对p-bin的行为进行分析"><span class="nav-text">动态调试对p.bin的行为进行分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#求解"><span class="nav-text">求解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二"><span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RCTF2018-Magic"><span class="nav-text">RCTF2018 Magic</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#寻找入口函数"><span class="nav-text">寻找入口函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#时间验证"><span class="nav-text">时间验证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#输入验证"><span class="nav-text">输入验证</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#护网杯2018-rerere"><span class="nav-text">护网杯2018 rerere</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
