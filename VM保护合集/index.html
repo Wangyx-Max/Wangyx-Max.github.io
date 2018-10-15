@@ -125,7 +125,7 @@
 <meta property="og:image" content="http://yoursite.com/VM保护合集/1531298507806.png">
 <meta property="og:image" content="http://yoursite.com/VM保护合集/1531298953005.png">
 <meta property="og:image" content="http://yoursite.com/VM保护合集/1531308757507.png">
-<meta property="og:updated_time" content="2018-10-15T03:19:01.273Z">
+<meta property="og:updated_time" content="2018-10-15T03:26:54.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VM保护合集">
 <meta name="twitter:description" content="VM保护合集题目清单   DDCTF2018 黑盒破解  RCTF2018 Simple vm  RCTF2018 Magic">
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-15T11:19:01+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-15T11:26:54+08:00">
                 2018-10-15
               </time>
             
@@ -429,38 +429,36 @@
 <p>详情待施工……</p>
 </blockquote>
 <h2 id="题目示例"><a href="#题目示例" class="headerlink" title="题目示例"></a>题目示例</h2><h3 id="DDCTF2018-黑盒破解"><a href="#DDCTF2018-黑盒破解" class="headerlink" title="DDCTF2018 黑盒破解"></a>DDCTF2018 黑盒破解</h3><p>解题的基本思路是通过分析二进制文件，得到opcode及其对应的基本操作，通过构造passcode，令程序输出binggo字样。</p>
-<h5 id="前期准备分析"><a href="#前期准备分析" class="headerlink" title="前期准备分析"></a>前期准备分析</h5><p>拿到文件完成基本分析后加载到IDA。</p>
-<pre><code>首先通过字符串搜索，并交叉引用定位到主函数，分析程序的基本逻辑：输入password（即给的txt文件名中的数字），然后输入passcode，令程序输出Binggo。
-
-main函数关键判断如下
-</code></pre>  <img src="/VM保护合集/1530849338318.png" title="ReverseMe_1">
-<pre><code>对flag查找引用发现一个函数，但继续查找引用遇到障碍，所以开动态调试，看一下程序运行的情况。发现sub_401A48可能是一个重要函数，进入查看。
-</code></pre>  <img src="/VM保护合集/1530858822184.png" title="ReverseMe_2">
-<pre><code>这段代码F5之后不是很友好，但还是看得到大概意思是：根据输入参数调用函数，也就是虚拟机的Dispatcher位置，被调用的各个函数就是虚拟机的各个Handler。下图的汇编更加直接的展示了这个意思，call eax表示调用Handler。
-</code></pre>  <img src="/VM保护合集/1530860300945.png" title="ReverseMe_3">
+<h5 id="前期准备分析"><a href="#前期准备分析" class="headerlink" title="前期准备分析"></a>前期准备分析</h5><p>​    拿到文件完成基本分析后加载到IDA。</p>
+<p>​    首先通过字符串搜索，并交叉引用定位到主函数，分析程序的基本逻辑：输入password（即给的txt文件名中的数字），然后输入passcode，令程序输出Binggo。</p>
+<p>​    main函数关键判断如下</p>
+  <img src="/VM保护合集/1530849338318.png" title="ReverseMe_1">
+<p>​    对flag查找引用发现一个函数，但继续查找引用遇到障碍，所以开动态调试，看一下程序运行的情况。发现sub_401A48可能是一个重要函数，进入查看。</p>
+  <img src="/VM保护合集/1530858822184.png" title="ReverseMe_2">
+<p>​    这段代码F5之后不是很友好，但还是看得到大概意思是：根据输入参数调用函数，也就是虚拟机的Dispatcher位置，被调用的各个函数就是虚拟机的各个Handler。下图的汇编更加直接的展示了这个意思，call eax表示调用Handler。</p>
+  <img src="/VM保护合集/1530860300945.png" title="ReverseMe_3">
 <p>#####得到passcode与其对应的操作</p>
-<p>在这段调用Handel的CFG块上方是判断是否会执行调用的关键代码。根据汇编代码推断算法，并写出idc脚本。在推断算法时要注意根据动态调试来确定各个值得变化，不然很容易出错。</p>
+<p>​    在这段调用Handel的CFG块上方是判断是否会执行调用的关键代码。根据汇编代码推断算法，并写出idc脚本。在推断算法时要注意根据动态调试来确定各个值得变化，不然很容易出错。</p>
   <img src="/VM保护合集/1530858999174.png" title="ReverseMe_4">
-<pre><code>idc脚本如下，要注意这个脚本中的值0x123E010在每一次执行过程中会发生变化，因为它是输入参数存放的地址，具体方法是动态调试执行到参数存放时得到地址值，再根据它修改脚本。爆破出各种可能的函数跳转。
-</code></pre>  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;idc.idc&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">auto</span> i,j,p,q,v14;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>;i&lt;<span class="number">8</span>;i++)&#123;</span><br><span class="line">		p = Byte(<span class="number">0x123E010</span>+<span class="number">4</span>*(i+<span class="number">72</span>)+<span class="number">8</span>);</span><br><span class="line">		v14 = Dword(<span class="number">0x123E010</span>+<span class="number">8</span>*(p+<span class="number">0x54</span>)+<span class="number">8</span>);</span><br><span class="line">		Message(<span class="string">"%x"</span>,p);</span><br><span class="line">		<span class="keyword">for</span>(j = <span class="number">0</span> ;j&lt;<span class="number">255</span>;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(Byte(<span class="number">0x603900</span>+j)==Byte(<span class="number">0x123E010</span>+p+<span class="number">0x198</span>))&#123;</span><br><span class="line">				q = j;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		Message(<span class="string">"%x %c %x\n"</span>,q , q, v14);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    idc脚本如下，要注意这个脚本中的值0x123E010在每一次执行过程中会发生变化，因为它是输入参数存放的地址，具体方法是动态调试执行到参数存放时得到地址值，再根据它修改脚本。爆破出各种可能的函数跳转。</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;idc.idc&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">auto</span> i,j,p,q,v14;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>;i&lt;<span class="number">8</span>;i++)&#123;</span><br><span class="line">		p = Byte(<span class="number">0x123E010</span>+<span class="number">4</span>*(i+<span class="number">72</span>)+<span class="number">8</span>);</span><br><span class="line">		v14 = Dword(<span class="number">0x123E010</span>+<span class="number">8</span>*(p+<span class="number">0x54</span>)+<span class="number">8</span>);</span><br><span class="line">		Message(<span class="string">"%x"</span>,p);</span><br><span class="line">		<span class="keyword">for</span>(j = <span class="number">0</span> ;j&lt;<span class="number">255</span>;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(Byte(<span class="number">0x603900</span>+j)==Byte(<span class="number">0x123E010</span>+p+<span class="number">0x198</span>))&#123;</span><br><span class="line">				q = j;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		Message(<span class="string">"%x %c %x\n"</span>,q , q, v14);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <pre><code>运行结果如下
 </code></pre><hr>
 <p>  1324 $ 400dc1<br>  9738 8 400e7a<br>  1943 C 400f3a<br>  774 t 401064<br>  c730 0 4011c9<br>  d545 E 40133d<br>  c875 u 4012f3<br>  1423 # 4014b9</p>
 <hr>
-<pre><code>现在要开始分析各个handler的作用，最为特殊的一个handler是sub_40133d，进入这个函数后发现代码如下：
-</code></pre>  <img src="/VM保护合集/1530862044942.png" title="ReverseMe_5">
-<pre><code>这段代码有个地方比较坑，其实这个将flag置1并不是问题的关键，这个题目要求的是输出“Binggo”字样，所以这里的三个函数并不要去逆向分析，关键在于前面几句，将a1+0x120里的20个字节输出，我们要做的就是构造输出的字符串。在构造之前我们先要分析出其他handler的作用才能根据这些handler构造字符串。
-
-各个handler的分析过程比较痛苦，但在分析时要有一个意识，虚拟机的堆栈或寄存器是创建在真实堆栈之上的，比如说在这个题目中有很多类似如下的代码。
-</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov     edx, [rax+120h]</span><br></pre></td></tr></table></figure>
-<pre><code>其实这当中的[rax+120h]只是模拟一个变量或者一个寄存器，在整个handler中一共用到了四个变量，下面是四个变量的枚举，以及经过分析得出的四变量的作用。
-</code></pre><hr>
+<p>​    现在要开始分析各个handler的作用，最为特殊的一个handler是sub_40133d，进入这个函数后发现代码如下：</p>
+  <img src="/VM保护合集/1530862044942.png" title="ReverseMe_5">
+<p>​    这段代码有个地方比较坑，其实这个将flag置1并不是问题的关键，这个题目要求的是输出“Binggo”字样，所以这里的三个函数并不要去逆向分析，关键在于前面几句，将a1+0x120里的20个字节输出，我们要做的就是构造输出的字符串。在构造之前我们先要分析出其他handler的作用才能根据这些handler构造字符串。</p>
+<p>​    各个handler的分析过程比较痛苦，但在分析时要有一个意识，虚拟机的堆栈或寄存器是创建在真实堆栈之上的，比如说在这个题目中有很多类似如下的代码。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov     edx, [rax+120h]</span><br></pre></td></tr></table></figure>
+<p>​    其实这当中的[rax+120h]只是模拟一个变量或者一个寄存器，在整个handler中一共用到了四个变量，下面是四个变量的枚举，以及经过分析得出的四变量的作用。</p>
+<hr>
 <p>  [rax+120h] –&gt; 当前指针位置a[index]</p>
 <p>  [rax+298h] –&gt; 当前字符参数的下一个字符passcode[next]</p>
 <p>  [rax+299h] –&gt; 临时变量temp</p>
 <hr>
-<pre><code>最终得到下表
-</code></pre><table>
+<p>​    最终得到下表</p>
+<table>
 <thead>
 <tr>
 <th style="text-align:center">opcode</th>
