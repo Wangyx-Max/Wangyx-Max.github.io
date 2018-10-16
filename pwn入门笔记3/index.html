@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="pwn," />
 
 
 
@@ -96,21 +96,18 @@
 
 
 
-<meta name="description" content="8月日总结">
+<meta name="description" content="off by one  asisctf2016 b00ks  plaidctf2015 datastore">
+<meta name="keywords" content="pwn">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2018&#x2F;8">
-<meta property="og:url" content="http://yoursite.com/2018-8/index.html">
+<meta property="og:title" content="pwn入门笔记3">
+<meta property="og:url" content="http://yoursite.com/pwn入门笔记3/index.html">
 <meta property="og:site_name" content="wyx&#39;s blog">
-<meta property="og:description" content="8月日总结">
+<meta property="og:description" content="off by one  asisctf2016 b00ks  plaidctf2015 datastore">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018-8/1533619420293.png">
-<meta property="og:image" content="http://yoursite.com/2018-8/1533619490619.png">
-<meta property="og:image" content="http://yoursite.com/2018-8/1533619548055.png">
-<meta property="og:updated_time" content="2018-09-06T11:38:10.336Z">
+<meta property="og:updated_time" content="2018-10-16T01:36:04.374Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2018&#x2F;8">
-<meta name="twitter:description" content="8月日总结">
-<meta name="twitter:image" content="http://yoursite.com/2018-8/1533619420293.png">
+<meta name="twitter:title" content="pwn入门笔记3">
+<meta name="twitter:description" content="off by one  asisctf2016 b00ks  plaidctf2015 datastore">
 
 
 
@@ -139,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018-8/"/>
+  <link rel="canonical" href="http://yoursite.com/pwn入门笔记3/"/>
 
 
 
 
 
-  <title>2018/8 | wyx's blog</title>
+  <title>pwn入门笔记3 | wyx's blog</title>
   
 
 
@@ -288,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018-8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/pwn入门笔记3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wyx">
@@ -305,7 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">2018/8</h1>
+          <h1 class="post-title" itemprop="name headline">pwn入门笔记3</h1>
         
 
         <div class="post-meta">
@@ -317,8 +314,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-04T16:04:50+08:00">
-                2018-08-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-10T15:18:42+08:00">
+                2018-10-10
               </time>
             
 
@@ -333,8 +330,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-06T19:38:10+08:00">
-                2018-09-06
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-16T09:36:04+08:00">
+                2018-10-16
               </time>
             
           </span>
@@ -352,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/diary/" itemprop="url" rel="index">
-                    <span itemprop="name">diary</span>
+                  <a href="/categories/Binary-security/" itemprop="url" rel="index">
+                    <span itemprop="name">Binary security</span>
                   </a>
                 </span>
 
@@ -389,52 +386,26 @@
       
 
       
-        <p>8月日总结</p>
+        <h1 id="off-by-one"><a href="#off-by-one" class="headerlink" title="off by one"></a>off by one</h1><ul>
+<li style="list-style: none"><input type="checkbox"> asisctf2016 b00ks</li>
+<li style="list-style: none"><input type="checkbox"> plaidctf2015 datastore</li>
+</ul>
 <a id="more"></a>
-<h3 id="0804"><a href="#0804" class="headerlink" title="0804"></a>0804</h3><p>tip：gmpy2几个取模数函数的细微区别</p>
-<table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>区别</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>f_mod(x,y)</td>
-<td>取得的模数与y的符号相同</td>
-</tr>
-<tr>
-<td>c_mod(x,y)</td>
-<td>取得的模数与y的符号相反</td>
-</tr>
-<tr>
-<td>t_mod(x,y)</td>
-<td>取得的模数与x的符号相同</td>
-</tr>
-</tbody>
-</table>
-<h3 id="0806"><a href="#0806" class="headerlink" title="0806"></a>0806</h3><p>收获总结：</p>
-<ol>
-<li>rop链的本质是构造假栈帧</li>
-<li>aslr和pie的区别，aslr不会将.bss和.data段代码地址随机化，pie是讲整个进程的地址随机化。</li>
-<li>内存泄漏基本手段及怎样通过内存泄漏来搜索内存找到system()的地址</li>
-</ol>
-<h3 id="0807"><a href="#0807" class="headerlink" title="0807"></a>0807</h3><p>收获总结：</p>
-<ol>
-<li><p>x64和x86参数传送方式不一样</p>
-</li>
-<li><p>使用工具查找简单的gadgets</p>
-<img src="/2018-8/1533619420293.png">
-<img src="/2018-8/1533619490619.png">
-<img src="/2018-8/1533619548055.png">
-</li>
-</ol>
-<h3 id="0808"><a href="#0808" class="headerlink" title="0808"></a>0808</h3><p>收获总结：</p>
-<ol>
-<li>符号执行其实是将输入符号化，并形式化的表示地表示符号执行地过程。有点类似于编译原理中的语义分析，都是形式化的表示程序做了什么（都可以被称作语义信息），不同在于一个是为了编译程序使得机器可以理解，一个是分析程序使得人可以更好的理解。在语义分析的过程中最麻烦的问题是状态爆炸，在符号执行的过程中也有类似的问题被称为路径爆炸；除此之外符号执行还可能遇到表达式不可解的问题。前者可以通过减支加上系统化或启发式路径选择算法来优化，也可以使用Concolic Execution，这种方法有点像深度优先搜索，在此方法基础上改进除了KLEE。后一个问题，有一种改进策略是将某些无法计算的表达式中的符号替换为缺定制，这样会造成路径不完全的问题，当然现在求解器能力也有一定的提高，也是解决问题的一种途径。</li>
-<li>AEG(Automatic Exploit Generation)漏洞利用自动化。像是一种理想化的数学模型，给AEG系统一个输入程序，输出一个exploit脚本或者直接弹出shell。比如现在流行的Fuzzer，给一个程序就能循序找到很多导致程序崩溃的输入。另外由于符号执行能得到大量语义信息，也可以作为AEG系统的重要一环。感觉有很多技术细节并不理解，特别是基于符号执行的漏洞挖掘，看得很迷。</li>
-</ol>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>off-by-one指单字节缓冲区溢出，既程序在向缓冲区写入时，写入的字节数超过了这个缓冲区本身所申请的字节数并且只越界了一个字节。off-by-one可以基于各种缓冲区，一般被认为比较难以利用，通常需要结合其他手段才能达到任意地址读写的目的。</p>
+<h2 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h2><h3 id="asisctf2016-b00ks"><a href="#asisctf2016-b00ks" class="headerlink" title="asisctf2016 b00ks"></a>asisctf2016 b00ks</h3><p>这道题首先构造两个</p>
+<p>通过读入Author_Name函数存在的null byte off-by-one漏洞，泄露存放第一个book_struct的地址，然后通过</p>
+<ul>
+<li>程序分析</li>
+</ul>
+<p>主函数如下（部分函数名和变量名经过修改），结合程序运行时的情况，这是一个图书管理系统，程序提供创建、删除、编辑、打印修改的功能。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">__int64 __<span class="function">fastcall <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> _<span class="title">IO_FILE</span> *<span class="title">v3</span>;</span> <span class="comment">// rdi</span></span><br><span class="line">  __int64 savedregs; <span class="comment">// [rsp+20h] [rbp+0h]</span></span><br><span class="line"></span><br><span class="line">  setvbuf(<span class="built_in">stdout</span>, <span class="number">0L</span>L, <span class="number">2</span>, <span class="number">0L</span>L);</span><br><span class="line">  v3 = <span class="built_in">stdin</span>;</span><br><span class="line">  setvbuf(<span class="built_in">stdin</span>, <span class="number">0L</span>L, <span class="number">1</span>, <span class="number">0L</span>L);</span><br><span class="line">  sub_5586DAF91A77();</span><br><span class="line">  AuthorName();</span><br><span class="line">  <span class="keyword">while</span> ( (<span class="keyword">unsigned</span> <span class="keyword">int</span>)sub_5586DAF91A89() != <span class="number">6</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">switch</span> ( (<span class="keyword">unsigned</span> <span class="keyword">int</span>)&amp;savedregs )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">1u</span>:</span><br><span class="line">        Create();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">2u</span>:</span><br><span class="line">        Delete();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">3u</span>:</span><br><span class="line">        Edit();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">4u</span>:</span><br><span class="line">        Print(v3);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">5u</span>:</span><br><span class="line">        AuthorName();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        v3 = (struct _IO_FILE *)<span class="string">"Wrong option"</span>;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">"Wrong option"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Thanks to use our library software"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而程序中存在两个全局变量，一个是authorName，存放指向作者名地址的指针；另一个是booksTable，是一个存放指向book_struct的指针的指针数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.data:0000561205993010 booksTable dq offset unk_561205993060</span><br><span class="line">.data:0000561205993018 authorName dq offset unk_561205993040</span><br></pre></td></tr></table></figure>
+<p>运行后查看这两个地址的内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0000561205993040  61 75 74 68 6F 72 4E 61  6D 65 00 00 00 00 00 00 ;authorName</span><br><span class="line">0000561205993050  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00</span><br><span class="line">0000561205993060  50 B0 C4 06 12 56 00 00  00 00 00 00 00 00 00 00 ;addr book_struct</span><br><span class="line">0000561205993070  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00</span><br></pre></td></tr></table></figure>
+<p>然后要看一下book_struct的具体内容，在Create函数中有具体声明，其结构体如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">book_struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">void</span> * book_name;</span><br><span class="line">    <span class="keyword">void</span> * book_description;</span><br><span class="line">    <span class="keyword">int</span> description_size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>* </p>
 
       
     </div>
@@ -450,6 +421,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/pwn/" rel="tag"># pwn</a>
+          
+        </div>
+      
 
       
       
@@ -459,8 +436,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/RSA集合/" rel="next" title="RSA集合">
-                <i class="fa fa-chevron-left"></i> RSA集合
+              <a href="/国庆大礼包/" rel="next" title="国庆大礼包">
+                <i class="fa fa-chevron-left"></i> 国庆大礼包
               </a>
             
           </div>
@@ -468,10 +445,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/pwn入门笔记2/" rel="prev" title="pwn入门笔记2">
-                pwn入门笔记2 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -634,7 +607,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0804"><span class="nav-text">0804</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0806"><span class="nav-text">0806</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0807"><span class="nav-text">0807</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0808"><span class="nav-text">0808</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#off-by-one"><span class="nav-text">off by one</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本原理"><span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习题"><span class="nav-text">练习题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#asisctf2016-b00ks"><span class="nav-text">asisctf2016 b00ks</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
