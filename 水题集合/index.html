@@ -96,21 +96,21 @@
 
 
 
-<meta name="description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2  网鼎杯 advenced  中科大hacker game 喵咪遥控器  中科大hacker game 喵咪克星">
+<meta name="description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2  网鼎杯 advenced  hackergame2018 喵咪遥控器  hackergame2018 喵咪克星">
 <meta name="keywords" content="CTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="水题集合">
 <meta property="og:url" content="http://yoursite.com/水题集合/index.html">
 <meta property="og:site_name" content="wyx&#39;s blog">
-<meta property="og:description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2  网鼎杯 advenced  中科大hacker game 喵咪遥控器  中科大hacker game 喵咪克星">
+<meta property="og:description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2  网鼎杯 advenced  hackergame2018 喵咪遥控器  hackergame2018 喵咪克星">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/水题集合/1532439460327.png">
 <meta property="og:image" content="http://yoursite.com/水题集合/1532440354909.png">
 <meta property="og:image" content="http://yoursite.com/水题集合/1532440672940.png">
-<meta property="og:updated_time" content="2018-10-13T11:16:25.478Z">
+<meta property="og:updated_time" content="2018-10-17T12:37:10.525Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="水题集合">
-<meta name="twitter:description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2  网鼎杯 advenced  中科大hacker game 喵咪遥控器  中科大hacker game 喵咪克星">
+<meta name="twitter:description" content="水一水  JarvisOJ  basic_help!!  afctf 数据恢复2  网鼎杯 advenced  hackergame2018 喵咪遥控器  hackergame2018 喵咪克星">
 <meta name="twitter:image" content="http://yoursite.com/水题集合/1532439460327.png">
 
 
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-13T19:16:25+08:00">
-                2018-10-13
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-17T20:37:10+08:00">
+                2018-10-17
               </time>
             
           </span>
@@ -394,8 +394,8 @@
 <li style="list-style: none"><input type="checkbox" checked> JarvisOJ  basic_help!!</li>
 <li style="list-style: none"><input type="checkbox" checked> afctf 数据恢复2</li>
 <li style="list-style: none"><input type="checkbox" checked> 网鼎杯 advenced</li>
-<li style="list-style: none"><input type="checkbox" checked> 中科大hacker game 喵咪遥控器</li>
-<li style="list-style: none"><input type="checkbox" checked> 中科大hacker game 喵咪克星</li>
+<li style="list-style: none"><input type="checkbox" checked> hackergame2018 喵咪遥控器</li>
+<li style="list-style: none"><input type="checkbox" checked> hackergame2018 喵咪克星</li>
 </ul>
 <a id="more"></a>
 <h2 id="JarvisOJ-basic-help"><a href="#JarvisOJ-basic-help" class="headerlink" title="JarvisOJ  basic_help!!"></a>JarvisOJ  basic_help!!</h2><p>打开压缩包发现有加密，但是拖到爆破软件中未能得到密码，查找资料发现可能是伪加密。用010editor查看文件，并修改二进制文件。修改结果如下，也就是将ushort deFlags的值将09改为00</p>
@@ -416,8 +416,8 @@
 <blockquote>
 <p>flag{d_with_a_template_phew}</p>
 </blockquote>
-<h2 id="中科大hacker-game-喵咪遥控器"><a href="#中科大hacker-game-喵咪遥控器" class="headerlink" title="中科大hacker game 喵咪遥控器"></a>中科大hacker game 喵咪遥控器</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">canvas = np.ones((<span class="number">600</span>,<span class="number">600</span>,<span class="number">3</span>),dtype=<span class="string">"uint8"</span>)</span><br><span class="line">canvas = canvas*<span class="number">255</span></span><br><span class="line">list = open(<span class="string">"C:\Users\Max_Wang\Desktop\seq.txt"</span>).read()</span><br><span class="line">r_point = [<span class="number">7</span>,<span class="number">7</span>]</span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> list:</span><br><span class="line">    canvas[r_point[<span class="number">0</span>],r_point[<span class="number">1</span>]] = [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">if</span> c ==<span class="string">'D'</span>:</span><br><span class="line">        r_point[<span class="number">0</span>] += <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> c == <span class="string">'R'</span>:</span><br><span class="line">        r_point[<span class="number">1</span>] += <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> c == <span class="string">'U'</span>:</span><br><span class="line">        r_point[<span class="number">0</span>] -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        r_point[<span class="number">1</span>] -= <span class="number">1</span></span><br><span class="line">cv2.imwrite(<span class="string">"1.jpg"</span>,canvas)</span><br><span class="line">cv2.imshow(<span class="string">"Canvas"</span>,canvas)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="中科大hacker-game-喵咪克星"><a href="#中科大hacker-game-喵咪克星" class="headerlink" title="中科大hacker game 喵咪克星"></a>中科大hacker game 喵咪克星</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">s.connect((<span class="string">'202.38.95.46'</span>,<span class="number">12009</span>))</span><br><span class="line">s.recv(<span class="number">2048</span>)</span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    expression = s.recv(<span class="number">0x200</span>).decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    expression = expression.replace(<span class="string">'exit()'</span>,<span class="string">"None"</span>)</span><br><span class="line">    expression = expression.replace(<span class="string">'__import__(\'time\').sleep(100)'</span>,<span class="string">"None"</span>)</span><br><span class="line">    expression = expression.replace(<span class="string">'__import__(\'os\').system(\'find ~\')'</span>,<span class="string">'None'</span>)</span><br><span class="line">    print(expression)</span><br><span class="line">    buf = <span class="string">''</span></span><br><span class="line">    buf += str(eval(expression))</span><br><span class="line">    buf += <span class="string">'\n'</span></span><br><span class="line">    s.send(buf.encode(<span class="string">'utf-8'</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="hackergame2018-喵咪遥控器"><a href="#hackergame2018-喵咪遥控器" class="headerlink" title="hackergame2018 喵咪遥控器"></a>hackergame2018 喵咪遥控器</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">canvas = np.ones((<span class="number">600</span>,<span class="number">600</span>,<span class="number">3</span>),dtype=<span class="string">"uint8"</span>)</span><br><span class="line">canvas = canvas*<span class="number">255</span></span><br><span class="line">list = open(<span class="string">"C:\Users\Max_Wang\Desktop\seq.txt"</span>).read()</span><br><span class="line">r_point = [<span class="number">7</span>,<span class="number">7</span>]</span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> list:</span><br><span class="line">    canvas[r_point[<span class="number">0</span>],r_point[<span class="number">1</span>]] = [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">if</span> c ==<span class="string">'D'</span>:</span><br><span class="line">        r_point[<span class="number">0</span>] += <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> c == <span class="string">'R'</span>:</span><br><span class="line">        r_point[<span class="number">1</span>] += <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> c == <span class="string">'U'</span>:</span><br><span class="line">        r_point[<span class="number">0</span>] -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        r_point[<span class="number">1</span>] -= <span class="number">1</span></span><br><span class="line">cv2.imwrite(<span class="string">"1.jpg"</span>,canvas)</span><br><span class="line">cv2.imshow(<span class="string">"Canvas"</span>,canvas)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="hackergame2018-喵咪克星"><a href="#hackergame2018-喵咪克星" class="headerlink" title="hackergame2018 喵咪克星"></a>hackergame2018 喵咪克星</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">s.connect((<span class="string">'202.38.95.46'</span>,<span class="number">12009</span>))</span><br><span class="line">s.recv(<span class="number">2048</span>)</span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    expression = s.recv(<span class="number">0x200</span>).decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    expression = expression.replace(<span class="string">'exit()'</span>,<span class="string">"None"</span>)</span><br><span class="line">    expression = expression.replace(<span class="string">'__import__(\'time\').sleep(100)'</span>,<span class="string">"None"</span>)</span><br><span class="line">    expression = expression.replace(<span class="string">'__import__(\'os\').system(\'find ~\')'</span>,<span class="string">'None'</span>)</span><br><span class="line">    print(expression)</span><br><span class="line">    buf = <span class="string">''</span></span><br><span class="line">    buf += str(eval(expression))</span><br><span class="line">    buf += <span class="string">'\n'</span></span><br><span class="line">    s.send(buf.encode(<span class="string">'utf-8'</span>))</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -537,7 +537,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -559,7 +559,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -623,7 +623,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#水一水"><span class="nav-text">水一水</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JarvisOJ-basic-help"><span class="nav-text">JarvisOJ  basic_help!!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#afctf-数据恢复2"><span class="nav-text">afctf 数据恢复2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网鼎杯-advenced"><span class="nav-text">网鼎杯 advenced</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中科大hacker-game-喵咪遥控器"><span class="nav-text">中科大hacker game 喵咪遥控器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中科大hacker-game-喵咪克星"><span class="nav-text">中科大hacker game 喵咪克星</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#水一水"><span class="nav-text">水一水</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JarvisOJ-basic-help"><span class="nav-text">JarvisOJ  basic_help!!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#afctf-数据恢复2"><span class="nav-text">afctf 数据恢复2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网鼎杯-advenced"><span class="nav-text">网鼎杯 advenced</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hackergame2018-喵咪遥控器"><span class="nav-text">hackergame2018 喵咪遥控器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hackergame2018-喵咪克星"><span class="nav-text">hackergame2018 喵咪克星</span></a></li></ol></li></ol></div>
             
 
           </div>
