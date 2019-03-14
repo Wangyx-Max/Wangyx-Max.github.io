@@ -96,20 +96,20 @@
 
 
 
-<meta name="description" content="8月日总结">
+<meta name="description" content="不好分类的小总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2018&#x2F;8">
 <meta property="og:url" content="http://yoursite.com/2018-8/index.html">
 <meta property="og:site_name" content="wyx&#39;s blog">
-<meta property="og:description" content="8月日总结">
+<meta property="og:description" content="不好分类的小总结">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018-8/1533619420293.png">
 <meta property="og:image" content="http://yoursite.com/2018-8/1533619490619.png">
 <meta property="og:image" content="http://yoursite.com/2018-8/1533619548055.png">
-<meta property="og:updated_time" content="2018-09-06T11:38:10.336Z">
+<meta property="og:updated_time" content="2019-03-14T07:13:07.808Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2018&#x2F;8">
-<meta name="twitter:description" content="8月日总结">
+<meta name="twitter:description" content="不好分类的小总结">
 <meta name="twitter:image" content="http://yoursite.com/2018-8/1533619420293.png">
 
 
@@ -333,8 +333,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-06T19:38:10+08:00">
-                2018-09-06
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-14T15:13:07+08:00">
+                2019-03-14
               </time>
             
           </span>
@@ -389,9 +389,9 @@
       
 
       
-        <p>8月日总结</p>
+        <p>不好分类的小总结</p>
 <a id="more"></a>
-<h3 id="0804"><a href="#0804" class="headerlink" title="0804"></a>0804</h3><p>tip：gmpy2几个取模数函数的细微区别</p>
+<h3 id="01"><a href="#01" class="headerlink" title="01"></a>01</h3><p>tip：gmpy2几个取模数函数的细微区别</p>
 <table>
 <thead>
 <tr>
@@ -414,13 +414,13 @@
 </tr>
 </tbody>
 </table>
-<h3 id="0806"><a href="#0806" class="headerlink" title="0806"></a>0806</h3><p>收获总结：</p>
+<h3 id="02"><a href="#02" class="headerlink" title="02"></a>02</h3><p>收获总结：</p>
 <ol>
 <li>rop链的本质是构造假栈帧</li>
 <li>aslr和pie的区别，aslr不会将.bss和.data段代码地址随机化，pie是讲整个进程的地址随机化。</li>
 <li>内存泄漏基本手段及怎样通过内存泄漏来搜索内存找到system()的地址</li>
 </ol>
-<h3 id="0807"><a href="#0807" class="headerlink" title="0807"></a>0807</h3><p>收获总结：</p>
+<h3 id="03"><a href="#03" class="headerlink" title="03"></a>03</h3><p>收获总结：</p>
 <ol>
 <li><p>x64和x86参数传送方式不一样</p>
 </li>
@@ -430,7 +430,7 @@
 <img src="/2018-8/1533619548055.png">
 </li>
 </ol>
-<h3 id="0808"><a href="#0808" class="headerlink" title="0808"></a>0808</h3><p>收获总结：</p>
+<h3 id="04"><a href="#04" class="headerlink" title="04"></a>04</h3><p>收获总结：</p>
 <ol>
 <li>符号执行其实是将输入符号化，并形式化的表示地表示符号执行地过程。有点类似于编译原理中的语义分析，都是形式化的表示程序做了什么（都可以被称作语义信息），不同在于一个是为了编译程序使得机器可以理解，一个是分析程序使得人可以更好的理解。在语义分析的过程中最麻烦的问题是状态爆炸，在符号执行的过程中也有类似的问题被称为路径爆炸；除此之外符号执行还可能遇到表达式不可解的问题。前者可以通过减支加上系统化或启发式路径选择算法来优化，也可以使用Concolic Execution，这种方法有点像深度优先搜索，在此方法基础上改进除了KLEE。后一个问题，有一种改进策略是将某些无法计算的表达式中的符号替换为缺定制，这样会造成路径不完全的问题，当然现在求解器能力也有一定的提高，也是解决问题的一种途径。</li>
 <li>AEG(Automatic Exploit Generation)漏洞利用自动化。像是一种理想化的数学模型，给AEG系统一个输入程序，输出一个exploit脚本或者直接弹出shell。比如现在流行的Fuzzer，给一个程序就能循序找到很多导致程序崩溃的输入。另外由于符号执行能得到大量语义信息，也可以作为AEG系统的重要一环。感觉有很多技术细节并不理解，特别是基于符号执行的漏洞挖掘，看得很迷。</li>
@@ -634,7 +634,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0804"><span class="nav-text">0804</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0806"><span class="nav-text">0806</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0807"><span class="nav-text">0807</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0808"><span class="nav-text">0808</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01"><span class="nav-text">01</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02"><span class="nav-text">02</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03"><span class="nav-text">03</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04"><span class="nav-text">04</span></a></li></ol></div>
             
 
           </div>

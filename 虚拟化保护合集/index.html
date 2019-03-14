@@ -96,13 +96,13 @@
 
 
 
-<meta name="description" content="VMP合集题目清单   DDCTF2018 黑盒破解  RCTF2018 Simple vm  RCTF2018 Magic  护网杯2018 rerere">
+<meta name="description" content="VMP合集（阶段性输出）代码虚拟化保护">
 <meta name="keywords" content="Re,ctf">
 <meta property="og:type" content="article">
 <meta property="og:title" content="虚拟化保护合集">
 <meta property="og:url" content="http://yoursite.com/虚拟化保护合集/index.html">
 <meta property="og:site_name" content="wyx&#39;s blog">
-<meta property="og:description" content="VMP合集题目清单   DDCTF2018 黑盒破解  RCTF2018 Simple vm  RCTF2018 Magic  护网杯2018 rerere">
+<meta property="og:description" content="VMP合集（阶段性输出）代码虚拟化保护">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/虚拟化保护合集/1530847718783.png">
 <meta property="og:image" content="http://yoursite.com/虚拟化保护合集/1530848472213.png">
@@ -131,10 +131,10 @@
 <meta property="og:image" content="http://yoursite.com/Users/Max_Wang/Documents/blog/blog/source/_posts/VM保护合集/1539654860058.png">
 <meta property="og:image" content="http://yoursite.com/虚拟化保护合集/1539592784926.png">
 <meta property="og:image" content="http://yoursite.com/Users/Max_Wang/Documents/blog/blog/source/_posts/VM保护合集/1539592784926.png">
-<meta property="og:updated_time" content="2019-03-14T06:59:39.941Z">
+<meta property="og:updated_time" content="2019-03-14T07:09:37.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="虚拟化保护合集">
-<meta name="twitter:description" content="VMP合集题目清单   DDCTF2018 黑盒破解  RCTF2018 Simple vm  RCTF2018 Magic  护网杯2018 rerere">
+<meta name="twitter:description" content="VMP合集（阶段性输出）代码虚拟化保护">
 <meta name="twitter:image" content="http://yoursite.com/虚拟化保护合集/1530847718783.png">
 
 
@@ -358,7 +358,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-14T14:59:39+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-14T15:09:37+08:00">
                 2019-03-14
               </time>
             
@@ -414,14 +414,15 @@
       
 
       
-        <h1 id="VMP合集"><a href="#VMP合集" class="headerlink" title="VMP合集"></a>VMP合集</h1><p>题目清单</p>
+        <h1 id="VMP合集"><a href="#VMP合集" class="headerlink" title="VMP合集"></a>VMP合集</h1><p>（阶段性输出）代码虚拟化保护</p>
+<a id="more"></a>
+<p>题目清单</p>
 <ul>
 <li style="list-style: none"><input type="checkbox" checked> DDCTF2018 黑盒破解</li>
 <li style="list-style: none"><input type="checkbox" checked> RCTF2018 Simple vm</li>
 <li style="list-style: none"><input type="checkbox" checked> RCTF2018 Magic</li>
 <li style="list-style: none"><input type="checkbox" checked> 护网杯2018 rerere</li>
 </ul>
-<a id="more"></a>
 <h2 id="原理介绍"><a href="#原理介绍" class="headerlink" title="原理介绍"></a>原理介绍</h2><h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><p>虚拟机保护技术是指，将程序代码转换为自定义的中间操作码（OpCode，当操作码只占一个字节可称作ByteCode），OpCode通过一种解释执行系统或者模拟器（Emulator）解释执行，实现代码基本功能。</p>
 <p>逆向这种程序，一般需要对emulator结构进行逆向，结合opcode进行分析，得到各个操作码对应的基本操作，从而理解程序功能。（图片来自：<a href="https://mp.weixin.qq.com/s/4Nfso1OuHeQgCTGYv2IF5Q）" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/4Nfso1OuHeQgCTGYv2IF5Q）</a></p>
 <img src="/虚拟化保护合集/1530847718783.png" title="pre_1">
