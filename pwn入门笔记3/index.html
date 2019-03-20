@@ -96,18 +96,18 @@
 
 
 
-<meta name="description" content="how2heap(fastbin attack)（阶段性输出）跟着how2heap学堆溢出攻击">
+<meta name="description" content="how2heap(fastbin attack)（学习记录）跟着how2heap学堆溢出攻击">
 <meta name="keywords" content="pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pwn入门笔记3">
 <meta property="og:url" content="http://yoursite.com/pwn入门笔记3/index.html">
 <meta property="og:site_name" content="wyx&#39;s blog">
-<meta property="og:description" content="how2heap(fastbin attack)（阶段性输出）跟着how2heap学堆溢出攻击">
+<meta property="og:description" content="how2heap(fastbin attack)（学习记录）跟着how2heap学堆溢出攻击">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-19T08:05:05.595Z">
+<meta property="og:updated_time" content="2019-03-20T08:58:34.546Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pwn入门笔记3">
-<meta name="twitter:description" content="how2heap(fastbin attack)（阶段性输出）跟着how2heap学堆溢出攻击">
+<meta name="twitter:description" content="how2heap(fastbin attack)（学习记录）跟着how2heap学堆溢出攻击">
 
 
 
@@ -330,8 +330,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-19T16:05:05+08:00">
-                2019-03-19
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-20T16:58:34+08:00">
+                2019-03-20
               </time>
             
           </span>
@@ -386,19 +386,15 @@
       
 
       
-        <h1 id="how2heap-fastbin-attack"><a href="#how2heap-fastbin-attack" class="headerlink" title="how2heap(fastbin attack)"></a>how2heap(fastbin attack)</h1><p>（阶段性输出）跟着how2heap学堆溢出攻击</p>
+        <h1 id="how2heap-fastbin-attack"><a href="#how2heap-fastbin-attack" class="headerlink" title="how2heap(fastbin attack)"></a>how2heap(fastbin attack)</h1><p>（学习记录）跟着how2heap学堆溢出攻击</p>
 <a id="more"></a>
 <ul>
 <li style="list-style: none"><input type="checkbox"> 0ctf2017 babyheap</li>
-<li style="list-style: none"><input type="checkbox"> </li>
+<li style="list-style: none"><input type="checkbox"> 9447ctf2015 search-engine</li>
+<li style="list-style: none"><input type="checkbox"> Hitcon2016 SleepyHolder</li>
 </ul>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="fastbin中的2free"><a href="#fastbin中的2free" class="headerlink" title="fastbin中的2free"></a>fastbin中的2free</h3><p>fastbin是单链表结构，在两次free(a)中间加入一个free(b)就可以绕过检查，并获得两个指向同一内存区域的指针。</p>
-<h3 id="fastbin-attack"><a href="#fastbin-attack" class="headerlink" title="fastbin attack"></a>fastbin attack</h3><p>1、2free获得形如a-&gt;b-&gt;a的freebins（也就是获得两个指向同一内存区域的指针）</p>
-<p>2、当我们再次*d = malloc()，并将b也取出，这时freebins中只有a。对d进行操作，就可以伪造一个任意地址的chunk。</p>
-<p>3、有了这个任意地址的chunk，我们可以通过malloc将freebins中的a取出来，这时，任意地址的chunk被加入freebins。</p>
-<p>4、我们再次malloc，这个任意地址的chunk就可以被任意写（任意地址写成就达成~）</p>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h3 id="0ctf2017-babyheap"><a href="#0ctf2017-babyheap" class="headerlink" title="0ctf2017 babyheap"></a>0ctf2017 babyheap</h3><h4 id="程序分析"><a href="#程序分析" class="headerlink" title="程序分析"></a>程序分析</h4><p>每个块的结构体如下</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    <span class="keyword">signed</span> <span class="keyword">int</span> flag;　　　　<span class="comment">//标记是否被分配</span></span><br><span class="line">    <span class="keyword">signed</span> <span class="keyword">int</span> size;　　　　<span class="comment">//请求申请的大小</span></span><br><span class="line">    <span class="keyword">void</span>* chunk_m;　　　　<span class="comment">//chunk的mem值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="fastbin中的2free"><a href="#fastbin中的2free" class="headerlink" title="fastbin中的2free"></a>fastbin中的2free</h3><h3 id="fastbin-dup-into-stack"><a href="#fastbin-dup-into-stack" class="headerlink" title="fastbin dup into stack"></a>fastbin dup into stack</h3><h3 id="fastbin-dup-consolidate"><a href="#fastbin-dup-consolidate" class="headerlink" title="fastbin dup consolidate"></a>fastbin dup consolidate</h3><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h3 id="0ctf2017-babyheap"><a href="#0ctf2017-babyheap" class="headerlink" title="0ctf2017 babyheap"></a>0ctf2017 babyheap</h3><h4 id="程序分析"><a href="#程序分析" class="headerlink" title="程序分析"></a>程序分析</h4><p>每个块的结构体如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">HEAP</span>&#123;</span></span><br><span class="line">    <span class="keyword">signed</span> <span class="keyword">int</span> flag;　　　　<span class="comment">//标记是否被分配</span></span><br><span class="line">    <span class="keyword">signed</span> <span class="keyword">int</span> size;　　　　<span class="comment">//请求申请的大小</span></span><br><span class="line">    <span class="keyword">void</span>* chunk_m;　　　　<span class="comment">//chunk的mem值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h4><p>首先是要做内存泄漏，泄露的目标是一个small chunk的地址。为了达到这个目的，要获得一个指向这个small chunk的指针，然后还需要一个以这个指针的值为mem值的HEAP，最后Dump这个HEAP得到目的地址。</p>
 <p>由此我们思路应该出来了：</p>
 <p>先分配几个块</p>
@@ -437,6 +433,9 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Allocate(<span class="number">0x60</span>) <span class="comment">#index=4</span></span><br><span class="line">Allocate(<span class="number">0x60</span>) <span class="comment">#index=6</span></span><br></pre></td></tr></table></figure>
 <p>将这两个chunk通过malloc从freebins中取出，这时，index=6的HEAP的mem的值就是malloc_hook的值。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">payload = </span><br><span class="line">Fill(<span class="number">6</span>,payload)</span><br></pre></td></tr></table></figure>
+<p>###9447ctf2015 search-engine</p>
+<h3 id="Hitcon2016-SleepyHolder"><a href="#Hitcon2016-SleepyHolder" class="headerlink" title="Hitcon2016 SleepyHolder"></a>Hitcon2016 SleepyHolder</h3><h4 id="程序分析-1"><a href="#程序分析-1" class="headerlink" title="程序分析"></a>程序分析</h4><p>三个功能选项</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"1. Keep secret"</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"2. Wipe secret"</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"3. Renew secret"</span>);</span><br><span class="line">  <span class="built_in">memset</span>(&amp;s, <span class="number">0</span>, <span class="number">4u</span>LL);</span><br><span class="line">  read(<span class="number">0</span>, &amp;s, <span class="number">4u</span>LL);</span><br><span class="line">  v3 = atoi(&amp;s);</span><br><span class="line">  v6 = v3;</span><br><span class="line">  <span class="keyword">switch</span> ( v3 )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">      delect();</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">      update();</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">      add();</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -642,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#how2heap-fastbin-attack"><span class="nav-text">how2heap(fastbin attack)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-text">原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fastbin中的2free"><span class="nav-text">fastbin中的2free</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fastbin-attack"><span class="nav-text">fastbin attack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0ctf2017-babyheap"><span class="nav-text">0ctf2017 babyheap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#程序分析"><span class="nav-text">程序分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存泄漏"><span class="nav-text">内存泄漏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取shell"><span class="nav-text">获取shell</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#how2heap-fastbin-attack"><span class="nav-text">how2heap(fastbin attack)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-text">原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fastbin中的2free"><span class="nav-text">fastbin中的2free</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fastbin-dup-into-stack"><span class="nav-text">fastbin dup into stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fastbin-dup-consolidate"><span class="nav-text">fastbin dup consolidate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0ctf2017-babyheap"><span class="nav-text">0ctf2017 babyheap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#程序分析"><span class="nav-text">程序分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存泄漏"><span class="nav-text">内存泄漏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取shell"><span class="nav-text">获取shell</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hitcon2016-SleepyHolder"><span class="nav-text">Hitcon2016 SleepyHolder</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#程序分析-1"><span class="nav-text">程序分析</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
