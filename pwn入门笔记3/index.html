@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="wyx&#39;s blog">
 <meta property="og:description" content="how2heap(fastbin attack)（学习记录）跟着how2heap学堆溢出攻击">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-20T08:58:34.546Z">
+<meta property="og:updated_time" content="2019-03-20T09:13:56.988Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pwn入门笔记3">
 <meta name="twitter:description" content="how2heap(fastbin attack)（学习记录）跟着how2heap学堆溢出攻击">
@@ -330,7 +330,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-20T16:58:34+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-20T17:13:56+08:00">
                 2019-03-20
               </time>
             
@@ -436,6 +436,11 @@
 <p>###9447ctf2015 search-engine</p>
 <h3 id="Hitcon2016-SleepyHolder"><a href="#Hitcon2016-SleepyHolder" class="headerlink" title="Hitcon2016 SleepyHolder"></a>Hitcon2016 SleepyHolder</h3><h4 id="程序分析-1"><a href="#程序分析-1" class="headerlink" title="程序分析"></a>程序分析</h4><p>三个功能选项</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"1. Keep secret"</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"2. Wipe secret"</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"3. Renew secret"</span>);</span><br><span class="line">  <span class="built_in">memset</span>(&amp;s, <span class="number">0</span>, <span class="number">4u</span>LL);</span><br><span class="line">  read(<span class="number">0</span>, &amp;s, <span class="number">4u</span>LL);</span><br><span class="line">  v3 = atoi(&amp;s);</span><br><span class="line">  v6 = v3;</span><br><span class="line">  <span class="keyword">switch</span> ( v3 )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">      delect();</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">      update();</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">      add();</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>没有输出函数，大概思路应该是劫持got表，然后将其修改为puts()的地址，用以内存泄漏。再将其修改为<code>system(&quot;/bin/sh&quot;)</code>，拿到shell。</p>
+<p>####got表劫持</p>
+<p>说到got表劫持，我们会想到unlink，但是这个题目中，huge chunk不能重复写，也不能free，怎么办呢？这时候就需要用到fastbin dup consolidate。把这个huge chunk用一个“fast chunk”的指针去操作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">add(<span class="number">1</span>,<span class="string">"1111"</span>)</span><br><span class="line">add(<span class="number">2</span>,<span class="string">"2222"</span>)</span><br><span class="line">delete(<span class="number">1</span>)</span><br><span class="line">add(<span class="number">3</span>,<span class="string">"3333"</span>)</span><br><span class="line">delete(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>从上述操作可以看到，我们首先创建一个fast bin，然后创建small bin，让它的堆块在huge bin</p>
 
       
     </div>
